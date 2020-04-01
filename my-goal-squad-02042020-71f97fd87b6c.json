@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "my-goal-squad-02042020",
+  "private_key_id": "71f97fd87b6c4f3d1f56b55a60d0cc657640e075",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCV4fCGV3QO86jb\n7thVV36LPr6GmViz4SgT1xj71vZY0syXFgwp2rvNv6ObDViYefL5m9oK9ibnh5tU\nRaXoIMwHrGD2boQgDy1VLGhuCqueLr23hQ13UIAmUHAi3qtfSj4YDOqh53OAhaSM\nbn4nyc8XZIbmiyULmYg8CViaePWQKuP1tZONMniXSHFWuj36oY2W6xbLgeapFs2E\nn8wPDxZinI1rFCUT/ySI5Kninouw0dzKxow3CzxoDPcRCQjdl+YvU7oO6d2Jl+Bf\nq43NlUMn5qK2qmaZNGB4yc+CywzZABQoCZCUeDLXkWSNzIKQUFGPxHccVqbXDYZq\nN8VhwnWLAgMBAAECggEALEgpGl/LI8G8YWIzGx+y/OvIOZcjvF1ozFfQA1PSy5JY\nLMkwRctgkhys9xnd04qwDSwNIxDvlJcdfqvnJOpPrXKx4Qzsz1X8lD3/CofvhVgU\n6BwQyvAHNIquXrb/1bLnHo7uYXAy0UVqxKy+a/31R9mE+6cfhkpRlD9EpLrY/kMh\nvYZjl+KJRQHSmS9U8ej6uRrDddj+jUdteksspUB8x0tus3xhVf2VadknKa4LwrI4\ntfnlEX4r6K2czmGgT953aptiBt7ZQl+hv0Q6xe5AnUotjAZzNRMRqjIrHFTLr8QU\novNlxeR3x7nJbaSfEnsKYRvLQ5BcgNMLGD+yGN8BXQKBgQDRgOZ1rQiETZSj8n49\noZsVtWYdPUWI9vMm0LqdBj21nu5uRS76IAguABdZ27k/BFtqgw1CGZy80rsN/bg1\nIEnbC47C3tdmQ+NaZC/20IV7FFxEkFTyCYyq1HVMc4aSW6LiRnoeW3YcfcxF3psQ\nXS0DeghG6qJ5rYBi+NMgrD45nwKBgQC3JaF7OoLGF3WuFUUx9T5+Cn/bdk/triWL\niU6XqBhARoy7IrUu1c7Dt/0JBE7i/CYD2iZW3KZpwbXsl6nFkO/IvZ+Nw2nWiVB9\nCGTQuyOlanDs31djoXsGSFS7j7pp1iR2hQ5edZytN8bc8RMsOweU3tgS7i4oDm78\n8DIxQ+WUlQKBgQCDlv8qMsECuOgAAjQg6fzLKeE1xGKEoPghDUHplx3zkhwYzwOu\nv6fjnNMN8eDtIAN7Z01Qk13LjGFJbG/jjqBVIXFOHUIWTdXj1MH7uQXeRO+fcTip\nvi3IryHuHzILg9tPXQ0fPDt3sdw4lpW3NY8se93vDTl4S+40PC4Ae6+p6QKBgD2I\njCe98eAiU6yIgvYVAskQOAMBTjt6Di1ClcBIftVhnrjlIWC5/z0s3PwhkWub8h3L\nNqRqgBL6PWhfUHALkTSt2SSlKjMlcYCAyHaE2aYjDAvZwh+8SnxC4w0dbjFO/HNB\noyFDfL+KBOuIp7ttnc97y7cYhTN6HfonrYV13XW9AoGBAIA2x7IkJATtZQznIWj6\napv+BsycSiA+JqT5j3iFow8sucTeCtzX7NIX6ml+sEiuLMbHTU92ejkIsSPlB6TL\nFXqO4dhHxLKsLDWLggD9ZGyBTLHaFl8+Mpc+fbQSMrm7XBK4mMOTSaepK6XUk219\n/BjVzyggi5GpDITpWP3MAOvv\n-----END PRIVATE KEY-----\n",
+  "client_email": "sheets@my-goal-squad-02042020.iam.gserviceaccount.com",
+  "client_id": "108353537053681528453",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/sheets%40my-goal-squad-02042020.iam.gserviceaccount.com"
+}
