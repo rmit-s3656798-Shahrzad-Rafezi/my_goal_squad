@@ -1,0 +1,25 @@
+{
+  "name": "my_goal_squad",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sw.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rmit-s3656798-Shahrzad-Rafezi/my_goal_squad.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rmit-s3656798-Shahrzad-Rafezi/my_goal_squad/issues"
+  },
+  "homepage": "https://github.com/rmit-s3656798-Shahrzad-Rafezi/my_goal_squad#readme",
+  "dependencies": {
+    "google": "^2.1.0",
+    "google-spreadsheet": "^3.0.10",
+    "spreadsheet": "^0.3.0"
+  }
+}
