@@ -3,6 +3,7 @@ auth.onAuthStateChanged((user) => {
     console.log(user.email, "has logged in");
   } else {
     console.log("user has logged out");
+    window.location.href = "../index.html";
   }
 });
 
@@ -12,5 +13,4 @@ const logout = document.querySelector("#logout-btn");
 logout.addEventListener("click", (e) => {
   e.preventDefault();
   auth.signOut().then(() => {});
-  window.location.href = "../index.html";
 });
