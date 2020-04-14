@@ -10,9 +10,9 @@
 </head>
 
 <body class="grey lighten-3">
-    <div class="login">
-        <h5>Hello World</h5>
+    <div class="z-depth-5 container">
         <form id="signup-form">
+            <h5>Register</h5>
             <div class="input-field">
                 <input type="email" id="signup-email" required />
                 <label for="signup-email">Email Address</label>
@@ -21,11 +21,24 @@
                 <input type="password" id="signup-password" required />
                 <label for="signup-password">Choose Passwords</label>
             </div>
-            <button class="waves-effect btn">Signup
-                <i class="material-icons right">send</i>
+            <button class="waves-effect waves-orange btn-flat signup-button">Signup
             </button>
         </form>
-        <button class="waves-effect btn red ">Logout
+
+        <form id="signin-form">
+            <div class="input-field">
+                <h5>Log In</h5>
+                <input type="email" id="signin-email" required />
+                <label for="signin-email">Email Address</label>
+            </div>
+            <div class="input-field">
+                <input type="password" id="signin-password" required />
+                <label for="signin-password">Enter Passwords</label>
+            </div>
+            <button class="waves-effect btn">LogIn
+            </button>
+        </form>
+        <button id="logout" class="waves-effect btn red ">Logout
             <i class="material-icons right">input</i>
         </button>
     </div>
