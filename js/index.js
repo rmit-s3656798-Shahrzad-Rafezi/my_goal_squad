@@ -21,6 +21,12 @@ signinForm.addEventListener("submit", (e) => {
 
   auth.signInWithEmailAndPassword(email, password).then((cred) => {
     signinForm.reset();
-    window.location.href = "/pages/user-main-page.html";
+    auth.onAuthStateChanged((user) => {
+      if (user.email == "test@mail.com") {
+        window.location.href = "/pages/admin-page.html";
+      } else {
+        window.location.href = "/pages/user-main-page.html";
+      }
+    });
   });
 });
