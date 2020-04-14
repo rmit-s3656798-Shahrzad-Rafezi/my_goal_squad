@@ -7,19 +7,3 @@
   transform: translate(-50%, -50%);
   text-align: center;
 }
-
-.signup-button {
-  color: teal;
-}
-
-#signup-form {
-  display: none;
-}
-
-#signin-form {
-  display: none;
-}
-
-#logout-btn {
-  display: none;
-}
