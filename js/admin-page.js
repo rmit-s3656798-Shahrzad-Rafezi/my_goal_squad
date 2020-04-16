@@ -14,14 +14,23 @@ signupForm.addEventListener("submit", (e) => {
   //   prevent page refresh
   e.preventDefault();
 
+  const name = signupForm["user-name"].value;
   const email = signupForm["signup-email"].value;
   const password = signupForm["signup-password"].value;
+
+  const newUser = {
+    name,
+    email,
+    password
+  };
+
+  const addNewUser = functions.httpsCallable('createNewUser');
 
   auth.onAuthStateChanged((user) => {
     user.getIdTokenResult().then(idTokenResult => {
       if (idTokenResult.claims.admin) {
-        auth.createUserWithEmailAndPassword(email, password).then((cred) => {
-          signupForm.reset();
+        addNewUser(newUser).then(result => {
+          console.log(result);
         });
       } else {
         console.log('You are not an admin');
