@@ -1,5 +1,13 @@
 <html>
-  <head></head>
+  <head>
+    <style>
+      table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 10px;
+        }
+    </style>
+  </head>
   <body>
     <!--
     BEFORE RUNNING:
@@ -16,10 +24,17 @@
     function makeApiCall() {
       var params = {
         // The ID of the spreadsheet to retrieve data from.
-        spreadsheetId: '1ne3uU4Mqo6djga7bUM8IbFe4RVI2Dh_AEsaTTBsOt4M',
+
+        //Ange's Sheet
+        //spreadsheetId: '1ne3uU4Mqo6djga7bUM8IbFe4RVI2Dh_AEsaTTBsOt4M',
+
+        spreadsheetId: '1x1HnkiGS09FlpMDBhNLllTlC_Hf7xoAe9XTYKT261qU',
 
         // The A1 notation of the values to retrieve.
-        range: '2020', 
+        //Ange's Range
+        //range: '2020', 
+
+        range: 'Weekly', 
 
         // How values should be represented in the output.
         // The default render option is ValueRenderOption.FORMATTED_VALUE.
