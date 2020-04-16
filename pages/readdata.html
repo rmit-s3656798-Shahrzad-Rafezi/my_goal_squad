@@ -16,10 +16,10 @@
     function makeApiCall() {
       var params = {
         // The ID of the spreadsheet to retrieve data from.
-        spreadsheetId: '1ne3uU4Mqo6djga7bUM8IbFe4RVI2Dh_AEsaTTBsOt4M',  // TODO: Update placeholder value.
+        spreadsheetId: '1ne3uU4Mqo6djga7bUM8IbFe4RVI2Dh_AEsaTTBsOt4M',
 
         // The A1 notation of the values to retrieve.
-        range: '2020',  // TODO: Update placeholder value.
+        range: '2020', 
 
         // How values should be represented in the output.
         // The default render option is ValueRenderOption.FORMATTED_VALUE.
@@ -36,15 +36,16 @@
       request.then(function(response) {
         // TODO: Change code below to process the `response` object:
         console.log(response.result);
+        window.onload = populateSheet(response.result);
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
       });
     }
 
     function initClient() {
-      var API_KEY = 'AIzaSyA5vOHyY0k8pXVMqU5eV3EEV7adhAbh72Y';  // TODO: Update placeholder with desired API key.
+      var API_KEY = 'AIzaSyA5vOHyY0k8pXVMqU5eV3EEV7adhAbh72Y';  
       
-      var CLIENT_ID = '1043837139257-nodg451ck0oul8bu97h23t5fqja7c7d4.apps.googleusercontent.com';  // TODO: Update placeholder with desired client ID.
+      var CLIENT_ID = '1043837139257-nodg451ck0oul8bu97h23t5fqja7c7d4.apps.googleusercontent.com';
 
       // TODO: Authorize using one of the following scopes:
       //   'https://www.googleapis.com/auth/drive'
@@ -82,12 +83,32 @@
     function handleSignOutClick(event) {
       gapi.auth2.getAuthInstance().signOut();
     }
+
+    function populateSheet(result) {
+      var table = document.createElement('table'), tr, td, row, cell;
+        for(var row = 0; row < result.values.length; row++) {
+          tr = document.createElement('tr');
+          for(var col = 0; col < result.values.length; col++) {
+            td = document.createElement('td');
+            tr.appendChild(td);
+            td.innerHTML = result.values[row][col];
+          }
+          table.appendChild(tr);
+        }
+        document.getElementById('container').appendChild(table).value;
+      }
+
     </script>
+
     <script async defer src="https://apis.google.com/js/api.js"
       onload="this.onload=function(){};handleClientLoad()"
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
     </script>
+
     <button id="signin-button" onclick="handleSignInClick()">Sign in</button>
     <button id="signout-button" onclick="handleSignOutClick()">Sign out</button>
+
+    <div id="container"></div>
+
   </body>
 </html>
