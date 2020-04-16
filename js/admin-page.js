@@ -31,3 +31,24 @@ logout.addEventListener("click", (e) => {
     window.location.href = "../index.html";
   });
 });
+
+// Make Admin
+const adminForm = document.querySelector("#make-admin");
+
+adminForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const userEmail = adminForm["admin-email"].value;
+  const makeAdmin = functions.httpsCallable('makeAdminRole');
+
+  makeAdmin({ email: userEmail }).then(result => {
+    console.log(result)
+  })
+
+  // auth.getUserByEmail(email).then((user) => {
+  //   console.log(user.getUid());
+  // });
+  // admin.auth().setCustomUserClaims( adminEmail["admin-email"].value, {admin: true}).then(() => {
+  //    console.log(email);
+  // })
+});

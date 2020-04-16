@@ -7,3 +7,8 @@
   /* transform: translate(-50%, -50%); */
   text-align: center;
 }
+
+#logout-btn,
+#make-admin {
+  margin-top: 10%;
+}
