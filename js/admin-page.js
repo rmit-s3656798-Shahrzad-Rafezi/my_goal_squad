@@ -17,9 +17,19 @@ signupForm.addEventListener("submit", (e) => {
   const email = signupForm["signup-email"].value;
   const password = signupForm["signup-password"].value;
 
-  auth.createUserWithEmailAndPassword(email, password).then((cred) => {
-    signupForm.reset();
+  auth.onAuthStateChanged((user) => {
+    user.getIdTokenResult().then(idTokenResult => {
+      if (idTokenResult.claims.admin) {
+        auth.createUserWithEmailAndPassword(email, password).then((cred) => {
+          signupForm.reset();
+        });
+      } else {
+        console.log('You are not an admin');
+      }
+    })
   });
+
+
 });
 
 // Logout Button
@@ -41,14 +51,16 @@ adminForm.addEventListener("submit", (e) => {
   const userEmail = adminForm["admin-email"].value;
   const makeAdmin = functions.httpsCallable('makeAdminRole');
 
-  makeAdmin({ email: userEmail }).then(result => {
-    console.log(result)
-  })
+  auth.onAuthStateChanged((user) => {
+    user.getIdTokenResult().then(idTokenResult => {
+      if (idTokenResult.claims.admin) {
+        makeAdmin({ email: userEmail }).then(result => {
+          console.log(result)
+        })
+      } else {
+        console.log('You are not an admin');
+      }
+    })
+  });
 
-  // auth.getUserByEmail(email).then((user) => {
-  //   console.log(user.getUid());
-  // });
-  // admin.auth().setCustomUserClaims( adminEmail["admin-email"].value, {admin: true}).then(() => {
-  //    console.log(email);
-  // })
 });

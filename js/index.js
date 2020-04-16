@@ -3,6 +3,13 @@ auth.onAuthStateChanged((user) => {
   if (user) {
     console.log(user.email, "has logged in");
     document.querySelector(".container").style.display = "none";
+    user.getIdTokenResult().then(idTokenResult => {
+      if (idTokenResult.claims.admin) {
+        window.location.href = "/pages/admin-page.html";
+      } else {
+        window.location.href = "/pages/user-main-page.html";
+      }
+    })
   } else {
     console.log("user has logged out");
     document.querySelector("#signin-form").style.display = "block";
@@ -22,11 +29,13 @@ signinForm.addEventListener("submit", (e) => {
   auth.signInWithEmailAndPassword(email, password).then((cred) => {
     signinForm.reset();
     auth.onAuthStateChanged((user) => {
-      if (user.email == "it.mygoalsquad@gmail.com") {
-        window.location.href = "/pages/admin-page.html";
-      } else {
-        window.location.href = "/pages/user-main-page.html";
-      }
+      user.getIdTokenResult().then(idTokenResult => {
+        if (idTokenResult.claims.admin) {
+          window.location.href = "/pages/admin-page.html";
+        } else {
+          window.location.href = "/pages/user-main-page.html";
+        }
+      })
     });
   });
 });
