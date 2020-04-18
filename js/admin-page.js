@@ -17,11 +17,13 @@ signupForm.addEventListener("submit", (e) => {
   const name = signupForm["user-name"].value;
   const email = signupForm["signup-email"].value;
   const password = signupForm["signup-password"].value;
+  const tel = signupForm["signup-number"].value;
 
   const newUser = {
     name,
     email,
-    password
+    password,
+    tel
   };
 
   const addNewUser = functions.httpsCallable('createNewUser');

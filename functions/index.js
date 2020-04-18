@@ -1,6 +1,7 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
-admin.initializeApp();
+admin.initializeApp(functions.config().firebase);
+const db = admin.firestore();
 
 
 // Make admin 
@@ -25,16 +26,19 @@ exports.createNewUser = functions.https.onCall((data, context) => {
     const name = data.name
     const email = data.email;
     const password = data.password;
+    const tel = data.tel;
 
     return admin.auth().createUser({
         displayName: data.name,
         email: data.email,
-        password: data.password
-    }).then(() => {
+        password: data.password,
+        phoneNumber: data.tel
+    }).then(cred => {
         return {
-            message: `${data.name} has been registered`
+            message: `${cred.displayName} has been registered`
         };
     }).catch((err) => {
         return err;
     });
 })
+
