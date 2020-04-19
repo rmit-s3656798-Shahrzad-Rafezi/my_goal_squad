@@ -75,5 +75,3 @@ adminForm.addEventListener("submit", (e) => {
   });
 
 });
-
-test

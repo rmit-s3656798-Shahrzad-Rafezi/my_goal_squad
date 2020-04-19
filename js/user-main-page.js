@@ -15,3 +15,11 @@ logout.addEventListener("click", (e) => {
     window.location.href = "../index.html";
   });
 });
+
+// Gratitdue Journal Button
+const jounral = document.querySelector("#gratitude-btn");
+
+jounral.addEventListener("click", (e) => {
+  e.preventDefault();
+  window.location.href = "/pages/gratitude-journal.html";
+});
