@@ -1,0 +1,66 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <title>My Goal Squad</title>
+</head>
+
+<body class="grey lighten-3">
+    <div class="z-depth-5 container">
+        <img src="/img/logo.png" alt="">
+
+        <form id="signin-form">
+            <div class="input-field">
+                <h5>Log In</h5>
+                <input type="email" id="signin-email" required />
+                <label for="signin-email">Email Address</label>
+            </div>
+            <div class="input-field">
+                <input type="password" id="signin-password" required />
+                <label for="signin-password">Enter Passwords</label>
+            </div>
+            <button class="waves-effect btn">LogIn
+            </button>
+        </form>
+    </div>
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script> -->
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyD-FzCFNKKUlRyuqDitOKl7exXbu8YhGfE",
+            authDomain: "mygoalsquad.firebaseapp.com",
+            databaseURL: "https://mygoalsquad.firebaseio.com",
+            projectId: "mygoalsquad",
+            storageBucket: "mygoalsquad.appspot.com",
+            messagingSenderId: "577390043871",
+            appId: "1:577390043871:web:1c4e34f73663b13c3ebf6a",
+            measurementId: "G-38YM9W2JM0"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        // firebase.analytics();
+
+        // auth and firestor references
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/js/index.js"></script>
+</body>
+
+</html>

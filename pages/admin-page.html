@@ -1,0 +1,89 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/admin-page.css">
+    <title>My Goal Squad | Admin</title>
+</head>
+
+<body class="grey lighten-3">
+
+    <div class="container">
+        <h2>Admin Page</h2>
+
+        <form id="signup-form">
+            <h5>Register New User</h5>
+            <div class="input-field">
+                <input type="text" id="user-name" required />
+                <label for="user-name">Enter Your Name</label>
+            </div>
+            <div class="input-field">
+                <input type="email" id="signup-email" required />
+                <label for="signup-email">Email Address</label>
+            </div>
+            <div class="input-field">
+                <input type="password" id="signup-password" required />
+                <label for="signup-password">Choose Passwords</label>
+            </div>
+            <div class="input-field">
+                <input placeholder="<+ country code><phone number>" type="tel" id="signup-number" required />
+                <label for="signup-number">Enter Your Number</label>
+            </div>
+            <button class="waves-effect waves-orange btn signup-button">Signup
+            </button>
+        </form>
+
+        <form id="make-admin">
+            <h6>Make User an admin</h6>
+            <div class="input-field">
+                <input type="email" id="admin-email" required />
+                <label for="admin-email">Enter Email to make Admin</label>
+            </div>
+            <button id="admin-btn" class="waves-effect btn orange">Make admin</button>
+        </form>
+
+        <button id="logout-btn" class="waves-effect btn red ">Logout
+            <i class="material-icons right">input</i>
+        </button>
+    </div>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-functions.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+https://firebase.google.com/docs/web/setup#available-libraries -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script> -->
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyD-FzCFNKKUlRyuqDitOKl7exXbu8YhGfE",
+            authDomain: "mygoalsquad.firebaseapp.com",
+            databaseURL: "https://mygoalsquad.firebaseio.com",
+            projectId: "mygoalsquad",
+            storageBucket: "mygoalsquad.appspot.com",
+            messagingSenderId: "577390043871",
+            appId: "1:577390043871:web:1c4e34f73663b13c3ebf6a",
+            measurementId: "G-38YM9W2JM0"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        // firebase.analytics();
+
+        // auth and firestor references
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const functions = firebase.functions();
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/js/admin-page.js"></script>
+</body>
+
+</html>
