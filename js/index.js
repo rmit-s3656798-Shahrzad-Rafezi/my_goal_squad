@@ -23,6 +23,9 @@ signinForm.addEventListener("submit", (e) => {
   //   prevent page refresh
   e.preventDefault();
 
+  document.querySelector("#signin-form").style.display = "none";
+  document.querySelector(".progress").style.display = "block";
+
   const email = signinForm["signin-email"].value;
   const password = signinForm["signin-password"].value;
 
