@@ -12,10 +12,32 @@
 <body class="grey lighten-3">
 
     <div class="container">
-        <i class="large material-icons">book</i>
-        <h2>GRATITUDE JOURNAL</h2>
-    </div>
+        <i class="medium material-icons">book</i>
+        <h4>GRATITUDE JOURNAL</h4>
+        <h6 id="no-entries"> There is no journal entries yet.<br> Write something !</h6>
 
+        <div id="modal-entry" class="modal bottom-sheet">
+            <div class="modal-content">
+                <form id="journal-form">
+                    <!-- <i class="medium material-icons">book</i> -->
+                    <i class="small material-icons">border_color</i>
+                    <div class="input-field">
+                        <input type="text" id="journal-entry" required />
+                        <label for="journal-entry">Say something</label>
+                        <button class="waves-effect waves-teal btn journal-btn">Log
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="fixed-action-btn">
+            <button data-target='modal-entry'
+                class="waves-effect btn-floating btn-large modal-trigger waves-teal entry-button">
+                <i class="large material-icons">mode_edit</i>
+            </button>
+        </div>
+    </div>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
