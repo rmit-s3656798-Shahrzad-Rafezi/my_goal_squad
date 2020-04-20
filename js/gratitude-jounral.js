@@ -2,26 +2,22 @@ auth.onAuthStateChanged((user) => {
     if (user) {
         console.log(user.email, "has logged in");
 
-        // db.collection('users').doc(user.uid).collection('journal').get().then(snapshot => {
-        //     console.log(snapshot.docs);
-        //     if (snapshot.size == 0) {
-        //         document.querySelector("#no-entries").style.display = "block";
-        //     } else {
-        //         document.querySelector("#no-entries").style.display = "none";
-        //     }
-
-        // }).catch(err => {
-        //     return {
-        //         message: `${err}`
-        //     }
-        // })
-
         db.collection('users').doc(user.uid).collection('journal').onSnapshot(snapshot => {
             if (snapshot.size == 0) {
                 document.querySelector("#no-entries").style.display = "block";
             } else {
                 document.querySelector("#no-entries").style.display = "none";
             }
+
+            snapshot.docChanges().forEach(change => {
+                if (change.type === 'added') {
+                    // added
+                    renderEntry(change.doc.data(), change.doc.id);
+                }
+                else if (change.type === 'removed') {
+                    // removed
+                };
+            })
         })
 
 
@@ -72,3 +68,18 @@ journalForm.addEventListener("submit", (e) => {
     });
 
 })
+
+
+// render Entry
+
+const renderEntry = (data, id) => {
+    const html = `
+    <div class="card-panel teal lighten-4">
+          <span class="black-text">
+          ${data.entry_string}
+          </span>
+        </div>
+    `;
+    let entries = document.querySelector(".entry-container");
+    entries.innerHTML += html;
+}
