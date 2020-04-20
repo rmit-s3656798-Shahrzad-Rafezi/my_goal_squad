@@ -1,14 +1,22 @@
 //checks to see if that user has logged in
 auth.onAuthStateChanged((user) => {
   if (user) {
+
     console.log(user.email, "has logged in");
-    //gets data
-    db.collection('users').doc(user.uid).collection('Goals').doc('Year').collection('2020').doc('Month').collection('January').doc('Week').collection('Week1').doc('Type').collection('Personal').doc('ilk1m1bxJScQxkcGb2Nj').get().then(doc => {
-      console.log(doc.data());
-    })
-    // db.collection('users').get().then(snapshot =>{
-    //   console.log(snapshot.docs);
-    // });
+    
+    var user = db.collection('users').doc(user.uid);
+    var goals = user.collection('Goals').doc('Year');
+    var year = goals.collection('2020').doc('Month');
+    var month = year.collection('January').doc('Week');
+    var week = month.collection('Week1').doc('Type');
+    var type = week.collection("Personal");
+
+    type.get().then((snapshot) =>{
+      snapshot.docs.forEach(doc =>{
+        console.log(doc.data());
+      });
+    });
+
   } else {
     // TODO: leave an empty string
     console.log("user has logged out");
