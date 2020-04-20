@@ -37,6 +37,7 @@ signupForm.addEventListener("submit", (e) => {
       } else {
         console.log('You are not an admin');
       }
+      signupForm.reset();
     })
   });
 
