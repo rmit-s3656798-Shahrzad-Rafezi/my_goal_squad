@@ -38,6 +38,14 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+// Home Button
+const home = document.querySelector("#home-btn");
+
+home.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.location.href = "/pages/user-main-page.html";
+});
+
 // write journal 
 
 const journalForm = document.querySelector("#journal-form");
