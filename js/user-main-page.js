@@ -1,3 +1,18 @@
+const todo_list = document.querySelector('#todo-list'); 
+
+//create element and render
+function renderList(doc){
+  let li = document.createElement('li');
+  let todo = document.createElement('span');
+
+  li.setAttribute('data-id', doc.id);
+  todo.textContent = doc.data().Todo;
+
+  li.appendChild(todo);
+
+  todo_list.appendChild(li);
+}
+
 //checks to see if that user has logged in
 auth.onAuthStateChanged((user) => {
   if (user) {
@@ -13,7 +28,8 @@ auth.onAuthStateChanged((user) => {
 
     type.get().then((snapshot) =>{
       snapshot.docs.forEach(doc =>{
-        console.log(doc.data());
+        renderList(doc);
+        //console.log(doc.data());
       });
     });
 
