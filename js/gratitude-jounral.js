@@ -19,7 +19,6 @@ auth.onAuthStateChanged((user) => {
                     // removed
                     let removedEntry = document.querySelector("#" + change.doc.id);
                     removedEntry.remove();
-
                 };
             })
         })
