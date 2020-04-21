@@ -39,10 +39,25 @@ auth.onAuthStateChanged((user) => {
     type = week.collection("Personal");
 
     //get data
-    type.get().then((snapshot) =>{
-      snapshot.docs.forEach(doc =>{
-        renderList(doc);
-        //console.log(doc.data());
+    // type.get().then((snapshot) =>{
+    //   snapshot.docs.forEach(doc =>{
+    //     renderList(doc);
+    //     //console.log(doc.data());
+    //   });
+    // });
+
+    //get data on real-time
+    type.onSnapshot(snapshot => {
+      let changes = snapshot.docChanges();
+      changes.forEach(change =>{
+        console.log(change.doc.data());
+        if(change.type == 'added'){
+          renderList(change.doc);
+        }
+        else if(change.type == 'removed'){
+          let li = todo_list.querySelector('[data-id=' + change.doc.id + ']');
+          todo_list.removeChild(li);
+        }
       });
     });
 
