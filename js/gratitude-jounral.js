@@ -2,7 +2,7 @@ auth.onAuthStateChanged((user) => {
     if (user) {
         console.log(user.email, "has logged in");
 
-        db.collection('users').doc(user.uid).collection('journal').onSnapshot(snapshot => {
+        db.collection('users').doc(user.uid).collection('journal').orderBy("timestamp", "asc").onSnapshot(snapshot => {
             if (snapshot.size == 0) {
                 document.querySelector("#no-entries").style.display = "block";
             } else {
@@ -13,9 +13,13 @@ auth.onAuthStateChanged((user) => {
                 if (change.type === 'added') {
                     // added
                     renderEntry(change.doc.data(), change.doc.id);
+
                 }
                 else if (change.type === 'removed') {
                     // removed
+                    let removedEntry = document.querySelector("#" + change.doc.id);
+                    removedEntry.remove();
+
                 };
             })
         })
@@ -43,17 +47,17 @@ home.addEventListener("click", (e) => {
 });
 
 // write journal 
-
 const journalForm = document.querySelector("#journal-form");
 
 journalForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const user_entry = journalForm["journal-entry"].value;
-    var today = new Date();
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = date + ' ' + time;
+    let user_entry = journalForm["journal-entry"].value;
+    let today = new Date();
+    let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    let dateTime = date + ' ' + time;
+    // let dateTime = new firebase.firestore.Timestamp.now();
 
 
     auth.onAuthStateChanged((user) => {
@@ -71,15 +75,17 @@ journalForm.addEventListener("submit", (e) => {
 
 
 // render Entry
-
 const renderEntry = (data, id) => {
     const html = `
-    <div class="card-panel teal lighten-4">
-          <span class="black-text">
-          ${data.entry_string}
-          </span>
+    <div class="entry teal lighten-4" id="${id}">
+          <p class="entry-title grey-text text-darken-3">Display Name</p>
+          <p class="entry-text">${data.entry_string}</P>
         </div>
     `;
     let entries = document.querySelector(".entry-container");
     entries.innerHTML += html;
+
+    // scroll to the bottom 
+    recentEntry = document.getElementById(id);
+    recentEntry.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
