@@ -2,7 +2,7 @@ auth.onAuthStateChanged((user) => {
     if (user) {
         console.log(user.email, "has logged in");
 
-        db.collection('users').doc(user.uid).collection('journal').orderBy("timestamp", "asc").onSnapshot(snapshot => {
+        db.collection('users').doc(user.uid).collection('journal').orderBy("timestamp_raw", "asc").onSnapshot(snapshot => {
             if (snapshot.size == 0) {
                 document.querySelector("#no-entries").style.display = "block";
             } else {
@@ -12,7 +12,7 @@ auth.onAuthStateChanged((user) => {
             snapshot.docChanges().forEach(change => {
                 if (change.type === 'added') {
                     // added
-                    renderEntry(change.doc.data(), change.doc.id);
+                    renderEntry(user.displayName, change.doc.data(), change.doc.id);
 
                 }
                 else if (change.type === 'removed') {
@@ -52,15 +52,18 @@ journalForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
     let user_entry = journalForm["journal-entry"].value;
-    let today = new Date();
-    let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    let dateTime = date + ' ' + time;
-    // let dateTime = new firebase.firestore.Timestamp.now();
+    // let today = new Date();
+    // let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    // let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    // let dateTime = date + ' ' + time;
+
+    let dateTime = new firebase.firestore.Timestamp.now();
+    let rawTime = dateTime.seconds;
 
 
     auth.onAuthStateChanged((user) => {
         db.collection('users').doc(user.uid).collection('journal').add({
+            timestamp_raw: rawTime,
             timestamp: dateTime,
             entry_string: user_entry
         }).then(() => {
@@ -74,10 +77,10 @@ journalForm.addEventListener("submit", (e) => {
 
 
 // render Entry
-const renderEntry = (data, id) => {
+const renderEntry = (displayName, data, id) => {
     const html = `
     <div class="entry teal lighten-4" id="${id}">
-          <p class="entry-title grey-text text-darken-3">Display Name</p>
+          <p class="entry-title grey-text text-darken-3">${displayName}</p>
           <p class="entry-text">${data.entry_string}</P>
         </div>
     `;
@@ -88,3 +91,12 @@ const renderEntry = (data, id) => {
     recentEntry = document.getElementById(id);
     recentEntry.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
+
+let test = document.querySelector('.test');
+
+test.addEventListener("click", (e) => {
+    e.preventDefault();
+    let dateTime = new firebase.firestore.Timestamp.now();
+    let rawTime = dateTime.seconds;
+    console.log(rawTime)
+})

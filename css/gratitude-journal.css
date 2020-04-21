@@ -1,20 +1,14 @@
 .container {
   padding: 5%;
-  /* position: absolute; */
-  /* left: 50%;
-    top: 50%; */
-  /* width: 70%; */
-  /* transform: translate(-50%, -50%); */
   text-align: center;
 }
 
 h5 {
   text-align: left;
   font-size: 18px;
-  /* margin-left: 4%; */
 }
 
-i {
+.journal {
   transform: translate(25%, 25%);
 }
 
@@ -44,15 +38,3 @@ p {
 .entry-title {
   font-weight: bolder;
 }
-
-/* #modal-entry {
-  position: absolute;
-  top: 85% !important;
-  width: 80%;
-  transform: translateY(-50%) !important;
-} */
-
-/* .entry-container {
-  height: 70%;
-  overflow: scroll;
-} */

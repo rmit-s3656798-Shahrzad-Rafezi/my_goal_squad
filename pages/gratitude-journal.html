@@ -17,15 +17,16 @@
         <h5>GRATITUDE JOURNAL<i class="small material-icons">book</i></h5>
         <h6 id="no-entries"> There is no journal entries yet.<br> Write something !</h6>
 
-        <div class="entry-container" id="test">
+        <!-- Entry Container -->
+        <div class="entry-container">
 
         </div>
 
+        <!-- New Entry Form -->
         <div id="modal-entry" class="modal bottom-sheet">
             <div class="modal-content">
                 <form id="journal-form">
-                    <!-- <i class="medium material-icons">book</i> -->
-                    <i class="small material-icons">border_color</i>
+                    <i class="small material-icons journal">border_color</i>
                     <div class="input-field">
                         <input type="text" id="journal-entry" required />
                         <label for="journal-entry">Say something</label>
@@ -36,6 +37,7 @@
             </div>
         </div>
 
+        <!-- Entry Form Trigger -->
         <div class="fixed-action-btn">
             <button data-target='modal-entry'
                 class="waves-effect btn-floating btn-large modal-trigger waves-teal entry-button">
@@ -44,6 +46,8 @@
         </div>
     </div>
 
+    <button class="waves-effect waves-teal btn test">Log
+    </button>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
