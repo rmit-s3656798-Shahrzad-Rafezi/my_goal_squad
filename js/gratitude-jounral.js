@@ -1,5 +1,6 @@
 auth.onAuthStateChanged((user) => {
     if (user) {
+        CURRENTUSER = user;
         console.log(user.email, "has logged in");
 
         db.collection('users').doc(user.uid).collection('journal').orderBy("timestamp_raw", "asc").onSnapshot(snapshot => {
@@ -13,7 +14,6 @@ auth.onAuthStateChanged((user) => {
                 if (change.type === 'added') {
                     // added
                     renderEntry(user.displayName, change.doc.data(), change.doc.id);
-
                 }
                 else if (change.type === 'removed') {
                     // removed
@@ -29,13 +29,11 @@ auth.onAuthStateChanged((user) => {
     }
 });
 
-// floationg button
-
+// Floationg action button
 document.addEventListener('DOMContentLoaded', function () {
     var elems = document.querySelectorAll('.modal');
     var instances = M.Modal.init(elems);
 });
-
 
 // Home Button
 const home = document.querySelector("#home-btn");
@@ -45,20 +43,17 @@ home.addEventListener("click", (e) => {
     window.location.href = "/pages/user-main-page.html";
 });
 
-// write journal 
+// Write journal 
 const journalForm = document.querySelector("#journal-form");
 
 journalForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
     let user_entry = journalForm["journal-entry"].value;
-    // let today = new Date();
-    // let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    // let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    // let dateTime = date + ' ' + time;
-
+    // Server Timestamp
     let dateTime = new firebase.firestore.Timestamp.now();
-    let rawTime = dateTime.seconds;
+    // Approx time to manage data
+    let rawTime = new Date().getTime();
 
 
     auth.onAuthStateChanged((user) => {
@@ -75,14 +70,18 @@ journalForm.addEventListener("submit", (e) => {
 
 })
 
-
-// render Entry
+// Render Entry
 const renderEntry = (displayName, data, id) => {
+    let time = new Date(data.timestamp_raw);
     const html = `
     <div class="entry teal lighten-4" id="${id}">
-          <p class="entry-title grey-text text-darken-3">${displayName}</p>
-          <p class="entry-text">${data.entry_string}</P>
+        <div class="entry-title-container">
+        <p class="entry-title grey-text text-darken-3">${displayName}</p>
+        <p class="date grey-text text-darken-2 entry-time">${dateString(time)}</p>
+        <i class="entry-delete tiny material-icons" data-id="${id}">clear</i>
         </div>
+          <p class="entry-text">${data.entry_string}</P>
+    </div>
     `;
     let entries = document.querySelector(".entry-container");
     entries.innerHTML += html;
@@ -92,11 +91,83 @@ const renderEntry = (displayName, data, id) => {
     recentEntry.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
-let test = document.querySelector('.test');
+// Time since published
+// Takes in Date() format as an argument
+// ! Have not found a way to auto update without refreshing the entire page
+const timeSince = (timeStamp) => {
 
-test.addEventListener("click", (e) => {
-    e.preventDefault();
-    let dateTime = new firebase.firestore.Timestamp.now();
-    let rawTime = dateTime.seconds;
-    console.log(rawTime)
+    var now = new Date(),
+        secondsPast = (now.getTime() - timeStamp) / 1000;
+    if (secondsPast < 60) {
+        return parseInt(secondsPast) + 's';
+    }
+    if (secondsPast < 3600) {
+        return parseInt(secondsPast / 60) + 'm';
+    }
+    if (secondsPast <= 86400) {
+        return parseInt(secondsPast / 3600) + 'h';
+    }
+    if (secondsPast > 86400) {
+        day = timeStamp.getDate();
+        month = timeStamp.toDateString().match(/ [a-zA-Z]*/)[0].replace(" ", "");
+        year = timeStamp.getFullYear() == now.getFullYear() ? "" : " " + timeStamp.getFullYear();
+        return day + " " + month + year;
+    }
+}
+
+// Format datatype Date to DDMMM HH:mm
+// Takes in Date() format as an argument
+const dateString = (date) => {
+    let strArray = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    let d = date.getDate();
+    let m = strArray[date.getMonth()];
+    let y = date.getFullYear();
+    let H = date.getHours();
+    let M = date.getMinutes();
+    let S = date.getSeconds();
+    return '' + (d <= 9 ? '0' + d : d) + m + ' ' +
+        H + ':' +
+        (M <= 9 ? '0' + M : M) + ':' +
+        // (S <= 9 ? '0' + S : S) +
+        (H < 12 ? 'am' : 'pm');
+}
+
+// Delete entry
+const entryContainer = document.querySelector('.entry-container');
+entryContainer.addEventListener('click', evt => {
+    // console.log(evt);
+    if (evt.target.tagName === 'I') {
+        // console.log("YES")
+        let id = evt.target.getAttribute('data-id')
+        console.log(id)
+        auth.onAuthStateChanged((user) => {
+            db.collection('users').doc(user.uid).collection('journal').doc(id).delete()
+        })
+
+    }
 })
+
+
+// Button for testing functions
+// let test = document.querySelector('.test');
+
+// test.addEventListener("click", (e) => {
+//     e.preventDefault();
+//     // let dateTime = new firebase.firestore.Timestamp.now();
+//     // let rawTime = dateTime.seconds;
+
+//     // let min = rawTime / 60;
+//     // let hr = min / 60;
+//     // let day = hr / 24;
+//     // let week = day / 7;
+
+//     // console.log(week)
+//     const time = new Date();
+
+//     const test = dateString(time)
+
+//     console.log(CURRENTUSER);
+
+// })
+
+

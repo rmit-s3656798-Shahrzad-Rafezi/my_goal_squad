@@ -14,23 +14,22 @@
     <div class="container" id="test">
         <button id="home-btn" class="waves-effect btn orange ">Home
         </button>
-        <h5>GRATITUDE JOURNAL<i class="small material-icons">book</i></h5>
+        <h5>GRATITUDE JOURNAL<i class="small material-icons book-icon">book</i></h5>
         <h6 id="no-entries"> There is no journal entries yet.<br> Write something !</h6>
 
         <!-- Entry Container -->
-        <div class="entry-container">
-
-        </div>
+        <div class="entry-container"></div>
 
         <!-- New Entry Form -->
         <div id="modal-entry" class="modal bottom-sheet">
             <div class="modal-content">
                 <form id="journal-form">
-                    <i class="small material-icons journal">border_color</i>
+                    <i class="small material-icons journal-icon">border_color</i>
                     <div class="input-field">
                         <input type="text" id="journal-entry" required />
                         <label for="journal-entry">Say something</label>
-                        <button class="waves-effect waves-teal btn journal-btn">Log
+                        <button class="waves-effect waves-teal btn-flat
+                        teal-text journal-btn">Log
                         </button>
                     </div>
                 </form>
@@ -40,14 +39,14 @@
         <!-- Entry Form Trigger -->
         <div class="fixed-action-btn">
             <button data-target='modal-entry'
-                class="waves-effect btn-floating btn-large modal-trigger waves-teal entry-button">
+                class="waves-effect btn-floating btn-large modal-trigger grey darken-3 entry-button">
                 <i class="large material-icons">mode_edit</i>
             </button>
         </div>
     </div>
 
-    <button class="waves-effect waves-teal btn test">Log
-    </button>
+    <!-- Test button (uncomment to use)-->
+    <!-- <button class="waves-effect waves-teal btn test">TEST</button> -->
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
@@ -80,6 +79,8 @@
 
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"
+        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
     <script src="/js/gratitude-jounral.js"></script>
 </body>
 
