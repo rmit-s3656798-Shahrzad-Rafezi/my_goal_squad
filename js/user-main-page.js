@@ -1,4 +1,5 @@
 const todo_list = document.querySelector('#todo-list'); 
+const form = document.querySelector('#add-todo-form');
 
 //create element and render
 function renderList(doc){
@@ -6,7 +7,7 @@ function renderList(doc){
   let todo = document.createElement('span');
 
   li.setAttribute('data-id', doc.id);
-  todo.textContent = doc.data().Todo;
+  todo.textContent = doc.data().todo;
 
   li.appendChild(todo);
 
@@ -26,11 +27,21 @@ auth.onAuthStateChanged((user) => {
     var week = month.collection('Week1').doc('Type');
     var type = week.collection("Personal");
 
+    //get data
     type.get().then((snapshot) =>{
       snapshot.docs.forEach(doc =>{
         renderList(doc);
-        //console.log(doc.data());
+        console.log(doc.data());
       });
+    });
+
+    //add data
+    form.addEventListener('submit', (e) =>{
+      e.preventDefault();
+      type.add({
+        todo: form.todo.value
+      });
+      form.todo.value = '';
     });
 
   } else {
