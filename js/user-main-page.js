@@ -42,7 +42,7 @@ auth.onAuthStateChanged((user) => {
     type.get().then((snapshot) =>{
       snapshot.docs.forEach(doc =>{
         renderList(doc);
-        console.log(doc.data());
+        //console.log(doc.data());
       });
     });
 
@@ -56,8 +56,8 @@ auth.onAuthStateChanged((user) => {
     });
 
   } else {
-    // TODO: leave an empty string
     console.log("user has logged out");
+    window.location.href = "../index.html";
   }
 });
 
