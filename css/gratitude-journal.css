@@ -8,6 +8,16 @@
   text-align: center;
 }
 
+h5 {
+  text-align: left;
+  font-size: 18px;
+  /* margin-left: 4%; */
+}
+
+i {
+  transform: translate(25%, 25%);
+}
+
 #no-entries {
   display: block;
 }
@@ -16,9 +26,33 @@
   display: block;
 }
 
+.entry-container {
+  margin-top: 5%;
+  text-align: left;
+}
+
+.entry {
+  margin: 15px 0;
+  padding: 10px 25px;
+  font-size: 12px;
+}
+
+p {
+  margin: 8px 0;
+}
+
+.entry-title {
+  font-weight: bolder;
+}
+
 /* #modal-entry {
   position: absolute;
   top: 85% !important;
   width: 80%;
   transform: translateY(-50%) !important;
+} */
+
+/* .entry-container {
+  height: 70%;
+  overflow: scroll;
 } */
