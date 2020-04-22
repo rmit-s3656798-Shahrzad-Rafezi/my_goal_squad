@@ -16,7 +16,35 @@
 
         <div class="content">
 
-            <!-- Add todo list -->
+             <!-- Slider Functionality -->
+             <div class="slide-wrap">
+
+                <!-- tabs -->
+                <a href="#slide-1">Health</a>
+                <a href="#slide-2">Work</a>
+                <a href="#slide-3">Personal</a>
+
+                <div class="slider">
+
+                    <!-- Display todo list for health -->
+                    <div class="slide" id="slide-1">
+                        Health
+                    </div>
+
+                    <!-- Display todo list for work -->
+                    <div class="slide" id="slide-2">
+                        Work
+                    </div>
+
+                    <!-- Display todo list for personal -->    
+                    <div class="slide" id="slide-3">
+                        Personal
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Add todo list form -->
             <form id = "add-todo-form">
                 <input type="text" name="todo" placeholder="Todo">
                 <button>Add list</button>
