@@ -2,8 +2,9 @@ const todo_list = document.querySelector('#todo-list');
 const form = document.querySelector('#add-todo-form');
 let type = '';
 
-//create element and render
+// Create element and render
 function renderList(doc){
+
   let li = document.createElement('li');
   let todo = document.createElement('span');
   let cross = document.createElement('div');
@@ -17,16 +18,19 @@ function renderList(doc){
 
   todo_list.appendChild(li);
 
-  // deleting data
+  // Delete data
   cross.addEventListener('click', (e) => {
+
     e.stopPropagation();
     let id = e.target.parentElement.getAttribute('data-id');
     type.doc(id).delete();
+
   });
 }
 
-//checks to see if that user has logged in
+// Checks to see if that user has logged in
 auth.onAuthStateChanged((user) => {
+
   if (user) {
 
     console.log(user.email, "has logged in");
@@ -46,22 +50,29 @@ auth.onAuthStateChanged((user) => {
     //   });
     // });
 
-    //get data on real-time
+    //Get data in real-time
     type.onSnapshot(snapshot => {
+
       let changes = snapshot.docChanges();
+
       changes.forEach(change =>{
-        console.log(change.doc.data());
+
+        //console.log(change.doc.data());
+
         if(change.type == 'added'){
           renderList(change.doc);
         }
+
         else if(change.type == 'removed'){
           let li = todo_list.querySelector('[data-id=' + change.doc.id + ']');
           todo_list.removeChild(li);
         }
+
       });
+
     });
 
-    //add data
+    // Add data
     form.addEventListener('submit', (e) =>{
       e.preventDefault();
       type.add({

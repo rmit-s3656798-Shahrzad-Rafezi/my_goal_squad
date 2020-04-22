@@ -11,19 +11,26 @@
 
 <body class="grey lighten-3">
     <div class="container">
+
         <h5>User Main Page</h5>
 
         <div class="content">
+
+            <!-- Add todo list -->
             <form id = "add-todo-form">
                 <input type="text" name="todo" placeholder="Todo">
                 <button>Add list</button>
             </form>
+
+            <!-- Display todo list -->
             <ul id="todo-list"></ul>
+            
         </div>
 
         <button id="logout-btn" class="waves-effect btn red ">Logout
             <i class="material-icons right">input</i>
         </button>
+
     </div>
 
 
@@ -57,6 +64,7 @@
         const db = firebase.firestore();
 
     </script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="/js/user-main-page.js"></script>
 
