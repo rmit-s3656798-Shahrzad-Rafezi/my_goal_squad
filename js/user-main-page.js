@@ -59,11 +59,11 @@ auth.onAuthStateChanged((user) => {
 
         //console.log(change.doc.data());
 
-        if(change.type == 'added'){
+        if(change.type === 'added'){
           renderList(change.doc);
         }
 
-        else if(change.type == 'removed'){
+        else if(change.type === 'removed'){
           let li = todo_list.querySelector('[data-id=' + change.doc.id + ']');
           todo_list.removeChild(li);
         }
