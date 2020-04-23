@@ -1,32 +1,50 @@
-const todo_list = document.querySelector('#todo-list'); 
 const form = document.querySelector('#add-todo-form');
 let type = '';
 
-// Create element and render
-function renderList(doc){
+// enable offline data
+db.enablePersistence().catch(function(err) {
+  if (err.code == 'failed-precondition') {
+    // probably multiple tabs open at once
+    console.log('persistance failed');
+    } 
+    else if (err.code == 'unimplemented') {
+      // lack of browser support for the feature
+      console.log('persistance not available');
+    }
+ });
 
-  let li = document.createElement('li');
-  let todo = document.createElement('span');
-  let cross = document.createElement('div');
+// Render todo list data
+const todo_list = document.querySelector('.todo-lists'); 
+const renderList = (data, id) => {
 
-  li.setAttribute('data-id', doc.id);
-  todo.textContent = doc.data().todo;
-  cross.textContent = 'x';
+  const html = `
+  <div class="card-panel todo white row" data-id="${id}">
+      <div class="todo-details">
+        <div class="recipe-title">${data.todo}</div>
+      </div>
+      <div class="todo-delete">
+        <i class="material-icons" data-id="${id}">delete_outline</i>
+      </div>
+  </div>
+  `;
+  
+  todo_list.innerHTML += html;
+};
 
-  li.appendChild(todo);
-  li.appendChild(cross);
-
-  todo_list.appendChild(li);
-
-  // Delete data
-  cross.addEventListener('click', (e) => {
-
-    e.stopPropagation();
-    let id = e.target.parentElement.getAttribute('data-id');
+// Delete todo list data
+const todoContainer = document.querySelector('.todo-lists'); 
+todoContainer.addEventListener('click', e =>{
+  if(e.target.tagName === 'I'){
+    const id = e.target.getAttribute('data-id');
     type.doc(id).delete();
+  }
+});
 
-  });
-}
+// Remove list from DOM
+const removeList = (id) => {
+  const todo = document.querySelector(`.todo[data-id=${id}]`);
+  todo.remove();
+};
 
 // Checks to see if that user has logged in
 auth.onAuthStateChanged((user) => {
@@ -36,43 +54,32 @@ auth.onAuthStateChanged((user) => {
     console.log(user.email, "has logged in");
     
     var user = db.collection('users').doc(user.uid);
-    let goals = user.collection('Goals').doc('Year');
-    let year = goals.collection('2020').doc('Month');
-    let month = year.collection('January').doc('Week');
-    let week = month.collection('Week1').doc('Type');
+    var goals = user.collection('Goals').doc('Year');
+    var year = goals.collection('2020').doc('Month');
+    var month = year.collection('January').doc('Week');
+    var week = month.collection('Week1').doc('Type');
     type = week.collection("Personal");
 
-    //get data
-    // type.get().then((snapshot) =>{
-    //   snapshot.docs.forEach(doc =>{
-    //     renderList(doc);
-    //     //console.log(doc.data());
-    //   });
-    // });
-
-    //Get data in real-time
+    // Get data in real-time
     type.onSnapshot(snapshot => {
 
       let changes = snapshot.docChanges();
 
       changes.forEach(change =>{
-
-        //console.log(change.doc.data());
-
+        
         if(change.type === 'added'){
-          renderList(change.doc);
+          renderList(change.doc.data(), change.doc.id);
         }
 
         else if(change.type === 'removed'){
-          let li = todo_list.querySelector('[data-id=' + change.doc.id + ']');
-          todo_list.removeChild(li);
+          removeList(change.doc.id);
         }
 
       });
 
     });
 
-    // Add data
+    // Add todo list data
     form.addEventListener('submit', (e) =>{
       e.preventDefault();
       type.add({
