@@ -1,4 +1,3 @@
-
 var y = document.getElementById('select_id_year');
 let chosen_year = '';
 y.addEventListener('change', function() {
@@ -59,6 +58,26 @@ t.addEventListener('change', function() {
   console.log(chosen_type);
 });
 
+// Get data in real-time
+function display(userID, year, month, week, type){
+  db.collection('users').doc(userID)
+  .collection('Goals').doc('Year')
+  .collection(year).doc('Month')
+  .collection(month).doc('Week')
+  .collection(week).doc('Type')
+  .collection(type).onSnapshot(snapshot =>{
+    let changes = snapshot.docChanges();
+    changes.forEach(change =>{
+      if(change.type === 'added'){
+        renderList(change.doc.data(), change.doc.id);
+      }
+      else if(change.type === 'removed'){
+        removeList(change.doc.id);
+      }
+    });
+  });
+}
+
 // This is for selection element in HTML file
 document.addEventListener('DOMContentLoaded', function() {
   var elems = document.querySelectorAll('select');
@@ -116,41 +135,10 @@ auth.onAuthStateChanged((user) => {
   if (user) {
 
     console.log(user.email, "has logged in");
-    
-    // Get data in real-time
-    db.collection('users').doc(user.uid)
-    .collection('Goals').doc('Year')
-    .collection('2020').doc('Month')
-    .collection('January').doc('Week')
-    .collection('Week1').doc('Type')
-    .collection('Personal').onSnapshot(snapshot =>{
-      let changes = snapshot.docChanges();
-      changes.forEach(change =>{
-        if(change.type === 'added'){
-          renderList(change.doc.data(), change.doc.id);
-        }
-        else if(change.type === 'removed'){
-          removeList(change.doc.id);
-        }
-      });
-    });
 
-    db.collection('users').doc(user.uid)
-    .collection('Goals').doc('Year')
-    .collection('2020').doc('Month')
-    .collection('February').doc('Week')
-    .collection('Week1').doc('Type')
-    .collection('Personal').onSnapshot(snapshot =>{
-      let changes = snapshot.docChanges();
-      changes.forEach(change =>{
-        if(change.type === 'added'){
-          renderList(change.doc.data(), change.doc.id);
-        }
-        else if(change.type === 'removed'){
-          removeList(change.doc.id);
-        }
-      });
-    });
+    display(user.uid, '2020', 'January', 'Week1', 'Personal');
+    display(user.uid, '2020', 'February', 'Week1', 'Personal');
+    display(user.uid, '2020', 'March', 'Week1', 'Personal');
 
     // Add todo list data
     const form = document.querySelector('#todo-form');
