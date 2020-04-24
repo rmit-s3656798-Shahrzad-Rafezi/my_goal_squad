@@ -1,103 +1,109 @@
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/user-main-page.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/user-main-page.css" />
     <title>My Goal Squad</title>
-</head>
+  </head>
 
-<body class="grey lighten-3">
+  <body class="grey lighten-3">
     <div class="container">
 
-        <h5>User Main Page</h5>
+      <h5>User Main Page</h5>
 
-        <div class="content">
+      <div class="content">
 
-            <!-- Add todo list form -->
-            <form id = "add-todo-form">
-                <input type="text" name="todo" placeholder="Todo">
-                <button>Add list</button>
-            </form>
+        <!-- Add todo list form -->
+        <form id="todo-form">
+          <input type="text" name="todo" placeholder="Add goals that you want to achieve" />
+          <select id="select_id_year">
+            <option value="" disabled selected>Select year</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+          </select>
+          <select id="select_id_month">
+            <option value="" disabled selected>Select Month</option>
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+          </select>
+          <select id="select_id_week">
+            <option value="" disabled selected>Select Week</option>
+            <option value="Week1">Week1</option>
+            <option value="Week2">Week2</option>
+            <option value="Week3">Week3</option>
+          </select>
+          <select id="select_id_type">
+            <option value="" disabled selected>Select Type</option>
+            <option value="Health">Health</option>
+            <option value="Work">Work</option>
+            <option value="Personal">Personal</option>
+          </select>
+          <button>Add list</button>
+        </form>
 
-             <!-- Slider Functionality -->
-             <div class="slide-wrap">
+        <!-- Slider Functionality -->
+        <div class="slide-wrap">
 
-                <!-- tabs -->
-                <a href="#slide-1">Health</a>
-                <a href="#slide-2">Work</a>
-                <a href="#slide-3">Personal</a>
+          <!-- tabs -->
+          <a href="#slide-1">Health</a>
+          <a href="#slide-2">Work</a>
+          <a href="#slide-3">Personal</a>
 
-                <div class="slider">
+          <div class="slider">
+            <!-- Display todo list for health -->
+            <div class="slide" id="slide-1">Health</div>
 
-                    <!-- Display todo list for health -->
-                    <div class="slide" id="slide-1">
-                        Health
-                    </div>
+            <!-- Display todo list for work -->
+            <div class="slide" id="slide-2">Work</div>
 
-                    <!-- Display todo list for work -->
-                    <div class="slide" id="slide-2">
-                        Work
-                    </div>
-
-                    <!-- Display todo list for personal -->    
-                    <div class="slide" id="slide-3">
-                        Personal
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Display todo list -->
-            <div class="todo-lists"></div>
-            
+            <!-- Display todo list for personal -->
+            <div class="slide" id="slide-3">Personal</div>
+          </div>
         </div>
 
-        <button id="logout-btn" class="waves-effect btn red ">Logout
-            <i class="material-icons right">input</i>
-        </button>
+        <!-- Display todo list -->
+        <div class="todo-lists"></div>
+      </div>
 
+      <button id="logout-btn" class="waves-effect btn red">
+        Logout
+        <i class="material-icons right">input</i>
+      </button>
     </div>
-
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js"></script>
 
-    <!-- TODO: Add SDKs for Firebase products that you want to use
- https://firebase.google.com/docs/web/setup#available-libraries -->
-    <!-- <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script> -->
-
     <script>
-        // Your web app's Firebase configuration
-        var firebaseConfig = {
-            apiKey: "AIzaSyD-FzCFNKKUlRyuqDitOKl7exXbu8YhGfE",
-            authDomain: "mygoalsquad.firebaseapp.com",
-            databaseURL: "https://mygoalsquad.firebaseio.com",
-            projectId: "mygoalsquad",
-            storageBucket: "mygoalsquad.appspot.com",
-            messagingSenderId: "577390043871",
-            appId: "1:577390043871:web:1c4e34f73663b13c3ebf6a",
-            measurementId: "G-38YM9W2JM0"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        // firebase.analytics();
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyD-FzCFNKKUlRyuqDitOKl7exXbu8YhGfE",
+        authDomain: "mygoalsquad.firebaseapp.com",
+        databaseURL: "https://mygoalsquad.firebaseio.com",
+        projectId: "mygoalsquad",
+        storageBucket: "mygoalsquad.appspot.com",
+        messagingSenderId: "577390043871",
+        appId: "1:577390043871:web:1c4e34f73663b13c3ebf6a",
+        measurementId: "G-38YM9W2JM0",
+      };
 
-        // auth and firestor references
-        const auth = firebase.auth();
-        const db = firebase.firestore();
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      // firebase.analytics();
 
+      // auth and firestor references
+      const auth = firebase.auth();
+      const db = firebase.firestore();
     </script>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
     <script src="/js/user-main-page.js"></script>
-
-</body>
-
-
-
+  </body>
 </html>
