@@ -1,62 +1,88 @@
-var y = document.getElementById('select_id_year');
+// Display Years
+var year_id = document.getElementById('select_id_year');
+year_Fragment = document.createDocumentFragment();
 let chosen_year = '';
-y.addEventListener('change', function() {
-  if(this.value == '2020'){
-    chosen_year = this.value;
-  }
-  else if(this.value == '2021'){
-    chosen_year = this.value;
-  }
-  else if(this.value == '2022'){
-    chosen_year = this.value;
-  }
-  console.log(chosen_year);
+
+var years = [new Date().getFullYear(), new Date().getFullYear()+1, new Date().getFullYear()+2, new Date().getFullYear()+3];
+
+for (var i = 0; i <= years.length-1; i++) {
+  var option = document.createElement('option');
+  option.value = years[i];
+  option.appendChild(document.createTextNode(years[i]));
+  year_Fragment.appendChild(option);
+}
+year_id.appendChild(year_Fragment);
+
+// Grabs the year value
+year_id.addEventListener('change', function() {
+  chosen_year = this.value;
+  //console.log(chosen_year);
 });
 
-var m = document.getElementById('select_id_month');
+// Display Months
+var month_id = document.getElementById('select_id_month');
+month_Fragment = document.createDocumentFragment();
 let chosen_month = '';
-m.addEventListener('change', function() {
-  if(this.value == 'January'){
-    chosen_month = this.value;
-  }
-  else if(this.value == 'February'){
-    chosen_month = this.value;
-  }
-  else if(this.value == 'March'){
-    chosen_month = this.value;
-  }
-  console.log(chosen_month);
+
+var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+for (var i = 0; i <= months.length-1; i++) {
+  var option = document.createElement('option');
+  option.value = months[i];
+  option.appendChild(document.createTextNode(months[i]));
+  month_Fragment.appendChild(option);
+}
+month_id.appendChild(month_Fragment);
+
+// Grabs the Month value
+month_id.addEventListener('change', function() {
+  chosen_month = this.value;
+  //console.log(chosen_month);
 });
 
-var w = document.getElementById('select_id_week');
+// Display Weeks
+var week_id = document.getElementById('select_id_week');
+week_fragment = document.createDocumentFragment();
 let chosen_week = '';
-w.addEventListener('change', function() {
-  if(this.value == 'Week1'){
-    chosen_week = this.value;
-  }
-  else if(this.value == 'Week2'){
-    chosen_week = this.value;
-  }
-  else if(this.value == 'Week3'){
-    chosen_week = this.value;
-  }
-  console.log(chosen_week);
+
+var weeks = ["Week1", "Week2", "Week3", "Week4"];
+
+for (var i = 0; i <= weeks.length-1; i++) {
+  var option = document.createElement('option');
+  option.value = weeks[i];
+  option.appendChild(document.createTextNode(weeks[i]));
+  week_fragment.appendChild(option);
+}
+week_id.appendChild(week_fragment);
+
+// Grabs the Week value
+week_id.addEventListener('change', function() {
+  chosen_week = this.value;
+  //console.log(chosen_week);
 });
 
-var t = document.getElementById('select_id_type');
+
+// Display Types
+var type_id = document.getElementById('select_id_type');
+type_fragment = document.createDocumentFragment();
 let chosen_type = '';
-t.addEventListener('change', function() {
-  if(this.value == 'Health'){
+
+var types = ["Health", "Work", "Personal"];
+
+for (var i = 0; i <= types.length-1; i++) {
+  var option = document.createElement('option');
+  option.value = types[i];
+  option.appendChild(document.createTextNode(types[i]));
+  type_fragment.appendChild(option);
+}
+type_id.appendChild(type_fragment);
+
+// Grabs the Type value
+type_id.addEventListener('change', function() {
     chosen_type = this.value;
-  }
-  else if(this.value == 'Work'){
-    chosen_type = this.value;
-  }
-  else if(this.value == 'Personal'){
-    chosen_type = this.value;
-  }
-  console.log(chosen_type);
+    console.log(chosen_type);
 });
+
 
 // Get data in real-time
 function display(userID, year, month, week, type){
