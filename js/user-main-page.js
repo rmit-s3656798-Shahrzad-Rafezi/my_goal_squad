@@ -3,7 +3,13 @@ var year_id = document.getElementById('select_id_year');
 year_Fragment = document.createDocumentFragment();
 let chosen_year = '';
 
-var years = [new Date().getFullYear(), new Date().getFullYear()+1, new Date().getFullYear()+2, new Date().getFullYear()+3];
+let years = new Array(3);
+let current_year = new Date().getFullYear();
+let stringYear = current_year.toString();
+
+for (i = 0; i <= 3; i++){
+  years[i] = current_year + i;
+}
 
 for (var i = 0; i <= years.length-1; i++) {
   var option = document.createElement('option');
@@ -80,7 +86,7 @@ type_id.appendChild(type_fragment);
 // Grabs the Type value
 type_id.addEventListener('change', function() {
     chosen_type = this.value;
-    console.log(chosen_type);
+    //console.log(chosen_type);
 });
 
 
@@ -110,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var instances = M.FormSelect.init(elems, {});
 });
 
-// enable offline data
+// Enable offline data
 db.enablePersistence().catch(function(err) {
   if (err.code == 'failed-precondition') {
     // probably multiple tabs open at once
@@ -161,10 +167,15 @@ auth.onAuthStateChanged((user) => {
   if (user) {
 
     console.log(user.email, "has logged in");
+    
+    //TODO: be able to display goals dynamically
+    //for (var i = 0; i <= years.length-1; i++) {
+      display(user.uid, stringYear, 'January', 'Week1', 'Personal');
+   //}
 
-    display(user.uid, '2020', 'January', 'Week1', 'Personal');
-    display(user.uid, '2020', 'February', 'Week1', 'Personal');
-    display(user.uid, '2020', 'March', 'Week1', 'Personal');
+    // display(user.uid, '2020', 'January', 'Week1', 'Personal');
+    // display(user.uid, '2020', 'February', 'Week1', 'Personal');
+    // display(user.uid, '2020', 'March', 'Week1', 'Personal');
 
     // Add todo list data
     const form = document.querySelector('#todo-form');
