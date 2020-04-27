@@ -107,6 +107,16 @@ function display(userID, year, month, week, type){
   });
 }
 
+// Delete todo list data
+function delete_todo_list(userID, year, month, week, type, docID){
+  db.collection('users').doc(userID)
+  .collection('Goals').doc('Year')
+  .collection(year).doc('Month')
+  .collection(month).doc('Week')
+  .collection(week).doc('Type')
+  .collection(type).doc(docID).delete();
+}
+
 // This is for selection element in HTML file (CSS Materialize)
 document.addEventListener('DOMContentLoaded', function() {
   var elems = document.querySelectorAll('select');
@@ -306,62 +316,20 @@ auth.onAuthStateChanged((user) => {
 
         //TODO: Be able to delete goals dynamically
         for(var i = 0; i <= months.length-1; i++){
-          db.collection('users').doc(user.uid)
-          .collection('Goals').doc('Year')
-          .collection(current_year.toString()).doc('Month')
-          .collection(months[i]).doc('Week')
-          .collection('Week1').doc('Type')
-          .collection('Personal').doc(id).delete();
+          delete_todo_list(user.uid, current_year.toString(), months[i], 'Week1', 'Personal', id);
+          delete_todo_list(user.uid, current_year.toString(), months[i], 'Week2', 'Personal', id);
+          delete_todo_list(user.uid, current_year.toString(), months[i], 'Week3', 'Personal', id);
+          delete_todo_list(user.uid, current_year.toString(), months[i], 'Week4', 'Personal', id);
 
-          db.collection('users').doc(user.uid)
-          .collection('Goals').doc('Year')
-          .collection(current_year.toString()).doc('Month')
-          .collection(months[i]).doc('Week')
-          .collection('Week2').doc('Type')
-          .collection('Personal').doc(id).delete();
+          delete_todo_list(user.uid, current_year.toString(), months[i], 'Week1', 'Work', id);
+          delete_todo_list(user.uid, current_year.toString(), months[i], 'Week2', 'Work', id);
+          delete_todo_list(user.uid, current_year.toString(), months[i], 'Week3', 'Work', id);
+          delete_todo_list(user.uid, current_year.toString(), months[i], 'Week4', 'Work', id);
 
-          db.collection('users').doc(user.uid)
-          .collection('Goals').doc('Year')
-          .collection(current_year.toString()).doc('Month')
-          .collection(months[i]).doc('Week')
-          .collection('Week3').doc('Type')
-          .collection('Personal').doc(id).delete();
-
-          db.collection('users').doc(user.uid)
-          .collection('Goals').doc('Year')
-          .collection(current_year.toString()).doc('Month')
-          .collection(months[i]).doc('Week')
-          .collection('Week4').doc('Type')
-          .collection('Personal').doc(id).delete();
-
-          db.collection('users').doc(user.uid)
-          .collection('Goals').doc('Year')
-          .collection(current_year.toString()).doc('Month')
-          .collection(months[i]).doc('Week')
-          .collection('Week1').doc('Type')
-          .collection('Work').doc(id).delete();
-
-          db.collection('users').doc(user.uid)
-          .collection('Goals').doc('Year')
-          .collection(current_year.toString()).doc('Month')
-          .collection(months[i]).doc('Week')
-          .collection('Week2').doc('Type')
-          .collection('Work').doc(id).delete();
-
-          db.collection('users').doc(user.uid)
-          .collection('Goals').doc('Year')
-          .collection(current_year.toString()).doc('Month')
-          .collection(months[i]).doc('Week')
-          .collection('Week3').doc('Type')
-          .collection('Work').doc(id).delete();
-
-          db.collection('users').doc(user.uid)
-          .collection('Goals').doc('Year')
-          .collection(current_year.toString()).doc('Month')
-          .collection(months[i]).doc('Week')
-          .collection('Week3').doc('Type')
-          .collection('Work').doc(id).delete();
-
+          delete_todo_list(user.uid, current_year.toString(), months[i], 'Week1', 'Health', id);
+          delete_todo_list(user.uid, current_year.toString(), months[i], 'Week2', 'Health', id);
+          delete_todo_list(user.uid, current_year.toString(), months[i], 'Week3', 'Health', id);
+          delete_todo_list(user.uid, current_year.toString(), months[i], 'Week4', 'Health', id);
         }
       }
     });
