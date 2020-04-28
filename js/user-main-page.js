@@ -1,3 +1,9 @@
+// This is for selection element in HTML file (CSS Materialize)
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('select');
+  var instances = M.FormSelect.init(elems, {});
+});
+
 // Display Years
 var year_id = document.getElementById('select_id_year');
 year_Fragment = document.createDocumentFragment();
@@ -71,7 +77,7 @@ var type_id = document.getElementById('select_id_type');
 type_fragment = document.createDocumentFragment();
 let chosen_type = '';
 
-var types = ["Health", "Work", "Personal"];
+var types = ["Health", "Career", "Personal", "Financial", "Other"];
 
 for (var i = 0; i <= types.length-1; i++) {
   var option = document.createElement('option');
@@ -117,12 +123,6 @@ function delete_todo_list(userID, year, month, week, type, docID){
   .collection(type).doc(docID).delete();
 }
 
-// This is for selection element in HTML file (CSS Materialize)
-document.addEventListener('DOMContentLoaded', function() {
-  var elems = document.querySelectorAll('select');
-  var instances = M.FormSelect.init(elems, {});
-});
-
 // Enable offline data
 db.enablePersistence().catch(function(err) {
   if (err.code == 'failed-precondition') {
@@ -166,128 +166,14 @@ auth.onAuthStateChanged((user) => {
 
     console.log(user.email, "has logged in");
 
-    //TODO: Be able to display goals dynamically
+    // Display Goals Dynamically
     for(var i = 0; i <= months.length-1; i++){
-
-      display(user.uid, current_year.toString(), months[i], 'Week1', 'Personal');
-      display(user.uid, current_year.toString(), months[i], 'Week2', 'Personal');
-      display(user.uid, current_year.toString(), months[i], 'Week3', 'Personal');
-      display(user.uid, current_year.toString(), months[i], 'Week4', 'Personal');
-
-      display(user.uid, current_year.toString(), months[i], 'Week1', 'Work');
-      display(user.uid, current_year.toString(), months[i], 'Week2', 'Work');
-      display(user.uid, current_year.toString(), months[i], 'Week3', 'Work');
-      display(user.uid, current_year.toString(), months[i], 'Week4', 'Work');
-
-      display(user.uid, current_year.toString(), months[i], 'Week1', 'Health');
-      display(user.uid, current_year.toString(), months[i], 'Week2', 'Health');
-      display(user.uid, current_year.toString(), months[i], 'Week3', 'Health');
-      display(user.uid, current_year.toString(), months[i], 'Week4', 'Health');
+      for(var j=0; j <= weeks.length-1; j++){
+        for(var k =0; k <= types.length-1; k++){
+          display(user.uid, current_year.toString(), months[i], weeks[j], types[k]);
+        }
+      }
     }
-           
-    // display(user.uid, '2020', 'January', 'Week1', 'Personal');
-    // display(user.uid, '2020', 'February', 'Week1', 'Personal');
-    // display(user.uid, '2020', 'March', 'Week1', 'Personal');
-    // display(user.uid, '2020', 'April', 'Week1', 'Personal');
-    // display(user.uid, '2020', 'May', 'Week1', 'Personal');
-    // display(user.uid, '2020', 'June', 'Week1', 'Personal');
-    // display(user.uid, '2020', 'July', 'Week1', 'Personal');
-    // display(user.uid, '2020', 'August', 'Week1', 'Personal');
-    // display(user.uid, '2020', 'September', 'Week1', 'Personal');
-    // display(user.uid, '2020', 'October', 'Week1', 'Personal');
-    // display(user.uid, '2020', 'November', 'Week1', 'Personal');
-    // display(user.uid, '2020', 'December', 'Week1', 'Personal');
-
-    // display(user.uid, '2020', 'January', 'Week2', 'Personal');
-    // display(user.uid, '2020', 'February', 'Week2', 'Personal');
-    // display(user.uid, '2020', 'March', 'Week2', 'Personal');
-    // display(user.uid, '2020', 'April', 'Week2', 'Personal');
-    // display(user.uid, '2020', 'May', 'Week2', 'Personal');
-    // display(user.uid, '2020', 'June', 'Week2', 'Personal');
-    // display(user.uid, '2020', 'July', 'Week2', 'Personal');
-    // display(user.uid, '2020', 'August', 'Week2', 'Personal');
-    // display(user.uid, '2020', 'September', 'Week2', 'Personal');
-    // display(user.uid, '2020', 'October', 'Week2', 'Personal');
-    // display(user.uid, '2020', 'November', 'Week2', 'Personal');
-    // display(user.uid, '2020', 'December', 'Week2', 'Personal');
-
-    // display(user.uid, '2020', 'January', 'Week3', 'Personal');
-    // display(user.uid, '2020', 'February', 'Week3', 'Personal');
-    // display(user.uid, '2020', 'March', 'Week3', 'Personal');
-    // display(user.uid, '2020', 'April', 'Week3', 'Personal');
-    // display(user.uid, '2020', 'May', 'Week3', 'Personal');
-    // display(user.uid, '2020', 'June', 'Week3', 'Personal');
-    // display(user.uid, '2020', 'July', 'Week3', 'Personal');
-    // display(user.uid, '2020', 'August', 'Week3', 'Personal');
-    // display(user.uid, '2020', 'September', 'Week3', 'Personal');
-    // display(user.uid, '2020', 'October', 'Week3', 'Personal');
-    // display(user.uid, '2020', 'November', 'Week3', 'Personal');
-    // display(user.uid, '2020', 'December', 'Week3', 'Personal');
-
-    // display(user.uid, '2020', 'January', 'Week4', 'Personal');
-    // display(user.uid, '2020', 'February', 'Week4', 'Personal');
-    // display(user.uid, '2020', 'March', 'Week4', 'Personal');
-    // display(user.uid, '2020', 'April', 'Week4', 'Personal');
-    // display(user.uid, '2020', 'May', 'Week4', 'Personal');
-    // display(user.uid, '2020', 'June', 'Week4', 'Personal');
-    // display(user.uid, '2020', 'July', 'Week4', 'Personal');
-    // display(user.uid, '2020', 'August', 'Week4', 'Personal');
-    // display(user.uid, '2020', 'September', 'Week4', 'Personal');
-    // display(user.uid, '2020', 'October', 'Week4', 'Personal');
-    // display(user.uid, '2020', 'November', 'Week4', 'Personal');
-    // display(user.uid, '2020', 'December', 'Week4', 'Personal');
-
-    // display(user.uid, '2020', 'January', 'Week1', 'Work');
-    // display(user.uid, '2020', 'February', 'Week1', 'Work');
-    // display(user.uid, '2020', 'March', 'Week1', 'Work');
-    // display(user.uid, '2020', 'April', 'Week1', 'Work');
-    // display(user.uid, '2020', 'May', 'Week1', 'Work');
-    // display(user.uid, '2020', 'June', 'Week1', 'Work');
-    // display(user.uid, '2020', 'July', 'Week1', 'Work');
-    // display(user.uid, '2020', 'August', 'Week1', 'Work');
-    // display(user.uid, '2020', 'September', 'Week1', 'Work');
-    // display(user.uid, '2020', 'October', 'Week1', 'Work');
-    // display(user.uid, '2020', 'November', 'Week1', 'Work');
-    // display(user.uid, '2020', 'December', 'Week1', 'Work');
-
-    // display(user.uid, '2020', 'January', 'Week2', 'Work');
-    // display(user.uid, '2020', 'February', 'Week2', 'Work');
-    // display(user.uid, '2020', 'March', 'Week2', 'Work');
-    // display(user.uid, '2020', 'April', 'Week2', 'Work');
-    // display(user.uid, '2020', 'May', 'Week2', 'Work');
-    // display(user.uid, '2020', 'June', 'Week2', 'Work');
-    // display(user.uid, '2020', 'July', 'Week2', 'Work');
-    // display(user.uid, '2020', 'August', 'Week2', 'Work');
-    // display(user.uid, '2020', 'September', 'Week2', 'Work');
-    // display(user.uid, '2020', 'October', 'Week2', 'Work');
-    // display(user.uid, '2020', 'November', 'Week2', 'Work');
-    // display(user.uid, '2020', 'December', 'Week2', 'Work');
-
-    // display(user.uid, '2020', 'January', 'Week3', 'Work');
-    // display(user.uid, '2020', 'February', 'Week3', 'Work');
-    // display(user.uid, '2020', 'March', 'Week3', 'Work');
-    // display(user.uid, '2020', 'April', 'Week3', 'Work');
-    // display(user.uid, '2020', 'May', 'Week3', 'Work');
-    // display(user.uid, '2020', 'June', 'Week3', 'Work');
-    // display(user.uid, '2020', 'July', 'Week3', 'Work');
-    // display(user.uid, '2020', 'August', 'Week3', 'Work');
-    // display(user.uid, '2020', 'September', 'Week3', 'Work');
-    // display(user.uid, '2020', 'October', 'Week3', 'Work');
-    // display(user.uid, '2020', 'November', 'Week3', 'Work');
-    // display(user.uid, '2020', 'December', 'Week3', 'Work');
-
-    // display(user.uid, '2020', 'January', 'Week4', 'Work');
-    // display(user.uid, '2020', 'February', 'Week4', 'Work');
-    // display(user.uid, '2020', 'March', 'Week4', 'Work');
-    // display(user.uid, '2020', 'April', 'Week4', 'Work');
-    // display(user.uid, '2020', 'May', 'Week4', 'Work');
-    // display(user.uid, '2020', 'June', 'Week4', 'Work');
-    // display(user.uid, '2020', 'July', 'Week4', 'Work');
-    // display(user.uid, '2020', 'August', 'Week4', 'Work');
-    // display(user.uid, '2020', 'September', 'Week4', 'Work');
-    // display(user.uid, '2020', 'October', 'Week4', 'Work');
-    // display(user.uid, '2020', 'November', 'Week4', 'Work');
-    // display(user.uid, '2020', 'December', 'Week4', 'Work');
 
     // Add todo list data
     const form = document.querySelector('#todo-form');
@@ -314,22 +200,13 @@ auth.onAuthStateChanged((user) => {
 
         const id = e.target.getAttribute('data-id');
 
-        //TODO: Be able to delete goals dynamically
+        // Delete goals dynamically
         for(var i = 0; i <= months.length-1; i++){
-          delete_todo_list(user.uid, current_year.toString(), months[i], 'Week1', 'Personal', id);
-          delete_todo_list(user.uid, current_year.toString(), months[i], 'Week2', 'Personal', id);
-          delete_todo_list(user.uid, current_year.toString(), months[i], 'Week3', 'Personal', id);
-          delete_todo_list(user.uid, current_year.toString(), months[i], 'Week4', 'Personal', id);
-
-          delete_todo_list(user.uid, current_year.toString(), months[i], 'Week1', 'Work', id);
-          delete_todo_list(user.uid, current_year.toString(), months[i], 'Week2', 'Work', id);
-          delete_todo_list(user.uid, current_year.toString(), months[i], 'Week3', 'Work', id);
-          delete_todo_list(user.uid, current_year.toString(), months[i], 'Week4', 'Work', id);
-
-          delete_todo_list(user.uid, current_year.toString(), months[i], 'Week1', 'Health', id);
-          delete_todo_list(user.uid, current_year.toString(), months[i], 'Week2', 'Health', id);
-          delete_todo_list(user.uid, current_year.toString(), months[i], 'Week3', 'Health', id);
-          delete_todo_list(user.uid, current_year.toString(), months[i], 'Week4', 'Health', id);
+          for(var j=0; j <= weeks.length-1; j++){
+            for(var k =0; k <= types.length-1; k++){
+              delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], types[k], id);
+            }
+          }
         }
       }
     });
