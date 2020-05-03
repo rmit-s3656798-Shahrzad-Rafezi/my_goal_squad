@@ -1,8 +1,19 @@
-// This is for selection element in HTML file (CSS Materialize)
+// This is for selection, tabs element in HTML file (CSS Materialize)
 document.addEventListener('DOMContentLoaded', function() {
-  var elems = document.querySelectorAll('select');
-  var instances = M.FormSelect.init(elems, {});
+  var select = document.querySelectorAll('select');
+  var instances = M.FormSelect.init(select, {});
+
+  const options = {
+    duration: 300,
+    onShow: null,
+    swipeable: true,
+    responsiveThreshold: Infinity
+  };
+
+  const tabsContainer = document.querySelector(".tabs");
+  M.Tabs.init(tabsContainer, options);
 });
+
 
 // Display Years
 var year_id = document.getElementById('select_id_year');

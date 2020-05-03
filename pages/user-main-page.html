@@ -60,27 +60,49 @@
 
 
         <!-- Slider Functionality -->
-        <div class="slide-wrap">
+            <!-- Tabs -->
+            <ul id="tabs-swipe-demo" class="tabs">
+              <li class="tab col s3">
+                <a href="#test-swipe-1">Health</a>
+              </li>
+              <li class="tab col s3">
+                <a class="active" href="#test-swipe-2">Career</a>
+              </li>
+              <li class="tab col s3">
+                <a href="#test-swipe-3">Personal</a>
+              </li>
+              <li class="tab col s3">
+                <a href="#test-swipe-4">Financial</a>
+              </li>
+              <li class="tab col s3">
+                <a href="#test-swipe-5">Other</a>
+              </li>
+            </ul>
 
-          <!-- tabs -->
-          <a href="#slide-1">Health</a>
-          <a href="#slide-2">Work</a>
-          <a href="#slide-3">Personal</a>
+            <!-- Contents inside tabs -->
+            <div  id="test-swipe-1" class="col s12">
+              Test 1
+            </div>
 
-          <div class="slider">
-            <!-- Display todo list for health -->
-            <div class="slide" id="slide-1">Health</div>
+            <div id="test-swipe-2" class="col s12">
+              Test 2
+            </div>
 
-            <!-- Display todo list for work -->
-            <div class="slide" id="slide-2">Work</div>
+            <div id="test-swipe-3" class="col s12">
+              Test 3
+            </div>
 
-            <!-- Display todo list for personal -->
-            <div class="slide" id="slide-3">Personal</div>
-          </div>
-        </div>
+            <div id="test-swipe-4" class="col s12">
+              Test 4
+            </div>
+
+            <div id="test-swipe-5" class="col s12">
+              Test 5
+            </div>
 
         <!-- Display todo list -->
         <div class="todo-lists"></div>
+        
       </div>
 
       <button id="logout-btn" class="waves-effect btn red">
