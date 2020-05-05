@@ -14,27 +14,53 @@
     <div class="container">
         <h2>Admin Page</h2>
 
-        <form id="signup-form">
-            <h5>Register New User</h5>
-            <div class="input-field">
-                <input type="text" id="user-name" required />
-                <label for="user-name">Enter Your Name</label>
+        <div id="modal-signup" class="modal">
+            <div class="modal-content">
+                <form id="signup-form">
+                    <h5>Register New User</h5>
+                    <div class="input-field">
+                        <input type="text" id="user-name" required />
+                        <label for="user-name">Enter Your Name</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="email" id="signup-email" required />
+                        <label for="signup-email">Email Address</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" id="signup-password" required />
+                        <label for="signup-password">Choose Passwords</label>
+                    </div>
+                    <div class="input-field">
+                        <input placeholder="<+ country code><phone number>" type="tel" id="signup-number" required />
+                        <label for="signup-number">Enter Your Number</label>
+                    </div>
+                    <button class="waves-effect waves-orange btn signup-button">Signup
+                    </button>
+                </form>
             </div>
-            <div class="input-field">
-                <input type="email" id="signup-email" required />
-                <label for="signup-email">Email Address</label>
+        </div>
+
+        <div id="modal-qotd" class="modal">
+            <div class="modal-content">
+                <h5>Upload Quotes</h5>
+                <div class="progress">
+                    <div id="pgb" class="determinate"></div>
+                </div>
+                <form id="file-upload-form">
+                    <div id="file-upload" class="file-field">
+                        <div id="upload-file-btn" class="btn">
+                            <span>Picture</span>
+                            <input type="file">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+                    <button class="waves-effect waves-orange btn signup-button">Submit
+                    </button>
+                </form>
             </div>
-            <div class="input-field">
-                <input type="password" id="signup-password" required />
-                <label for="signup-password">Choose Passwords</label>
-            </div>
-            <div class="input-field">
-                <input placeholder="<+ country code><phone number>" type="tel" id="signup-number" required />
-                <label for="signup-number">Enter Your Number</label>
-            </div>
-            <button class="waves-effect waves-orange btn signup-button">Signup
-            </button>
-        </form>
+        </div>
 
         <form id="make-admin">
             <h6>Make User an admin</h6>
@@ -45,7 +71,15 @@
             <button id="admin-btn" class="waves-effect btn orange">Make admin</button>
         </form>
 
-        <button id="logout-btn" class="waves-effect btn red ">Logout
+        <button id="register-btn" data-target='modal-signup'
+            class="waves-effect btn modal-trigger grey darken-3 button">New
+            User
+        </button>
+
+        <button id="qotd-btn" data-target="modal-qotd"
+            class="waves-effect btn modal-trigger orange darken-3 button">Quote Of The Day</button>
+
+        <button id="logout-btn" class="waves-effect btn red button">Logout
             <i class="material-icons right">input</i>
         </button>
     </div>
@@ -54,6 +88,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-storage.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-functions.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use

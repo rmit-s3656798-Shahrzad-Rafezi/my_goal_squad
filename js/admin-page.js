@@ -37,6 +37,8 @@ signupForm.addEventListener("submit", (e) => {
       } else {
         console.log('You are not an admin');
       }
+      const modal = document.querySelector("#modal-signup");
+      M.Modal.getInstance(modal).close();
       signupForm.reset();
     })
   });
@@ -76,3 +78,33 @@ adminForm.addEventListener("submit", (e) => {
   });
 
 });
+
+// Modal Triggers
+document.addEventListener('DOMContentLoaded', function () {
+  var elems = document.querySelectorAll('.modal');
+  var instances = M.Modal.init(elems);
+});
+
+
+const pb = document.getElementById('pgb')
+const file_form = document.querySelector('#file-upload-form');
+const file_upload = document.getElementById('upload-file-btn');
+
+
+file_upload.addEventListener("change", (e) => {
+
+  const file = e.target.files[0];
+
+  file_form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    // var file = ;
+    console.log(file.name);
+  })
+})
+
+
+
+const test = 70;
+pb.style.width = test + "%";
+

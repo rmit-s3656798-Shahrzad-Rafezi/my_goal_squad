@@ -8,9 +8,18 @@
   text-align: center;
 }
 
-#logout-btn,
-#make-admin {
-  margin-top: 10%;
+h2 {
+  padding-bottom: 15%;
+}
+
+.button {
+  margin: auto;
+  margin-top: 5%;
+  display: block;
+}
+
+#modal-qotd {
+  text-align: center;
 }
 
 #make-admin {
