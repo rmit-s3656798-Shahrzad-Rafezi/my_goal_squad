@@ -93,11 +93,16 @@ const file_upload = document.getElementById('upload-file-btn');
 // Get File everytime user press the file button
 file_upload.addEventListener("change", (e) => {
 
+  var quoteLimit = 3;
   var file = e.target.files[0];
 
   // Wait till user clicks submit
   file_form.addEventListener("submit", (e) => {
     e.preventDefault();
+    let quoteLimit = 3;
+
+    // Delete a random quote when limit is reached
+    deleteRandomQuote(quoteLimit)
 
     // Create reference in Firebase Storage
     var storageRef = storage.ref('quotes/' + file.name);
@@ -140,40 +145,45 @@ file_upload.addEventListener("change", (e) => {
   });
 });
 
+// Random Number Generator
+function generateRandomInteger(min, max) {
+  return Math.floor(min + Math.random() * (max + 1 - min))
+}
 
-$('#test-btn').click(function () {
-  test()
-})
+// $('#test-btn').click(() => {
+//   console.log(generateRandomInteger(0, 2))
+// })
 
-function test() {
-  while (true) {
-    let x = 0;
-    var storageRef = firebase.storage().ref("quotes");
-    storageRef.listAll().then((result) => {
-      result.items.forEach((item) => {
-        console.log(item.location.path)
-        x += 1;
-      });
-      if (x > 3) {
-        var file = result.items[0];
-
-        file.getMetadata().then((data) => {
-          // Create a reference to the file to delete
-          var earliestFile = storageRef.child(data.name);
-
-          // Delete the file
-          earliestFile.delete().then(function () {
-            // File deleted successfully
-            console.log("File Deleted Successfully")
-          }).catch(function (error) {
-            // Uh-oh, an error occurred!
-            console.log(error)
-          });
-        })
-      };
+// Delete Random Quote when limit is reached
+function deleteRandomQuote(limit) {
+  let x = 0;
+  var storageRef = firebase.storage().ref("quotes");
+  storageRef.listAll().then((result) => {
+    result.items.forEach((item) => {
+      // console.log(item.location.path)
+      x += 1;
     });
-    if (x <= 3) {
-      break;
+
+    // console.log(x);
+    if (x >= limit) {
+      
+      var file = result.items[generateRandomInteger(0, 2)];
+
+      file.getMetadata().then((data) => {
+        // Create a reference to the file to delete
+        var earliestFile = storageRef.child(data.name);
+
+        // Delete the file
+        earliestFile.delete().then(function () {
+          // File deleted successfully
+          console.log("File Deleted Successfully")
+          return true;
+        }).catch(function (error) {
+          // Uh-oh, an error occurred!
+          console.log(error)
+        });
+      })
     };
-  };
+  });
+
 }
