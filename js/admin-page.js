@@ -141,3 +141,39 @@ file_upload.addEventListener("change", (e) => {
 });
 
 
+$('#test-btn').click(function () {
+  test()
+})
+
+function test() {
+  while (true) {
+    let x = 0;
+    var storageRef = firebase.storage().ref("quotes");
+    storageRef.listAll().then((result) => {
+      result.items.forEach((item) => {
+        console.log(item.location.path)
+        x += 1;
+      });
+      if (x > 3) {
+        var file = result.items[0];
+
+        file.getMetadata().then((data) => {
+          // Create a reference to the file to delete
+          var earliestFile = storageRef.child(data.name);
+
+          // Delete the file
+          earliestFile.delete().then(function () {
+            // File deleted successfully
+            console.log("File Deleted Successfully")
+          }).catch(function (error) {
+            // Uh-oh, an error occurred!
+            console.log(error)
+          });
+        })
+      };
+    });
+    if (x <= 3) {
+      break;
+    };
+  };
+}
