@@ -39,6 +39,8 @@ function renderQuotes() {
                 let entries = document.querySelector(".carousel");
                 entries.innerHTML += html;
 
+                $('#preloader').hide();
+
                 $(document).ready(function () {
                     $('.carousel').carousel();
                 });

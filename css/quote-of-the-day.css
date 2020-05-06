@@ -1,4 +1,7 @@
 .container {
+  position: relative;
+  width: auto;
+  height: 100%;
   padding: 5%;
   text-align: center;
 }
@@ -39,4 +42,21 @@
 .lb-dataContainer {
   transform: translateY(-50vh);
   display: none !important;
+}
+
+.lb-nav {
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+#preloader {
+  /* margin: 0; */
+  display: block;
+  /* position: absolute; */
+  /* width: 100px; */
+  /* height: 100px; */
+  transform: translateY(25vh);
 }
