@@ -32,7 +32,7 @@ function renderQuotes() {
                 console.log(url)
 
                 let html = `
-                <a class="carousel-item">
+                <a class="carousel-item" href="${url}" rel='lightbox'>
                     <img src="${url}" alt="${imageRef.location.path}">
                 </a>
                 `;
@@ -43,18 +43,14 @@ function renderQuotes() {
                     $('.carousel').carousel();
                 });
             })
-
-            // displayImage(imageRef);
         });
     }).catch(function (error) {
         // Handle any errors
+        console.log(error);
     });
 }
 
-// `$(document).on('click', 'img', function () {
-//     var wH = $(window).height();
-//     $(this).animate({
-//         height: "1000px",
-//         width: "1000px"
-//     });
-// });`
+// Close when click outside of Lightbox 
+$('#lightboxOverlay, #lightbox, .lb-outerContainer').on('click', function (event) {
+    $("#lightbox, #overlay").hide();
+});
