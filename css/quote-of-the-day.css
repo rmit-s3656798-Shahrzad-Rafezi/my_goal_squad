@@ -6,6 +6,11 @@
   text-align: center;
 }
 
+h5 {
+  font-size: 16px;
+  margin-bottom: 7%;
+}
+
 .lightbox {
   align-content: center;
   align-items: center;

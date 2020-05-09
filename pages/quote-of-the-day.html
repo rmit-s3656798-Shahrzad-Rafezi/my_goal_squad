@@ -5,20 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/quote-of-the-day.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/js/lightbox-plus-jquery.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/css/lightbox.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="/css/quote-of-the-day.css">
     <title>My Goal Squad</title>
 </head>
 
 <body class="grey lighten-3">
 
-    <div class="container">
-        <h5>Inspirational Quotes</h5>
+    <!-- side navbar -->
+    <div>
+        <ul id="slide-out" class="sidenav sidenav-fixed">
+            <li>
+                <div class="user-view">
+                    <div class="background">
+                    </div>
+                </div>
+            </li>
+            <li class="nav-list"><a id="task-nav" href="/pages/user-main-page.html">Task</a></li>
+            <li class="nav-list"><a id="journal-nav" href="/pages/gratitude-journal.html">My Gratitude Journal</a>
+            </li>
+            <li class="nav-list"><a id="quote-nav" href="/pages/quote-of-the-day.html">Quotes of the Day</a>
+            </li>
+            <li class="nav-list"><a id="logout-nav" href="#">Logout</a></li>
+        </ul>
+    </div>
+    <!-- <a href="#" data-target="slide-out" class="sidenav-trigger menu-btn"><i class="material-icons">menu</i></a> -->
 
-        <button id="home-btn" class="waves-effect btn orange ">Home
-        </button>
+    <div class="container">
+        <h5>INSPIRATIONAL QUOTES</h5>
 
         <div id="preloader">
             <div class="preloader-wrapper big active">
@@ -36,7 +53,7 @@
             </div>
         </div>
 
-            <div class="carousel"></div>
+        <div class="carousel"></div>
 
     </div>
 
@@ -55,5 +72,6 @@
 
     <script src="/js/firebase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/js/navbar.js"></script>
     <script src="/js/quote-of-the-day.js"></script>
 </body>

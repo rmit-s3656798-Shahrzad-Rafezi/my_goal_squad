@@ -35,14 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var instances = M.Modal.init(elems);
 });
 
-// Home Button
-const home = document.querySelector("#home-btn");
-
-home.addEventListener("click", (e) => {
-    e.preventDefault();
-    window.location.href = "/pages/user-main-page.html";
-});
-
 // Write journal 
 const journalForm = document.querySelector("#journal-form");
 

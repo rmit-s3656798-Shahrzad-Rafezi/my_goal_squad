@@ -5,15 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/navbar.css">
     <link rel="stylesheet" type="text/css" href="/css/gratitude-journal.css">
     <title>My Goal Squad</title>
 </head>
 
 <body class="grey lighten-3">
 
-    <div class="container" id="test">
-        <button id="home-btn" class="waves-effect btn orange ">Home
-        </button>
+    <!-- side navbar -->
+    <div>
+        <ul id="slide-out" class="sidenav sidenav-fixed">
+            <li>
+                <div class="user-view">
+                    <div class="background">
+                    </div>
+                </div>
+            </li>
+            <li class="nav-list"><a id="task-nav" href="/pages/user-main-page.html">Task</a></li>
+            <li class="nav-list"><a id="journal-nav" href="/pages/gratitude-journal.html">My Gratitude Journal</a>
+            </li>
+            <li class="nav-list"><a id="quote-nav" href="/pages/quote-of-the-day.html">Quotes of the Day</a>
+            </li>
+            <li class="nav-list"><a id="logout-nav" href="#">Logout</a></li>
+        </ul>
+    </div>
+    <!-- <a href="#" data-target="slide-out" class="sidenav-trigger menu-btn"><i class="material-icons">menu</i></a> -->
+
+    <div class="container">
         <h5>GRATITUDE JOURNAL<i class="small material-icons book-icon">book</i></h5>
         <h6 id="no-entries"> There is no journal entries yet.<br> Write something !</h6>
 
@@ -61,9 +80,9 @@
 
     <script src="/js/firebase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.0.min.js"
-        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script src="/js/navbar.js"></script>
     <script src="/js/gratitude-jounral.js"></script>
+
 </body>
 
 </html>

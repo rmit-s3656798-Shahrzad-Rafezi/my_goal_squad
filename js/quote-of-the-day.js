@@ -7,15 +7,6 @@ auth.onAuthStateChanged((user) => {
     }
 });
 
-// Home Button
-const home = document.querySelector("#home-btn");
-
-home.addEventListener("click", (e) => {
-    e.preventDefault();
-    window.location.href = "/pages/user-main-page.html";
-});
-
-
 // Render Quotes
 function renderQuotes() {
     var storageRef = firebase.storage().ref("quotes");

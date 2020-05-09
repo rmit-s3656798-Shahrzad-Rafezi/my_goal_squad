@@ -1,9 +1,12 @@
 .container {
+  position: relative;
+  width: auto;
+  height: 100%;
   padding: 5%;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 70%;
-  transform: translate(-50%, -50%);
   text-align: center;
+}
+
+h5 {
+  font-size: 16px;
+  margin-bottom: 7%;
 }

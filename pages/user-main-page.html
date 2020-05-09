@@ -5,14 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/navbar.css">
     <link rel="stylesheet" type="text/css" href="/css/user-main-page.css">
     <title>My Goal Squad</title>
 </head>
 
 <body class="grey lighten-3">
+
+    <!-- side navbar -->
+    <div>
+        <ul id="slide-out" class="sidenav sidenav-fixed">
+            <li>
+                <div class="user-view">
+                    <div class="background">
+                    </div>
+                </div>
+            </li>
+            <li class="nav-list"><a id="task-nav" href="/pages/user-main-page.html">Task</a></li>
+            <li class="nav-list"><a id="journal-nav" href="/pages/gratitude-journal.html">My Gratitude Journal</a>
+            </li>
+            <li class="nav-list"><a id="quote-nav" href="/pages/quote-of-the-day.html">Quotes of the Day</a>
+            </li>
+            <li class="nav-list"><a id="logout-nav" href="#">Logout</a></li>
+        </ul>
+    </div>
+    <!-- <a href="#" data-target="slide-out" class="sidenav-trigger menu-btn"><i class="material-icons">menu</i></a> -->
+
+
     <div class="container">
-        <h5>User Main Page</h5>
-        <button id="gratitude-btn" class="waves-effect btn orange ">My Gratitude Journal
+        <h5>USER MAIN PAGE</h5>
+        <!-- <button id="gratitude-btn" class="waves-effect btn orange ">My Gratitude Journal
             <i class="material-icons right">book</i>
         </button>
         <button id="qotd-btn" class="waves-effect btn purple ">Quotes of the Day
@@ -20,7 +43,7 @@
         </button>
         <button id="logout-btn" class="waves-effect btn red ">Logout
             <i class="material-icons right">input</i>
-        </button>
+        </button> -->
     </div>
 
 
@@ -37,8 +60,8 @@
 
     <script src="/js/firebase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/js/navbar.js"></script>
     <script src="/js/user-main-page.js"></script>
-
 </body>
 
 
