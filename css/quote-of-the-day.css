@@ -31,7 +31,7 @@
 
 .lb-outerContainer {
   margin: auto;
-  transform: translateY(25%);
+  transform: translateY(12%);
   background-color: transparent !important;
 }
 
@@ -53,10 +53,24 @@
 }
 
 #preloader {
-  /* margin: 0; */
   display: block;
-  /* position: absolute; */
-  /* width: 100px; */
-  /* height: 100px; */
   transform: translateY(25vh);
+}
+
+.carousel .carousel-item {
+  width: 20% !important;
+}
+
+.carousel {
+  transform: translateY(-10%) !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .carousel .carousel-item {
+    width: 90% !important;
+  }
+
+  .lb-outerContainer {
+    background-color: transparent !important;
+  }
 }

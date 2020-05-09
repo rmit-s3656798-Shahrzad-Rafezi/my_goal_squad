@@ -42,7 +42,8 @@ function renderQuotes() {
                 $('#preloader').hide();
 
                 $(document).ready(function () {
-                    $('.carousel').carousel();
+                    $('.carousel').carousel({
+                    });
                 });
             })
         });
