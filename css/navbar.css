@@ -6,11 +6,37 @@ footer {
 }
 
 .background {
-  background-color: teal;
+  background-color: #92cfd0;
 }
 
-.nav-list {
-  /* text-align: center; */
+.menu-btn {
+  margin-top: 15px !important;
+}
+
+.menu-icon {
+  color: grey;
+  font-size: 26px !important;
+}
+
+nav {
+  background-color: #eee;
+  height: 90px;
+  box-shadow: none;
+}
+
+a.brand-logo {
+  margin-top: 20px;
+  left: 50%;
+  transform: translateX(-205px);
+}
+
+#logo {
+  height: auto;
+  width: 120px;
+}
+
+.white-text {
+  color: rgba(0, 0, 0, 0.87) !important;
 }
 
 a.disabled {
@@ -25,5 +51,20 @@ a.disabled {
   body,
   footer {
     padding-left: 0;
+  }
+
+  a.brand-logo {
+    margin-top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  #logo {
+    height: auto;
+    width: 90px;
+  }
+
+  .user-view {
+    padding-left: 32px !important;
   }
 }
