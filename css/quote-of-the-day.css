@@ -2,13 +2,20 @@
   position: relative;
   width: auto;
   height: 100%;
-  padding: 5%;
+  padding: 2% 5%;
   text-align: center;
+}
+
+#logo {
+  /* position: absolute; */
+  height: auto;
+  width: 120px;
 }
 
 h5 {
   font-size: 16px;
-  margin-bottom: 7%;
+  margin-top: 10%;
+  margin-bottom: 10%;
 }
 
 .lightbox {
@@ -62,16 +69,34 @@ h5 {
 }
 
 .carousel .carousel-item {
-  width: 20% !important;
+  position: absolute;
+  height: 100% !important;
+  width: 50vh !important;
 }
 
 .carousel {
-  transform: translateY(-10%) !important;
+  transform: translateY(-7%) !important;
+  height: 600px;
 }
 
 @media only screen and (max-width: 600px) {
+  #logo {
+    height: auto;
+    width: 27%;
+  }
+
+  h5 {
+    margin-top: 20%;
+    margin-bottom: 5%;
+  }
+
   .carousel .carousel-item {
     width: 90% !important;
+  }
+
+  .carousel {
+    transform: translateY(10%) !important;
+    height: 60vh;
   }
 
   .lb-outerContainer {
