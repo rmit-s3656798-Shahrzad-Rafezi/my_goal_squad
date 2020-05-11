@@ -1,7 +1,7 @@
 // This is for selection, tabs element in HTML file (CSS Materialize)
 document.addEventListener('DOMContentLoaded', function () {
   var select = document.querySelectorAll('select');
-  var instances = M.FormSelect.init(select, {});
+  M.FormSelect.init(select, {});
 
   const options = {
     duration: 300,
@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const tabsContainer = document.querySelector(".tabs");
   M.Tabs.init(tabsContainer, options);
 });
-
 
 // Display Years
 var year_id = document.getElementById('select_id_year');
@@ -106,22 +105,118 @@ type_id.addEventListener('change', function () {
 
 // Get data in real-time
 function display(userID, year, month, week, type) {
-  db.collection('users').doc(userID)
-    .collection('Goals').doc('Year')
-    .collection(year).doc('Month')
-    .collection(month).doc('Week')
-    .collection(week).doc('Type')
-    .collection(type).onSnapshot(snapshot => {
-      let changes = snapshot.docChanges();
-      changes.forEach(change => {
-        if (change.type === 'added') {
-          renderList(change.doc.data(), change.doc.id);
-        }
-        else if (change.type === 'removed') {
-          removeList(change.doc.id);
-        }
+
+  if (type == "Health") {
+    db.collection('users').doc(userID)
+      .collection('Goals').doc('Year')
+      .collection(year).doc('Month')
+      .collection(month).doc('Week')
+      .collection(week).doc('Type')
+      .collection(type).onSnapshot(snapshot => {
+        let changes = snapshot.docChanges();
+        changes.forEach(change => {
+          if (change.type === 'added') {
+            renderHealth(change.doc.data(), change.doc.id);
+          }
+          else if (change.type === 'removed') {
+            removeList(change.doc.id);
+          }
+        });
       });
-    });
+  }
+
+  if (type == "Career") {
+    db.collection('users').doc(userID)
+      .collection('Goals').doc('Year')
+      .collection(year).doc('Month')
+      .collection(month).doc('Week')
+      .collection(week).doc('Type')
+      .collection(type).onSnapshot(snapshot => {
+        let changes = snapshot.docChanges();
+        changes.forEach(change => {
+          if (change.type === 'added') {
+            renderCareer(change.doc.data(), change.doc.id);
+          }
+          else if (change.type === 'removed') {
+            removeList(change.doc.id);
+          }
+        });
+      });
+  }
+
+  if (type == "Personal") {
+    db.collection('users').doc(userID)
+      .collection('Goals').doc('Year')
+      .collection(year).doc('Month')
+      .collection(month).doc('Week')
+      .collection(week).doc('Type')
+      .collection(type).onSnapshot(snapshot => {
+        let changes = snapshot.docChanges();
+        changes.forEach(change => {
+          if (change.type === 'added') {
+            renderPersonal(change.doc.data(), change.doc.id);
+          }
+          else if (change.type === 'removed') {
+            removeList(change.doc.id);
+          }
+        });
+      });
+  }
+
+  if (type == "Financial") {
+    db.collection('users').doc(userID)
+      .collection('Goals').doc('Year')
+      .collection(year).doc('Month')
+      .collection(month).doc('Week')
+      .collection(week).doc('Type')
+      .collection(type).onSnapshot(snapshot => {
+        let changes = snapshot.docChanges();
+        changes.forEach(change => {
+          if (change.type === 'added') {
+            renderFinancial(change.doc.data(), change.doc.id);
+          }
+          else if (change.type === 'removed') {
+            removeList(change.doc.id);
+          }
+        });
+      });
+  }
+
+  if (type == "Other") {
+    db.collection('users').doc(userID)
+      .collection('Goals').doc('Year')
+      .collection(year).doc('Month')
+      .collection(month).doc('Week')
+      .collection(week).doc('Type')
+      .collection(type).onSnapshot(snapshot => {
+        let changes = snapshot.docChanges();
+        changes.forEach(change => {
+          if (change.type === 'added') {
+            renderOther(change.doc.data(), change.doc.id);
+          }
+          else if (change.type === 'removed') {
+            removeList(change.doc.id);
+          }
+        });
+      });
+  }
+
+  // db.collection('users').doc(userID)
+  //   .collection('Goals').doc('Year')
+  //   .collection(year).doc('Month')
+  //   .collection(month).doc('Week')
+  //   .collection(week).doc('Type')
+  //   .collection(type).onSnapshot(snapshot => {
+  //     let changes = snapshot.docChanges();
+  //     changes.forEach(change => {
+  //       if (change.type === 'added') {
+  //         renderList(change.doc.data(), change.doc.id);
+  //       }
+  //       else if (change.type === 'removed') {
+  //         removeList(change.doc.id);
+  //       }
+  //     });
+  //   });
 }
 
 // Delete todo list data
@@ -146,57 +241,8 @@ db.enablePersistence().catch(function (err) {
   }
 });
 
-// ======================================================================
-
-// ADRAIN-PSEUDOCODE-START
-function test2(type) {
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-      for (var i = 0; i <= months.length - 1; i++) {
-        for (var j = 0; j <= weeks.length - 1; j++) {
-          for (var k = 0; k <= types.length - 1; k++) {
-            display(user.uid, current_year.toString(), months[i], weeks[j], type);
-          }
-        }
-      }
-    }
-  })
-}
-
-// ADRAIN-PSEUDOCODE-END
-// ADRIAN HOTFIX- START
-var test1 = ["#test-swipe-1", "#test-swipe-2", '#test-swipe-3', '#test-swipe-4', '#test-swipe-5']
-
-for (x = 0; x < 5; x++) {
-
-  // display() type
-  test2(types[x]);
-  let list = document.querySelector(test1[x]);
-
-  const renderList = (data, id) => {
-
-    const html = `
-    <div class="card-panel todo white row" data-id="${id}">
-        <div class="todo-details">
-          <div>${data.todo}</div>
-        </div>
-        <div class="todo-delete">
-          <i class="material-icons" data-id="${id}">delete_outline</i>
-        </div>
-    </div>
-    `;
-
-    list.innerHTML += html;
-  };
-}
-// ADRIAN HOTFIX-END
-
-// ======================================================================
-
-// Render todo list data
-const todo_list = document.querySelector('.todo-lists');
-const renderList = (data, id) => {
-
+const health_tab = document.querySelector('#test-swipe-1');
+const renderHealth = (data, id) => {
   const html = `
   <div class="card-panel todo white row" data-id="${id}">
       <div class="todo-details">
@@ -207,9 +253,86 @@ const renderList = (data, id) => {
       </div>
   </div>
   `;
-
-  todo_list.innerHTML += html;
+  health_tab.innerHTML += html;
 };
+
+const career_tab = document.querySelector('#test-swipe-2');
+const renderCareer = (data, id) => {
+  const html = `
+  <div class="card-panel todo white row" data-id="${id}">
+      <div class="todo-details">
+        <div>${data.todo}</div>
+      </div>
+      <div class="todo-delete">
+        <i class="material-icons" data-id="${id}">delete_outline</i>
+      </div>
+  </div>
+  `;
+  career_tab.innerHTML += html;
+};
+
+const personal_tab = document.querySelector('#test-swipe-3');
+const renderPersonal = (data, id) => {
+  const html = `
+  <div class="card-panel todo white row" data-id="${id}">
+      <div class="todo-details">
+        <div>${data.todo}</div>
+      </div>
+      <div class="todo-delete">
+        <i class="material-icons" data-id="${id}">delete_outline</i>
+      </div>
+  </div>
+  `;
+  personal_tab.innerHTML += html;
+};
+
+const financial_tab = document.querySelector('#test-swipe-4');
+const renderFinancial = (data, id) => {
+  const html = `
+  <div class="card-panel todo white row" data-id="${id}">
+      <div class="todo-details">
+        <div>${data.todo}</div>
+      </div>
+      <div class="todo-delete">
+        <i class="material-icons" data-id="${id}">delete_outline</i>
+      </div>
+  </div>
+  `;
+  financial_tab.innerHTML += html;
+};
+
+const other_tab = document.querySelector('#test-swipe-5');
+const renderOther = (data, id) => {
+  const html = `
+  <div class="card-panel todo white row" data-id="${id}">
+      <div class="todo-details">
+        <div>${data.todo}</div>
+      </div>
+      <div class="todo-delete">
+        <i class="material-icons" data-id="${id}">delete_outline</i>
+      </div>
+  </div>
+  `;
+  other_tab.innerHTML += html;
+};
+
+// Render todo list data
+// const todo_list = document.querySelector('.todo-lists');
+// const renderList = (data, id) => {
+
+//   const html = `
+//   <div class="card-panel todo white row" data-id="${id}">
+//       <div class="todo-details">
+//         <div>${data.todo}</div>
+//       </div>
+//       <div class="todo-delete">
+//         <i class="material-icons" data-id="${id}">delete_outline</i>
+//       </div>
+//   </div>
+//   `;
+
+//   todo_list.innerHTML += html;
+// };
 
 // Remove list from DOM
 const removeList = (id) => {
@@ -251,13 +374,10 @@ auth.onAuthStateChanged((user) => {
       form.todo.value = '';
     });
 
-    // Delete todo list data
-    const todoContainer = document.querySelector('.todo-lists');
-    todoContainer.addEventListener('click', e => {
+    const healthContainer = document.querySelector('#test-swipe-1');
+    healthContainer.addEventListener('click', e => {
       if (e.target.tagName === 'I') {
-
         const id = e.target.getAttribute('data-id');
-
         // Delete goals dynamically
         for (var i = 0; i <= months.length - 1; i++) {
           for (var j = 0; j <= weeks.length - 1; j++) {
@@ -268,6 +388,67 @@ auth.onAuthStateChanged((user) => {
         }
       }
     });
+
+    const careerContainer = document.querySelector('#test-swipe-2');
+    careerContainer.addEventListener('click', e => {
+      if (e.target.tagName === 'I') {
+        const id = e.target.getAttribute('data-id');
+        // Delete goals dynamically
+        for (var i = 0; i <= months.length - 1; i++) {
+          for (var j = 0; j <= weeks.length - 1; j++) {
+            for (var k = 0; k <= types.length - 1; k++) {
+              delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], types[k], id);
+            }
+          }
+        }
+      }
+    });
+
+    const personalContainer = document.querySelector('#test-swipe-3');
+    personalContainer.addEventListener('click', e => {
+      if (e.target.tagName === 'I') {
+        const id = e.target.getAttribute('data-id');
+        // Delete goals dynamically
+        for (var i = 0; i <= months.length - 1; i++) {
+          for (var j = 0; j <= weeks.length - 1; j++) {
+            for (var k = 0; k <= types.length - 1; k++) {
+              delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], types[k], id);
+            }
+          }
+        }
+      }
+    });
+
+    const financialContainer = document.querySelector('#test-swipe-4');
+    financialContainer.addEventListener('click', e => {
+      if (e.target.tagName === 'I') {
+        const id = e.target.getAttribute('data-id');
+        // Delete goals dynamically
+        for (var i = 0; i <= months.length - 1; i++) {
+          for (var j = 0; j <= weeks.length - 1; j++) {
+            for (var k = 0; k <= types.length - 1; k++) {
+              delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], types[k], id);
+            }
+          }
+        }
+      }
+    });
+
+    const otherContainer = document.querySelector('#test-swipe-5');
+    otherContainer.addEventListener('click', e => {
+      if (e.target.tagName === 'I') {
+        const id = e.target.getAttribute('data-id');
+        // Delete goals dynamically
+        for (var i = 0; i <= months.length - 1; i++) {
+          for (var j = 0; j <= weeks.length - 1; j++) {
+            for (var k = 0; k <= types.length - 1; k++) {
+              delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], types[k], id);
+            }
+          }
+        }
+      }
+    });
+
 
   } else {
     console.log("user has logged out");
