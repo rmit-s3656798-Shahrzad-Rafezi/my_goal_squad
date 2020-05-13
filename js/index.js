@@ -25,6 +25,7 @@ signinForm.addEventListener("submit", (e) => {
 
   document.querySelector("#signin-form").style.display = "none";
   document.querySelector(".progress").style.display = "block";
+  document.querySelector("#error-message").style.display = "none";
 
   const email = signinForm["signin-email"].value;
   const password = signinForm["signin-password"].value;
@@ -40,5 +41,21 @@ signinForm.addEventListener("submit", (e) => {
         }
       })
     });
+  }).catch((error) => {
+    document.querySelector("#signin-form").style.display = "block";
+    document.querySelector(".progress").style.display = "none";
+    document.querySelector("#error-message").style.display = "block";
+
+    signinForm.reset();
+
+    let navLi = `
+    <span>${error}</span>
+    `;
+
+
+    let userPanel = document.querySelector("#error-message");
+    userPanel.innerHTML = navLi;
+
+    // alert(error)
   });
 });

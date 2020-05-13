@@ -22,6 +22,11 @@ img {
   width: 40%;
 }
 
-.signup-button {
-  color: teal;
+.signin-button {
+  margin-top: 20px;
+  /* color: teal; */
+}
+
+#error-message {
+  color: rgb(240, 52, 52);
 }
