@@ -40,13 +40,13 @@ exports.accountCreate = functions.auth.user().onCreate(user => {
         email: user.email,
         displayName: user.displayName
     }
-    // admin.firestore().collection('users').doc(user.uid)
-    //     .set(userDoc).then(writeResult => {
-    //         console.log('User Created result:', writeResult);
-    //         return null;
-    //     }).catch(err => {
-    //         console.log(err);
-    //         return null;
-    //     });
+    admin.firestore().collection('users').doc(user.uid)
+        .set(userDoc).then(writeResult => {
+            console.log('User Created result:', writeResult);
+            return null;
+        }).catch(err => {
+            console.log(err);
+            return null;
+        });
     return null;
 });
