@@ -23,20 +23,12 @@ exports.makeAdminRole = functions.https.onCall((data, context) => {
 // Create new user 
 
 exports.createNewUser = functions.https.onCall((data, context) => {
-    const name = data.name
-    const email = data.email;
-    const password = data.password;
-    const tel = data.tel;
-
     return admin.auth().createUser({
         displayName: data.name,
         email: data.email,
         password: data.password,
         phoneNumber: data.tel
     }).then(cred => {
-        // return {
-        //     message: `${cred.displayName} has been registered`
-        // };
         return true;
     }).catch((err) => {
         return err;
