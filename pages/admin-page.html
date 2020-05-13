@@ -26,7 +26,7 @@
                     <h5>Register New User</h5>
                     <div class="input-field">
                         <input type="text" id="user-name" required />
-                        <label for="user-name">Enter Your Name</label>
+                        <label for="user-name">Name</label>
                     </div>
                     <div class="input-field">
                         <input type="email" id="signup-email" required />
@@ -34,13 +34,14 @@
                     </div>
                     <div class="input-field">
                         <input type="password" id="signup-password" required />
-                        <label for="signup-password">Choose Passwords</label>
+                        <label for="signup-password">Passwords</label>
                     </div>
                     <div class="input-field">
                         <input placeholder="<+ country code><phone number>" type="tel" id="signup-number" required />
                         <label for="signup-number">Enter Your Number</label>
                     </div>
-                    <button class="waves-effect waves-orange btn signup-button">Signup
+                    <div id="error-message"></div>
+                    <button class="waves-effect waves-orange btn signup-button">Register
                     </button>
                 </form>
             </div>

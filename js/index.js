@@ -48,13 +48,12 @@ signinForm.addEventListener("submit", (e) => {
 
     signinForm.reset();
 
-    let navLi = `
-    <span>${error}</span>
-    `;
+    let error_message = `
+      <span>${error}</span>
+      `;
 
-
-    let userPanel = document.querySelector("#error-message");
-    userPanel.innerHTML = navLi;
+    let error_div = document.querySelector("#error-message");
+    error_div.innerHTML = error_message;
 
     // alert(error)
   });

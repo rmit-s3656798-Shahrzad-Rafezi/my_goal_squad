@@ -30,3 +30,8 @@ h5 {
 #make-admin {
   display: none;
 }
+
+#error-message {
+  color: rgb(240, 52, 52);
+  margin-bottom: 2%;
+}

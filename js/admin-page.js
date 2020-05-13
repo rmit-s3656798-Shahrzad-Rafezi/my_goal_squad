@@ -32,14 +32,29 @@ signupForm.addEventListener("submit", (e) => {
     user.getIdTokenResult().then(idTokenResult => {
       if (idTokenResult.claims.admin) {
         addNewUser(newUser).then(result => {
-          console.log(result);
+          // console.log(result);
+          if (result.data == true) {
+            document.querySelector("#error-message").style.display = "none";
+            M.toast({ html: name + ' has been registered', classes: 'rounded' });
+            const modal = document.querySelector("#modal-signup");
+            M.Modal.getInstance(modal).close();
+            signupForm.reset();
+          } else {
+            document.querySelector("#error-message").style.display = "block";
+
+            let error_message = `
+              <span>${result.data.errorInfo.message}</span>
+               `;
+
+            let error_div = document.querySelector("#error-message");
+            error_div.innerHTML = error_message;
+
+            // console.log(result.data.errorInfo.message)
+          }
         });
       } else {
         console.log('You are not an admin');
       }
-      const modal = document.querySelector("#modal-signup");
-      M.Modal.getInstance(modal).close();
-      signupForm.reset();
     })
   });
 
@@ -129,8 +144,6 @@ file_upload.addEventListener("change", (e) => {
       document.querySelector('#upload-file-btn').disabled = true;
       document.querySelector('.submit-quote-button').disabled = true;
 
-
-
       var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 
       progressBar.style.width = percentage + "%";
@@ -150,23 +163,16 @@ function generateRandomInteger(min, max) {
   return Math.floor(min + Math.random() * (max + 1 - min))
 }
 
-// $('#test-btn').click(() => {
-//   console.log(generateRandomInteger(0, 2))
-// })
-
 // Delete Random Quote when limit is reached
 function deleteRandomQuote(limit) {
   let x = 0;
   var storageRef = firebase.storage().ref("quotes");
   storageRef.listAll().then((result) => {
     result.items.forEach((item) => {
-      // console.log(item.location.path)
       x += 1;
     });
-
-    // console.log(x);
     if (x >= limit) {
-      
+
       var file = result.items[generateRandomInteger(0, 2)];
 
       file.getMetadata().then((data) => {
