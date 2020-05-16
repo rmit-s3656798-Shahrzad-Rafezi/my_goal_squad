@@ -11,7 +11,7 @@ h5 {
   /* position: block; */
   text-align: left;
   font-size: 16px;
-  margin-top: 6%;
+  /* margin-top: 6%; */
   margin-bottom: 2%;
 }
 
@@ -84,7 +84,6 @@ p {
 @media only screen and (max-width: 600px) {
 
   h5 {
-    margin-top: 10%;
     margin-bottom: 5%;
   }
 }

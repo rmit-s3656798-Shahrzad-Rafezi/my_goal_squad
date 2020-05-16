@@ -11,9 +11,9 @@ auth.onAuthStateChanged((user) => {
         }
 
         let navLi = `
-            <a href="#user"><img class="circle" src="${userPicture}"></a>
-            <a href="#name"><span class="white-text name">${user.displayName}</span></a>
-            <a href="#email"><span class="white-text email">${user.email}</span></a>
+            <a href="/pages/user-profile-page.html"><img class="circle" src="${userPicture}"></a>
+            <a href="/pages/user-profile-page.html"><span class="white-text name">${user.displayName}</span></a>
+            <a href="/pages/user-profile-page.html"><span class="white-text email">${user.email}</span></a>
             `;
 
 
@@ -30,6 +30,7 @@ $(document).ready(function () {
     let taskPage = "/pages/user-main-page.html"
     let journalPage = "/pages/gratitude-journal.html"
     let quotePage = "/pages/quote-of-the-day.html"
+    let userPage = "/pages/user-profile-page.html"
 
     if (window.location.pathname == taskPage) {
         $("#task-nav").addClass('disabled');
@@ -37,6 +38,8 @@ $(document).ready(function () {
         $("#journal-nav").addClass('disabled');
     } else if (window.location.pathname == quotePage) {
         $("#quote-nav").addClass('disabled');
+    } else if (window.location.pathname == userPage) {
+        $("#userTab").addClass('unclickable');
     }
 
 });

@@ -5,6 +5,10 @@ footer {
   padding-left: 300px;
 }
 
+.container {
+  padding-top: 5% !important;
+}
+
 .background {
   background-color: #92cfd0;
 }
@@ -43,6 +47,10 @@ a.disabled {
   text-decoration: underline;
   pointer-events: none;
   opacity: 0.6;
+}
+
+#userTab.unclickable {
+  pointer-events: none;
 }
 
 @media only screen and (max-width: 992px) {
