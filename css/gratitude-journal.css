@@ -69,9 +69,11 @@ p {
 }
 
 #modal-entry {
-  border-top-left-radius: 3%;
-  border-top-right-radius: 3%;
-  padding: 1% 5%;
+  border-top-left-radius: 3% !important;
+  border-top-right-radius: 3% !important;
+  padding: 1% 5% !important;
+  top: auto !important;
+  transform: translateY(0) !important;
 }
 
 .entry-delete {
@@ -82,7 +84,6 @@ p {
 }
 
 @media only screen and (max-width: 600px) {
-
   h5 {
     margin-bottom: 5%;
   }

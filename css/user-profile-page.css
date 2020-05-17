@@ -24,6 +24,7 @@ i,
 }
 
 #picture-container {
+  position: relative;
   border-radius: 50%;
   position: relative;
   width: fit-content;
@@ -38,26 +39,32 @@ i,
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  opacity: 0;
+  opacity: 1;
+  transition: 0.3s ease-in-out;
+}
+
+#picture-container i {
+  font-size: 800% !important;
+  color: rgba(212, 212, 212, 0.959);
   transition: 0.3s ease-in-out;
 }
 
 #picture-container img {
   object-fit: cover;
-  height: 25vh;
-  width: 25vh;
+  height: 15vh !important;
+  width: 15vh !important;
   border-radius: 50%;
   opacity: 1;
   transition: 0.3s ease-in-out;
 }
 
 #picture-container:hover img {
-  opacity: 0.1;
+  opacity: 0.05;
 }
 
-#picture-container:hover button {
+#picture-container:hover button i {
   opacity: 1;
-  color: teal;
+  color: #92cfd0;
 }
 
 .data {
@@ -161,12 +168,38 @@ i:hover {
     font-size: 14px;
   }
 
+  #logout-btn {
+    position: absolute;
+    top: 55vh;
+    left: 50%;
+    margin-top: 28% !important;
+    transform: translate(-50%, -50%);
+    color: rgba(0, 0, 0, 0.87);
+  }
+
+  #picture-container button {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    background-color: transparent;
+  }
+
+  #picture-container i {
+    font-size: 400% !important;
+    opacity: 1;
+    color: #92cfd0;
+  }
+
   #picture-container img {
     object-fit: cover;
-    height: 15vh;
-    width: 15vh;
+    height: 25vh;
+    width: 25vh;
     border-radius: 50%;
-    opacity: 1;
-    transition: 0.5s ease-in-out;
+    opacity: 0.1 !important;
   }
 }

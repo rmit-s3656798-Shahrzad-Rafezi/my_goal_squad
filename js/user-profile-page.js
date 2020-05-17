@@ -7,17 +7,13 @@ auth.onAuthStateChanged((user) => {
     if (user.photoURL == null) {
       userPicture = "/img/empty-profile.png";
     } else {
-      console.log('test2: ' + user.uid)
 
       let path = 'users/' + user.uid + "/profilePicture.png"
       // var starsRef = storageRef.child('images/stars.jpg');
 
       var test = storage.ref(path);
 
-      console.log('test3: ' + test)
-
       test.getDownloadURL().then(function (url) {
-        console.log('test4: ' + url)
         userPicture = url;
         renderUserData(url, user.displayName, user.email)
 
@@ -31,7 +27,7 @@ auth.onAuthStateChanged((user) => {
       <div id="picture-container">
         <img class="userImg" src="${userPicture}">
         <button data-target="modal-img" class="waves-effect waves-grey btn-flat modal-trigger">
-          <i class="material-icons">edit</i>Edit
+          <i class="material-icons">camera_alt</i>
         </button>
       </div>
       <div id="text-container">
@@ -108,11 +104,22 @@ updateNameForm.addEventListener("submit", (e) => {
     // Update successful.
 
     M.Modal.getInstance($('#modal-name')).close();
-    M.toast({ html: 'Name has been updated successfully' })
     updateNameForm.reset();
-    setTimeout(() => {
-      location.reload()
-    }, 500)
+
+    // Update in Firestore
+    // ++++++++++++++++++++++++++++++++++
+    db.collection("users").doc(user.uid).update({
+      displayName: name
+    }).then(function () {
+
+      M.toast({ html: 'Name has been updated successfully' })
+
+      setTimeout(() => {
+        location.reload()
+      }, 500)
+    }).catch((e) => {
+      console.log(e)
+    });
 
   }).catch(function (e) {
     console.log(e)
@@ -140,11 +147,24 @@ updateEmailForm.addEventListener("submit", (e) => {
 
       M.Modal.getInstance($('#modal-email')).close();
       updateEmailForm.reset();
-      M.toast({ html: 'Email update successfully' })
 
-      setTimeout(() => {
-        location.reload()
-      }, 500)
+
+      // Update in Firestore
+      // ++++++++++++++++++++++++++++++++++
+      db.collection("users").doc(user.uid).update({
+        email: new_email
+      }).then(function () {
+
+        M.toast({ html: 'Email update successfully' })
+
+        setTimeout(() => {
+          location.reload()
+        }, 500)
+      }).catch((e) => {
+        console.log(e)
+      });
+
+
 
     }).catch((e) => {
 
@@ -230,7 +250,6 @@ file_upload.addEventListener("change", (e) => {
     // Create reference in Firebase Storage
     var user = auth.currentUser;
     let uid = user.uid;
-    console.log(uid)
     var storageRef = storage.ref('users/' + uid + '/profilePicture.png');
 
     // // Task to put file into Firebase Storage
@@ -266,7 +285,6 @@ file_upload.addEventListener("change", (e) => {
         setTimeout(wait, 1000);
 
         var uid = auth.currentUser.uid;
-        console.log('test1: ' + uid)
         const file_path = 'users/' + uid + '/profilePicture.png';
 
         user.updateProfile({
@@ -276,7 +294,7 @@ file_upload.addEventListener("change", (e) => {
           M.toast({ html: 'Profile picture has been updated successfully' })
           setTimeout(() => {
             location.reload()
-          }, 500)
+          }, 1000)
         }).catch(function (e) {
           console.log(e)
         });
