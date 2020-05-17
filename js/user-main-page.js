@@ -1,4 +1,4 @@
-// This is for selection, tabs element in HTML file (CSS Materialize)
+// This is for selection, tabs, modal element in HTML file (CSS Materialize)
 document.addEventListener('DOMContentLoaded', function () {
   var select = document.querySelectorAll('select');
   M.FormSelect.init(select, {});
@@ -40,7 +40,6 @@ year_id.appendChild(year_Fragment);
 // Grabs the year value
 year_id.addEventListener('change', function () {
   chosen_year = this.value;
-  //console.log(chosen_year);
 });
 
 // Display Months
@@ -61,7 +60,6 @@ month_id.appendChild(month_Fragment);
 // Grabs the Month value
 month_id.addEventListener('change', function () {
   chosen_month = this.value;
-  //console.log(chosen_month);
 });
 
 // Display Weeks
@@ -82,7 +80,6 @@ week_id.appendChild(week_fragment);
 // Grabs the Week value
 week_id.addEventListener('change', function () {
   chosen_week = this.value;
-  //console.log(chosen_week);
 });
 
 // Display Types
@@ -103,10 +100,9 @@ type_id.appendChild(type_fragment);
 // Grabs the Type value
 type_id.addEventListener('change', function () {
   chosen_type = this.value;
-  //console.log(chosen_type);
 });
 
-// Get data in real-time
+// Get data in real-time based on types
 function display(userID, year, month, week, type) {
 
   if (type == "Health") {
@@ -203,23 +199,6 @@ function display(userID, year, month, week, type) {
         });
       });
   }
-
-  // db.collection('users').doc(userID)
-  //   .collection('Goals').doc('Year')
-  //   .collection(year).doc('Month')
-  //   .collection(month).doc('Week')
-  //   .collection(week).doc('Type')
-  //   .collection(type).onSnapshot(snapshot => {
-  //     let changes = snapshot.docChanges();
-  //     changes.forEach(change => {
-  //       if (change.type === 'added') {
-  //         renderList(change.doc.data(), change.doc.id);
-  //       }
-  //       else if (change.type === 'removed') {
-  //         removeList(change.doc.id);
-  //       }
-  //     });
-  //   });
 }
 
 // Delete todo list data
@@ -320,24 +299,6 @@ const renderOther = (data, id) => {
   other_tab.innerHTML += html;
 };
 
-// Render todo list data
-// const todo_list = document.querySelector('.todo-lists');
-// const renderList = (data, id) => {
-
-//   const html = `
-//   <div class="card-panel todo white row" data-id="${id}">
-//       <div class="todo-details">
-//         <div>${data.todo}</div>
-//       </div>
-//       <div class="todo-delete">
-//         <i class="material-icons" data-id="${id}">delete_outline</i>
-//       </div>
-//   </div>
-//   `;
-
-//   todo_list.innerHTML += html;
-// };
-
 // Remove list from DOM
 const removeList = (id) => {
   const todo = document.querySelector(`.todo[data-id=${id}]`);
@@ -385,9 +346,7 @@ auth.onAuthStateChanged((user) => {
         // Delete goals dynamically
         for (var i = 0; i <= months.length - 1; i++) {
           for (var j = 0; j <= weeks.length - 1; j++) {
-            for (var k = 0; k <= types.length - 1; k++) {
-              delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], types[k], id);
-            }
+            delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], "Health", id);
           }
         }
       }
@@ -400,9 +359,7 @@ auth.onAuthStateChanged((user) => {
         // Delete goals dynamically
         for (var i = 0; i <= months.length - 1; i++) {
           for (var j = 0; j <= weeks.length - 1; j++) {
-            for (var k = 0; k <= types.length - 1; k++) {
-              delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], types[k], id);
-            }
+            delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], "Career", id);
           }
         }
       }
@@ -415,9 +372,7 @@ auth.onAuthStateChanged((user) => {
         // Delete goals dynamically
         for (var i = 0; i <= months.length - 1; i++) {
           for (var j = 0; j <= weeks.length - 1; j++) {
-            for (var k = 0; k <= types.length - 1; k++) {
-              delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], types[k], id);
-            }
+            delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], "Personal", id);
           }
         }
       }
@@ -430,9 +385,7 @@ auth.onAuthStateChanged((user) => {
         // Delete goals dynamically
         for (var i = 0; i <= months.length - 1; i++) {
           for (var j = 0; j <= weeks.length - 1; j++) {
-            for (var k = 0; k <= types.length - 1; k++) {
-              delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], types[k], id);
-            }
+            delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], "Financial", id); 
           }
         }
       }
@@ -445,9 +398,7 @@ auth.onAuthStateChanged((user) => {
         // Delete goals dynamically
         for (var i = 0; i <= months.length - 1; i++) {
           for (var j = 0; j <= weeks.length - 1; j++) {
-            for (var k = 0; k <= types.length - 1; k++) {
-              delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], types[k], id);
-            }
+            delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], "Other", id);
           }
         }
       }
@@ -461,11 +412,11 @@ auth.onAuthStateChanged((user) => {
 });
 
 // Logout Button
-const logout = document.querySelector("#logout-btn");
+// const logout = document.querySelector("#logout-btn");
 
-logout.addEventListener("click", (e) => {
-  e.preventDefault();
-  auth.signOut().then(() => {
-    window.location.href = "../index.html";
-  });
-});
+// logout.addEventListener("click", (e) => {
+//   e.preventDefault();
+//   auth.signOut().then(() => {
+//     window.location.href = "../index.html";
+//   });
+// });
