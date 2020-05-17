@@ -1,14 +1,15 @@
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
     <link href="https://cdn.bootcss.com/jquery-confirm/3.2.3/jquery-confirm.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" 
-      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-    
+
     <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js "></script>
     <script src="https://cdn.bootcss.com/jquery-confirm/3.2.3/jquery-confirm.min.js "></script>
     <script src="https://cdn.bootcss.com/jquery.form/4.2.1/jquery.form.js"></script>
@@ -16,77 +17,113 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/user-main-page.css" />
     <title>My Goal Squad</title>
-  </head>
+</head>
 
-  <body class="grey lighten-3">
+<body class="grey lighten-3">
+
+    <!-- side navpanel -->
+    <div>
+        <ul id="slide-out" class="sidenav sidenav-fixed">
+            <li>
+                <div class="user-view">
+                    <div class="background">
+                    </div>
+                </div>
+            </li>
+            <li class="nav-list"><a id="task-nav" href="/pages/user-main-page.html">Task</a></li>
+            <li class="nav-list"><a id="journal-nav" href="/pages/gratitude-journal.html">My Gratitude Journal</a>
+            </li>
+            <li class="nav-list"><a id="quote-nav" href="/pages/quote-of-the-day.html">Quotes of the Day</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- top navbar -->
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#!" class="brand-logo">
+                    <img id='logo' src="/img/logo.svg" alt="">
+                </a>
+                <a href="#" data-target="slide-out" class="sidenav-trigger menu-btn"><i
+                        class="material-icons menu-icon">menu</i></a>
+                <ul class="left hide-on-med-and-down">
+                    <li>
+
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
     <div class="container">
 
-      <h5>User Main Page</h5>
+        <h5>User Main Page</h5>
 
-      <div class="content">
+        <div class="content">
 
-        <!-- Add todo list form -->
-        <form id="todo-form">
-          <input type="text" name="todo" placeholder="Add goals that you want to achieve" />
-          <select id="select_id_year">
-            <option value="" disabled selected>Select Year</option>
-          </select>
-          <select id="select_id_month">
-            <option value="" disabled selected>Select Month</option>
-          </select>
-          <select id="select_id_week">
-            <option value="" disabled selected>Select Week</option>
-          </select>
-          <select id="select_id_type">
-            <option value="" disabled selected>Select Type</option>
-          </select>
-          <button class="comfirmgoal">Add list</button>
-        </form>
-        <script>
-          $('.comfirmgoal').confirm({
-            title: 'Confirm!',
-            content: '',
-            buttons: {
-              confirm: function () {
-              },
-              cancel: function () {
-
-              }
-            }
-          });
-        </script>
-
-        <!-- This is for adding range for each task -->
-        <div id="modal1" class="modal">
-          <div class="modal-content">
-            <h1>Progress</h1>
-            <form action="#">
-              <p class="range-field">
-                <input type="range" id="test5" min="0" max="100" />
-              </p>
-              <button>Submit</button>
+            <!-- Add todo list form -->
+            <form id="todo-form">
+                <input type="text" name="todo" placeholder="Add goals that you want to achieve" />
+                <select id="select_id_year">
+                    <option value="" disabled selected>Select Year</option>
+                </select>
+                <select id="select_id_month">
+                    <option value="" disabled selected>Select Month</option>
+                </select>
+                <select id="select_id_week">
+                    <option value="" disabled selected>Select Week</option>
+                </select>
+                <select id="select_id_type">
+                    <option value="" disabled selected>Select Type</option>
+                </select>
+                <button class="comfirmgoal">Add list</button>
             </form>
-          </div>
-        </div>
+            <script>
+                $('.comfirmgoal').confirm({
+                    title: 'Confirm!',
+                    content: '',
+                    buttons: {
+                        confirm: function () {
+                        },
+                        cancel: function () {
 
-        <!-- Slider Functionality -->
+                        }
+                    }
+                });
+            </script>
+
+            <!-- This is for adding range for each task -->
+            <div id="modal1" class="modal">
+                <div class="modal-content">
+                    <h1>Progress</h1>
+                    <form action="#">
+                        <p class="range-field">
+                            <input type="range" id="test5" min="0" max="100" />
+                        </p>
+                        <button>Submit</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Slider Functionality -->
             <!-- Tabs -->
             <ul id="tabs-swipe-demo" class="tabs">
-              <li class="tab col s3">
-                <a href="#test-swipe-1">Health</a>
-              </li>
-              <li class="tab col s3">
-                <a class="active" href="#test-swipe-2">Career</a>
-              </li>
-              <li class="tab col s3">
-                <a href="#test-swipe-3">Personal</a>
-              </li>
-              <li class="tab col s3">
-                <a href="#test-swipe-4">Financial</a>
-              </li>
-              <li class="tab col s3">
-                <a href="#test-swipe-5">Other</a>
-              </li>
+                <li class="tab col s3">
+                    <a href="#test-swipe-1">Health</a>
+                </li>
+                <li class="tab col s3">
+                    <a class="active" href="#test-swipe-2">Career</a>
+                </li>
+                <li class="tab col s3">
+                    <a href="#test-swipe-3">Personal</a>
+                </li>
+                <li class="tab col s3">
+                    <a href="#test-swipe-4">Financial</a>
+                </li>
+                <li class="tab col s3">
+                    <a href="#test-swipe-5">Other</a>
+                </li>
             </ul>
 
             <!-- Contents inside tabs -->
@@ -105,15 +142,15 @@
             <div id="test-swipe-5" class="col s12">
             </div>
 
-        <!-- Display todo list -->
-        <!-- <div class="todo-lists"></div> -->
-        
-      </div>
+            <!-- Display todo list -->
+            <!-- <div class="todo-lists"></div> -->
 
-      <button id="logout-btn" class="waves-effect btn red">
-        Logout
-        <i class="material-icons right">input</i>
-      </button>
+        </div>
+
+        <button id="logout-btn" class="waves-effect btn red">
+            Logout
+            <i class="material-icons right">input</i>
+        </button>
     </div>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -126,8 +163,10 @@
 
     <script src="/js/firebase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"
+        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
     <script src="/js/navbar.js"></script>
     <script src="/js/user-main-page.js"></script>
-  </body>
+</body>
+
 </html>
