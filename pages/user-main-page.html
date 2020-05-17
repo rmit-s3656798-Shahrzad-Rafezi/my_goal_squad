@@ -30,7 +30,6 @@
           <input type="text" name="todo" placeholder="Add goals that you want to achieve" />
           <select id="select_id_year">
             <option value="" disabled selected>Select Year</option>
-
           </select>
           <select id="select_id_month">
             <option value="" disabled selected>Select Month</option>
@@ -43,7 +42,6 @@
           </select>
           <button class="comfirmgoal">Add list</button>
         </form>
-
         <script>
           $('.comfirmgoal').confirm({
             title: 'Confirm!',
@@ -56,8 +54,20 @@
               }
             }
           });
-      </script>
+        </script>
 
+        <!-- This is for adding range for each task -->
+        <div id="modal1" class="modal">
+          <div class="modal-content">
+            <h1>Progress</h1>
+            <form action="#">
+              <p class="range-field">
+                <input type="range" id="test5" min="0" max="100" />
+              </p>
+              <button>Submit</button>
+            </form>
+          </div>
+        </div>
 
         <!-- Slider Functionality -->
             <!-- Tabs -->

@@ -11,7 +11,10 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   const tabsContainer = document.querySelector(".tabs");
-  M.Tabs.init(tabsContainer, options);
+  M.Tabs.init(tabsContainer, options);  
+
+  var modal = document.querySelectorAll('.modal');
+  M.Modal.init(modal);
 });
 
 // Display Years
@@ -246,7 +249,7 @@ const renderHealth = (data, id) => {
   const html = `
   <div class="card-panel todo white row" data-id="${id}">
       <div class="todo-details">
-        <div>${data.todo}</div>
+        <a data-target="modal1" class="modal-trigger">${data.todo}</a>        
       </div>
       <div class="todo-delete">
         <i class="material-icons" data-id="${id}">delete_outline</i>
@@ -256,12 +259,13 @@ const renderHealth = (data, id) => {
   health_tab.innerHTML += html;
 };
 
+
 const career_tab = document.querySelector('#test-swipe-2');
 const renderCareer = (data, id) => {
   const html = `
   <div class="card-panel todo white row" data-id="${id}">
       <div class="todo-details">
-        <div>${data.todo}</div>
+        <a data-target="modal1" class="modal-trigger">${data.todo}</a>
       </div>
       <div class="todo-delete">
         <i class="material-icons" data-id="${id}">delete_outline</i>
@@ -276,7 +280,7 @@ const renderPersonal = (data, id) => {
   const html = `
   <div class="card-panel todo white row" data-id="${id}">
       <div class="todo-details">
-        <div>${data.todo}</div>
+        <a data-target="modal1" class="modal-trigger">${data.todo}</a>
       </div>
       <div class="todo-delete">
         <i class="material-icons" data-id="${id}">delete_outline</i>
@@ -291,12 +295,12 @@ const renderFinancial = (data, id) => {
   const html = `
   <div class="card-panel todo white row" data-id="${id}">
       <div class="todo-details">
-        <div>${data.todo}</div>
+        <a data-target="modal1" class="modal-trigger">${data.todo}</a>
       </div>
       <div class="todo-delete">
         <i class="material-icons" data-id="${id}">delete_outline</i>
       </div>
-  </div>
+  </>
   `;
   financial_tab.innerHTML += html;
 };
@@ -306,7 +310,7 @@ const renderOther = (data, id) => {
   const html = `
   <div class="card-panel todo white row" data-id="${id}">
       <div class="todo-details">
-        <div>${data.todo}</div>
+        <a data-target="modal1" class="modal-trigger">${data.todo}</a>
       </div>
       <div class="todo-delete">
         <i class="material-icons" data-id="${id}">delete_outline</i>
