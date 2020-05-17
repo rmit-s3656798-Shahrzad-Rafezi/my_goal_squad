@@ -7,12 +7,8 @@ auth.onAuthStateChanged((user) => {
         } else {
 
             let path = 'users/' + user.uid + "/profilePicture.png"
-            // var starsRef = storageRef.child('images/stars.jpg');
 
-            var test = storage.ref(path);
-
-
-            test.getDownloadURL().then(function (url) {
+            storage.ref(path).getDownloadURL().then(function (url) {
                 userPicture = url;
                 renderUserData(url, user.displayName, user.email)
 
