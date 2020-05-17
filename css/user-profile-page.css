@@ -11,13 +11,113 @@ h5 {
   margin-bottom: 7%;
 }
 
-button {
+i {
+  cursor: pointer;
+}
+
+#userData {
+  position: relative;
+  display: block;
+  text-align: left;
   margin-top: 10%;
+}
+
+#picture-container {
+  border-radius: 50%;
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+}
+
+#picture-container button {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: 0.5s ease-in-out;
+}
+
+#picture-container img {
+  object-fit: cover;
+  height: 25vh;
+  width: 25vh;
+  border-radius: 50%;
+  opacity: 1;
+  transition: 0.5s ease-in-out;
+}
+
+#picture-container:hover img {
+  opacity: 0.1;
+}
+
+#picture-container:hover button {
+  opacity: 1;
+  color: teal;
+}
+
+.data {
+  margin-top: 5%;
+  font-size: 17px;
+  float: left;
+  clear: left;
+}
+
+#text-container {
+  position: relative;
+}
+
+#text-container i {
+  position: absolute;
+  transform: translate(100%, -20%);
+}
+
+i:hover {
+  color: teal;
+}
+
+#logout-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: 28% !important;
+  transform: translate(-50%, -50%);
+  color: rgba(0, 0, 0, 0.87);
+}
+
+#logout-btn i {
+  /* position: absolute; */
+  transform: translate(-25%, 25%) !important;
+  font-size: 30px !important;
+}
+
+#logout-btn:hover i,
+#logout-btn:hover {
+  color: rgb(240, 52, 52);
 }
 
 @media only screen and (max-width: 600px) {
   h5 {
     margin-top: 10%;
     margin-bottom: 5%;
+  }
+
+  .data {
+    margin-top: 10%;
+    font-size: 14px;
+    float: left;
+    clear: left;
+  }
+
+  #picture-container img {
+    object-fit: cover;
+    height: 15vh;
+    width: 15vh;
+    border-radius: 50%;
+    opacity: 1;
+    transition: 0.5s ease-in-out;
   }
 }

@@ -43,9 +43,3 @@ $(document).ready(function () {
     }
 
 });
-
-$('#logout-nav').click(() => {
-    auth.signOut().then(() => {
-        window.location.href = "../index.html";
-    });
-})
