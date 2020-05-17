@@ -5,3 +5,7 @@ auth.onAuthStateChanged((user) => {
     console.log("user has logged out");
   }
 });
+
+$('.test-btn').click(() => {
+  M.toast({ html: 'Test' })
+})

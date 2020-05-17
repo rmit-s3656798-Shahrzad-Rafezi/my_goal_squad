@@ -9,7 +9,7 @@ auth.onAuthStateChanged((user) => {
 
 // Render Quotes
 function renderQuotes() {
-    var storageRef = firebase.storage().ref("quotes");
+    var storageRef = storage.ref("quotes");
 
 
     // Now we get the references of these images
