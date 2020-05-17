@@ -11,7 +11,8 @@ h5 {
   margin-bottom: 7%;
 }
 
-i {
+i,
+#logout-btn {
   cursor: pointer;
 }
 
@@ -38,7 +39,7 @@ i {
   left: 50%;
   transform: translate(-50%, -50%);
   opacity: 0;
-  transition: 0.5s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 #picture-container img {
@@ -47,7 +48,7 @@ i {
   width: 25vh;
   border-radius: 50%;
   opacity: 1;
-  transition: 0.5s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 #picture-container:hover img {
@@ -73,12 +74,24 @@ i {
 #text-container i {
   position: absolute;
   transform: translate(100%, -20%);
+  transition: 0.1s ease-in-out;
 }
 
 i:hover {
   color: teal;
+  font-size: 30px;
 }
 
+.error-message {
+  margin-bottom: 2%;
+  color: rgb(240, 52, 52);
+}
+
+.preloader {
+  display: none;
+}
+
+/* LOGOUT COMPONENT */
 #logout-btn {
   position: absolute;
   top: 50%;
@@ -94,9 +107,47 @@ i:hover {
   font-size: 30px !important;
 }
 
+#logout-btn i,
+#logout-btn {
+  transition: 0.1s ease-in-out;
+}
+
 #logout-btn:hover i,
 #logout-btn:hover {
   color: rgb(240, 52, 52);
+  font-size: 25px !important;
+}
+
+/* CONTACT COMPONENT */
+#contact {
+  position: absolute;
+  top: 85vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(0, 0, 0, 0.87);
+}
+
+#contact .component {
+  margin-top: 10%;
+}
+
+#contact i {
+  /* color: unset; */
+  transform: translate(-20%, 25%) !important;
+  font-size: 30px !important;
+}
+
+#contact a {
+  transition: 0.1s ease-in-out;
+}
+
+#contact:hover i {
+  color: unset;
+  cursor: default;
+}
+
+#contact:hover a {
+  font-size: larger;
 }
 
 @media only screen and (max-width: 600px) {
@@ -108,8 +159,6 @@ i:hover {
   .data {
     margin-top: 10%;
     font-size: 14px;
-    float: left;
-    clear: left;
   }
 
   #picture-container img {
