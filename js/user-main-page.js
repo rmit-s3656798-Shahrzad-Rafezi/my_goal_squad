@@ -511,3 +511,19 @@ logout.addEventListener("click", (e) => {
     window.location.href = "../index.html";
   });
 });
+
+//Confirm messsage
+var Confirmyear =  document.getElementById("select_id_year");
+var Confirmmonth = document.getElementById("select_id_month");
+var Confirmweek = document.getElementById("select_id_week");
+var Confirmtype = document.getElementById("select_id_type");
+var Confirmtodo = document.getElementById("todo");
+
+function goalconfirm() {
+   document.getElementById("goal-confirm").innerHTML=
+   Confirmyear.value + " " +
+   Confirmmonth.value + " " +
+   Confirmweek.value + " " +
+   Confirmtype.value;
+   document.getElementById("goal-confirm-text").innerHTML=Confirmtodo.value;
+} 

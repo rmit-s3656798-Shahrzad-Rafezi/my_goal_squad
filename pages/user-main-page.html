@@ -64,8 +64,9 @@
             <!-- Add todo list form -->
             <div id="modal-addgoal" class="modal">
                 <div class="modal-content">
+                    <h6>ADD NEW GOAL</h6>
                     <form id="todo-form">
-                        <input type="text" name="todo" placeholder="Add goals that you want to achieve" />
+                        <input id="todo" type="text" name="todo" placeholder="Add goals that you want to achieve" />
                         <select id="select_id_year">
                             <option value="" disabled selected>Select Year</option>
                         </select>
@@ -78,7 +79,15 @@
                         <select id="select_id_type">
                             <option value="" disabled selected>Select Type</option>
                         </select>
-                        <button class="modal-close waves-effect waves-orange btn">Add list</button>
+                        <a onclick="goalconfirm()"class="waves-effect waves-light btn modal-trigger" href="#goalconfirm">Add</a>
+                        <div id="goalconfirm" class="modal">
+                            <h5>Confirm</h5>
+                            <div class="modal-content">
+                            <p id="goal-confirm"></p>
+                            <p id="goal-confirm-text"></p>   
+                            <button class="modal-close waves-effect waves-orange btn">Add list</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
