@@ -224,6 +224,19 @@ function update_range(userID, year, month, week, type, docID) {
       .collection(type).doc(docID).update({ 
         range: range_form.range.value 
       });
+      //TODO: Need to think of a way to keep the colors when range changes
+      if(range_form.range.value < 35){
+        $(".todo").css("background", "red");
+      }
+      else if(range_form.range.value > 25){
+        $(".todo").css("background", "orange");
+      }
+      else if(range_form.range.value > 50){
+        $(".todo").css("background", "yellow");
+      }
+      else if(range_form.range.value > 70){
+        $(".todo").css("background", "Green");
+      }
   });
 }
 
@@ -242,7 +255,7 @@ db.enablePersistence().catch(function (err) {
 const health_tab = document.querySelector('#test-swipe-1');
 const renderHealth = (data, id) => {
   const html = `
-  <div class="card-panel todo white row" data-id="${id}">
+  <div class="card-panel todo row" data-id="${id}">
       <div class="todo-details">
         <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>        
       </div>
@@ -257,7 +270,7 @@ const renderHealth = (data, id) => {
 const career_tab = document.querySelector('#test-swipe-2');
 const renderCareer = (data, id) => {
   const html = `
-  <div class="card-panel todo white row" data-id="${id}">
+  <div class="card-panel todo row" data-id="${id}">
       <div class="todo-details">
         <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
       </div>
@@ -272,7 +285,7 @@ const renderCareer = (data, id) => {
 const personal_tab = document.querySelector('#test-swipe-3');
 const renderPersonal = (data, id) => {
   const html = `
-  <div class="card-panel todo white row" data-id="${id}">
+  <div class="card-panel todo row" data-id="${id}">
       <div class="todo-details">
         <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
       </div>
@@ -287,7 +300,7 @@ const renderPersonal = (data, id) => {
 const financial_tab = document.querySelector('#test-swipe-4');
 const renderFinancial = (data, id) => {
   const html = `
-  <div class="card-panel todo white row" data-id="${id}">
+  <div class="card-panel todo row" data-id="${id}">
       <div class="todo-details">
         <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
       </div>
@@ -302,7 +315,7 @@ const renderFinancial = (data, id) => {
 const other_tab = document.querySelector('#test-swipe-5');
 const renderOther = (data, id) => {
   const html = `
-  <div class="card-panel todo white row" data-id="${id}">
+  <div class="card-panel todo row" data-id="${id}">
       <div class="todo-details">
         <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
       </div>
