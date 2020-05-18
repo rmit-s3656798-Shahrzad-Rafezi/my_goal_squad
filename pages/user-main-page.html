@@ -9,18 +9,6 @@
 
     <!-- Import scripts START -->
     <!-- Conflicting with existing code -->
-    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-    <link href="https://cdn.bootcss.com/jquery-confirm/3.2.3/jquery-confirm.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-
-    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js "></script>
-    <script src="https://cdn.bootcss.com/jquery-confirm/3.2.3/jquery-confirm.min.js "></script>
-    <script src="https://cdn.bootcss.com/jquery.form/4.2.1/jquery.form.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <!-- Import scripts END -->
 
     <link rel="stylesheet" type="text/css" href="/css/navbar.css">
@@ -72,38 +60,30 @@
         <div class="content">
 
             <!-- Add todo list form -->
-            <form id="todo-form">
-                <input type="text" name="todo" placeholder="Add goals that you want to achieve" />
-                <select id="select_id_year">
-                    <option value="" disabled selected>Select Year</option>
-                </select>
-                <select id="select_id_month">
-                    <option value="" disabled selected>Select Month</option>
-                </select>
-                <select id="select_id_week">
-                    <option value="" disabled selected>Select Week</option>
-                </select>
-                <select id="select_id_type">
-                    <option value="" disabled selected>Select Type</option>
-                </select>
-                <button class="comfirmgoal">Add list</button>
-            </form>
+            <div id="modal-addgoal" class="modal">
+                <div class="modal-content">
+                    <form id="todo-form">
+                        <input type="text" name="todo" placeholder="Add goals that you want to achieve" />
+                        <select id="select_id_year">
+                            <option value="" disabled selected>Select Year</option>
+                        </select>
+                        <select id="select_id_month">
+                            <option value="" disabled selected>Select Month</option>
+                        </select>
+                        <select id="select_id_week">
+                            <option value="" disabled selected>Select Week</option>
+                        </select>
+                        <select id="select_id_type">
+                            <option value="" disabled selected>Select Type</option>
+                        </select>
+                        <button class="comfirmgoal">Add list</button>
+                    </form>
+                </div>
+            </div>
 
-            <!-- confirm script START -->
-            <!-- <script>
-                $('.comfirmgoal').confirm({
-                    title: 'Confirm!',
-                    content: '',
-                    buttons: {
-                        confirm: function () {
-                        },
-                        cancel: function () {
-
-                        }
-                    }
-                });
-            </script> -->
-            <!-- confirm script END -->
+            <button id="register-btn" data-target='modal-addgoal'
+            class="waves-effect btn modal-trigger grey darken-3 button">New Goal
+           </button>
 
             <!-- This is for adding range for each task -->
             <div id="modal1" class="modal">
