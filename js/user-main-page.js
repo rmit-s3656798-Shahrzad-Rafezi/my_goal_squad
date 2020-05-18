@@ -211,6 +211,22 @@ function delete_todo_list(userID, year, month, week, type, docID) {
     .collection(type).doc(docID).delete();
 }
 
+// Update Range
+function update_range(userID, year, month, week, type, docID) {
+  const range_form = document.querySelector('#range-form');
+  range_form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    db.collection('users').doc(userID)
+      .collection('Goals').doc('Year')
+      .collection(year).doc('Month')
+      .collection(month).doc('Week')
+      .collection(week).doc('Type')
+      .collection(type).doc(docID).update({ 
+        range: range_form.range.value 
+      });
+  });
+}
+
 // Enable offline data
 db.enablePersistence().catch(function (err) {
   if (err.code == 'failed-precondition') {
@@ -228,7 +244,7 @@ const renderHealth = (data, id) => {
   const html = `
   <div class="card-panel todo white row" data-id="${id}">
       <div class="todo-details">
-        <a data-target="modal1" class="modal-trigger">${data.todo}</a>        
+        <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>        
       </div>
       <div class="todo-delete">
         <i class="material-icons" data-id="${id}">delete_outline</i>
@@ -238,13 +254,12 @@ const renderHealth = (data, id) => {
   health_tab.innerHTML += html;
 };
 
-
 const career_tab = document.querySelector('#test-swipe-2');
 const renderCareer = (data, id) => {
   const html = `
   <div class="card-panel todo white row" data-id="${id}">
       <div class="todo-details">
-        <a data-target="modal1" class="modal-trigger">${data.todo}</a>
+        <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
       </div>
       <div class="todo-delete">
         <i class="material-icons" data-id="${id}">delete_outline</i>
@@ -259,7 +274,7 @@ const renderPersonal = (data, id) => {
   const html = `
   <div class="card-panel todo white row" data-id="${id}">
       <div class="todo-details">
-        <a data-target="modal1" class="modal-trigger">${data.todo}</a>
+        <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
       </div>
       <div class="todo-delete">
         <i class="material-icons" data-id="${id}">delete_outline</i>
@@ -274,7 +289,7 @@ const renderFinancial = (data, id) => {
   const html = `
   <div class="card-panel todo white row" data-id="${id}">
       <div class="todo-details">
-        <a data-target="modal1" class="modal-trigger">${data.todo}</a>
+        <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
       </div>
       <div class="todo-delete">
         <i class="material-icons" data-id="${id}">delete_outline</i>
@@ -289,7 +304,7 @@ const renderOther = (data, id) => {
   const html = `
   <div class="card-panel todo white row" data-id="${id}">
       <div class="todo-details">
-        <a data-target="modal1" class="modal-trigger">${data.todo}</a>
+        <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
       </div>
       <div class="todo-delete">
         <i class="material-icons" data-id="${id}">delete_outline</i>
@@ -324,25 +339,98 @@ auth.onAuthStateChanged((user) => {
     // Add todo list data
     const form = document.querySelector('#todo-form');
     form.addEventListener('submit', (e) => {
-
       e.preventDefault();
-
       db.collection('users').doc(user.uid)
         .collection('Goals').doc('Year')
         .collection(chosen_year).doc('Month')
         .collection(chosen_month).doc('Week')
         .collection(chosen_week).doc('Type')
         .collection(chosen_type).add({
-          todo: form.todo.value
+          todo: form.todo.value,
+          range: 0
         });
-
       form.todo.value = '';
     });
 
+    // NOTE: 
+    // Will have to do similar to the above code where you'd have to loop through months, weeks and types 
+    // in order to change the range on specific list.
+    //
+    // Create a method called update range that takes userID, year, months, weeks and types and docID. similar to delete-list
+    //
+    // Be able to change the colour based on range
+
+    //Update range from Health tab
+    const health_tab = document.querySelector('#test-swipe-1');
+    health_tab.addEventListener('click', e => {
+      if(e.target.tagName === 'A'){
+        const id = e.target.getAttribute('data-id');
+        for (var i = 0; i <= months.length - 1; i++) {
+          for (var j = 0; j <= weeks.length - 1; j++) {
+            update_range(user.uid, current_year.toString(), months[i], weeks[j], "Health", id);
+          }
+        } 
+      }
+    });
+
+    //Update range from Career tab
+    const career_tab = document.querySelector('#test-swipe-2');
+    career_tab.addEventListener('click', e => {
+      if(e.target.tagName === 'A'){
+        const id = e.target.getAttribute('data-id');
+        for (var i = 0; i <= months.length - 1; i++) {
+          for (var j = 0; j <= weeks.length - 1; j++) {
+            update_range(user.uid, current_year.toString(), months[i], weeks[j], "Career", id);
+          }
+        } 
+      }
+    });
+
+    //Update range from Personal tab
+    const personal_tab = document.querySelector('#test-swipe-3');
+    personal_tab.addEventListener('click', e => {
+      if(e.target.tagName === 'A'){
+        const id = e.target.getAttribute('data-id');
+        for (var i = 0; i <= months.length - 1; i++) {
+          for (var j = 0; j <= weeks.length - 1; j++) {
+            update_range(user.uid, current_year.toString(), months[i], weeks[j], "Personal", id);
+          }
+        } 
+      }
+    });
+
+    //Update range from Financial tab
+    const financial_tab = document.querySelector('#test-swipe-4');
+    financial_tab.addEventListener('click', e => {
+      if(e.target.tagName === 'A'){
+        const id = e.target.getAttribute('data-id');
+        for (var i = 0; i <= months.length - 1; i++) {
+          for (var j = 0; j <= weeks.length - 1; j++) {
+            update_range(user.uid, current_year.toString(), months[i], weeks[j], "Financial", id);
+          }
+        } 
+      }
+    });
+
+    //Update range from Other tab
+    const other_tab = document.querySelector('#test-swipe-5');
+    other_tab.addEventListener('click', e => {
+      if(e.target.tagName === 'A'){
+        const id = e.target.getAttribute('data-id');
+        for (var i = 0; i <= months.length - 1; i++) {
+          for (var j = 0; j <= weeks.length - 1; j++) {
+            update_range(user.uid, current_year.toString(), months[i], weeks[j], "Other", id);
+          }
+        } 
+      }
+    });
+
+    //Delete the list from Health tab
     const healthContainer = document.querySelector('#test-swipe-1');
     healthContainer.addEventListener('click', e => {
       if (e.target.tagName === 'I') {
         const id = e.target.getAttribute('data-id');
+        console.log(id);
         // Delete goals dynamically
         for (var i = 0; i <= months.length - 1; i++) {
           for (var j = 0; j <= weeks.length - 1; j++) {
@@ -352,6 +440,7 @@ auth.onAuthStateChanged((user) => {
       }
     });
 
+    //Delete the list from Career tab
     const careerContainer = document.querySelector('#test-swipe-2');
     careerContainer.addEventListener('click', e => {
       if (e.target.tagName === 'I') {
@@ -365,6 +454,7 @@ auth.onAuthStateChanged((user) => {
       }
     });
 
+    //Delete the list from Personal tab
     const personalContainer = document.querySelector('#test-swipe-3');
     personalContainer.addEventListener('click', e => {
       if (e.target.tagName === 'I') {
@@ -378,6 +468,7 @@ auth.onAuthStateChanged((user) => {
       }
     });
 
+    //Delete the list from Financial tab
     const financialContainer = document.querySelector('#test-swipe-4');
     financialContainer.addEventListener('click', e => {
       if (e.target.tagName === 'I') {
@@ -391,6 +482,7 @@ auth.onAuthStateChanged((user) => {
       }
     });
 
+    //Delete the list from Other tab
     const otherContainer = document.querySelector('#test-swipe-5');
     otherContainer.addEventListener('click', e => {
       if (e.target.tagName === 'I') {
@@ -403,7 +495,6 @@ auth.onAuthStateChanged((user) => {
         }
       }
     });
-
 
   } else {
     console.log("user has logged out");
