@@ -3,7 +3,14 @@ document.addEventListener('DOMContentLoaded', function () {
   var select = document.querySelectorAll('select');
   M.FormSelect.init(select, {});
 
-  const options = {
+  const options1 = {
+    duration: 300,
+    onShow: null,
+    swipeable: false,
+    responsiveThreshold: Infinity
+  };
+
+  const options2 = {
     duration: 300,
     onShow: null,
     swipeable: true,
@@ -11,10 +18,10 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   const tabsContainer1 = document.querySelector("#tabs-swipe-demo1");
-  M.Tabs.init(tabsContainer1, options);  
+  M.Tabs.init(tabsContainer1, options1);  
 
   const tabsContainer2 = document.querySelector("#tabs-swipe-demo2");
-  M.Tabs.init(tabsContainer2, options);  
+  M.Tabs.init(tabsContainer2, options2);  
 
   var modal = document.querySelectorAll('.modal');
   M.Modal.init(modal);
