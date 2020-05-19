@@ -193,3 +193,150 @@ function deleteRandomQuote(limit) {
   });
 
 }
+
+// This is for selection, tabs, modal element in HTML file (CSS Materialize)
+document.addEventListener('DOMContentLoaded', function () {
+  var select = document.querySelectorAll('select');
+  M.FormSelect.init(select, {});
+
+  const options1 = {
+    duration: 300,
+    onShow: null,
+    swipeable: false,
+    responsiveThreshold: Infinity
+  };
+
+  const options2 = {
+    duration: 300,
+    onShow: null,
+    swipeable: true,
+    responsiveThreshold: Infinity
+  };
+
+  const tabsContainer1 = document.querySelector("#tabs-swipe-demo1");
+  M.Tabs.init(tabsContainer1, options1);  
+
+  const tabsContainer2 = document.querySelector("#tabs-swipe-demo2");
+  M.Tabs.init(tabsContainer2, options2);  
+
+  var modal = document.querySelectorAll('.modal');
+  M.Modal.init(modal);
+});
+
+// Display Years
+var year_id = document.getElementById('select_id_year');
+year_Fragment = document.createDocumentFragment();
+let chosen_year = '';
+
+let years = new Array(3);
+let current_year = new Date().getFullYear();
+
+for (i = 0; i <= 3; i++) {
+  years[i] = current_year + i;
+}
+
+for (var i = 0; i <= years.length - 1; i++) {
+  var option = document.createElement('option');
+  option.value = years[i];
+  option.appendChild(document.createTextNode(years[i]));
+  year_Fragment.appendChild(option);
+}
+year_id.appendChild(year_Fragment);
+
+// Grabs the year value
+year_id.addEventListener('change', function () {
+  chosen_year = this.value;
+});
+
+// Display Months
+var month_id = document.getElementById('select_id_month');
+month_Fragment = document.createDocumentFragment();
+let chosen_month = '';
+
+var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+for (var i = 0; i <= months.length - 1; i++) {
+  var option = document.createElement('option');
+  option.value = months[i];
+  option.appendChild(document.createTextNode(months[i]));
+  month_Fragment.appendChild(option);
+}
+month_id.appendChild(month_Fragment);
+
+// Grabs the Month value
+month_id.addEventListener('change', function () {
+  chosen_month = this.value;
+});
+
+// Display Weeks
+var week_id = document.getElementById('select_id_week');
+week_fragment = document.createDocumentFragment();
+let chosen_week = '';
+
+var weeks = ["Week1", "Week2", "Week3", "Week4"];
+
+for (var i = 0; i <= weeks.length - 1; i++) {
+  var option = document.createElement('option');
+  option.value = weeks[i];
+  option.appendChild(document.createTextNode(weeks[i]));
+  week_fragment.appendChild(option);
+}
+week_id.appendChild(week_fragment);
+
+// Grabs the Week value
+week_id.addEventListener('change', function () {
+  chosen_week = this.value;
+});
+
+// Display Types
+var type_id = document.getElementById('select_id_type');
+type_fragment = document.createDocumentFragment();
+let chosen_type = '';
+
+var types = ["Health", "Career", "Personal", "Financial", "Other"];
+
+for (var i = 0; i <= types.length - 1; i++) {
+  var option = document.createElement('option');
+  option.value = types[i];
+  option.appendChild(document.createTextNode(types[i]));
+  type_fragment.appendChild(option);
+}
+type_id.appendChild(type_fragment);
+
+// Grabs the Type value
+type_id.addEventListener('change', function () {
+  chosen_type = this.value;
+});
+//Get userid
+var userId = document.getElementById("userId");
+// Add todo list data
+const form = document.querySelector('#todo-form');
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  db.collection('users').doc(userId.value)
+    .collection('Goals').doc('Year')
+    .collection(chosen_year).doc('Month')
+    .collection(chosen_month).doc('Week')
+    .collection(chosen_week).doc('Type')
+    .collection(chosen_type).add({
+      todo: form.todo.value,
+      range: 0
+    });
+  form.todo.value = '';
+});
+
+//Confirm messsage
+var Confirmyear =  document.getElementById("select_id_year");
+var Confirmmonth = document.getElementById("select_id_month");
+var Confirmweek = document.getElementById("select_id_week");
+var Confirmtype = document.getElementById("select_id_type");
+var Confirmtodo = document.getElementById("todo");
+
+function goalconfirm() {
+   document.getElementById("goal-confirm").innerHTML=
+   Confirmyear.value + " " +
+   Confirmmonth.value + " " +
+   Confirmweek.value + " " +
+   Confirmtype.value;
+   document.getElementById("goal-confirm-text").innerHTML=Confirmtodo.value;
+} 
