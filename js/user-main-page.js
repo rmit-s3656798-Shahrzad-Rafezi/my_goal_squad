@@ -343,6 +343,27 @@ auth.onAuthStateChanged((user) => {
 
     console.log(user.email, "has logged in");
 
+    const year_tab = document.querySelector('#year-swipe-3');
+    for (var i = 0; i <= months.length - 1; i++) {
+      const html = `
+      <div class="card-panel month row">
+        <p>${months[i]}</p>
+      </div>
+      `;
+      year_tab.innerHTML += html;
+    }
+
+    const month_tab = document.querySelector('#month-swipe-2');
+    for (var i = 0; i <= weeks.length - 1; i++) {
+      const html = `
+      <div class="card-panel week row">
+        <p>${weeks[i]}</p>
+      </div>
+      `;
+      month_tab.innerHTML += html;
+    }
+    
+    //TODO
     // Display Goals Dynamically
     for (var i = 0; i <= months.length - 1; i++) {
       for (var j = 0; j <= weeks.length - 1; j++) {
