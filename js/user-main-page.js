@@ -10,8 +10,11 @@ document.addEventListener('DOMContentLoaded', function () {
     responsiveThreshold: Infinity
   };
 
-  const tabsContainer = document.querySelector(".tabs");
-  M.Tabs.init(tabsContainer, options);  
+  const tabsContainer1 = document.querySelector("#tabs-swipe-demo1");
+  M.Tabs.init(tabsContainer1, options);  
+
+  const tabsContainer2 = document.querySelector("#tabs-swipe-demo2");
+  M.Tabs.init(tabsContainer2, options);  
 
   var modal = document.querySelectorAll('.modal');
   M.Modal.init(modal);
