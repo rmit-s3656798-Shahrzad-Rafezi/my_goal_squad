@@ -368,14 +368,6 @@ auth.onAuthStateChanged((user) => {
       form.todo.value = '';
     });
 
-    // NOTE: 
-    // Will have to do similar to the above code where you'd have to loop through months, weeks and types 
-    // in order to change the range on specific list.
-    //
-    // Create a method called update range that takes userID, year, months, weeks and types and docID. similar to delete-list
-    //
-    // Be able to change the colour based on range
-
     //Update range from Health tab
     const health_tab = document.querySelector('#test-swipe-1');
     health_tab.addEventListener('click', e => {
