@@ -3,25 +3,15 @@ document.addEventListener('DOMContentLoaded', function () {
   var select = document.querySelectorAll('select');
   M.FormSelect.init(select, {});
 
-  const options1 = {
-    duration: 300,
-    onShow: null,
-    swipeable: false,
-    responsiveThreshold: Infinity
-  };
-
-  const options2 = {
+  const options = {
     duration: 300,
     onShow: null,
     swipeable: true,
     responsiveThreshold: Infinity
   };
 
-  const tabsContainer1 = document.querySelector("#tabs-swipe-demo1");
-  M.Tabs.init(tabsContainer1, options1);  
-
-  const tabsContainer2 = document.querySelector("#tabs-swipe-demo2");
-  M.Tabs.init(tabsContainer2, options2);  
+  const tabsContainer = document.querySelector("#tabs-swipe-demo");
+  M.Tabs.init(tabsContainer, options);  
 
   var modal = document.querySelectorAll('.modal');
   M.Modal.init(modal);
@@ -350,35 +340,86 @@ auth.onAuthStateChanged((user) => {
 
     console.log(user.email, "has logged in");
 
-    const year_tab = document.querySelector('#year-swipe-3');
+    const year_modal = document.querySelector('#modal_year');
+    for (var i = 0; i <= years.length - 1; i++) {
+      const html = `
+      <div class="card-panel month row">
+        <button id="year_num" value="${years[i]}">${years[i]}</button>
+      </div>
+      `;
+      year_modal.innerHTML += html;
+    }
+
+    var select_year;
+    //console.log(typeof select_month);
+    const year = document.querySelectorAll('#year_num');
+    for (var i = 0; i < year.length; i++) {
+      year[i].addEventListener("click", function () {
+        select_year = this.value;
+        console.log(select_year);
+        //console.log(typeof select_month);
+      });
+    }
+
+    const month_modal = document.querySelector('#modal_month');
     for (var i = 0; i <= months.length - 1; i++) {
       const html = `
       <div class="card-panel month row">
-        <p>${months[i]}</p>
+        <button id="month_num" value="${months[i]}">${months[i]}</button>
       </div>
       `;
-      year_tab.innerHTML += html;
+      month_modal.innerHTML += html;
     }
 
-    const month_tab = document.querySelector('#month-swipe-2');
+    var select_month;
+    //console.log(typeof select_month);
+    const month = document.querySelectorAll('#month_num');
+    for (var i = 0; i < month.length; i++) {
+      month[i].addEventListener("click", function () {
+        select_month = this.value;
+        console.log(select_month);
+        //console.log(typeof select_month);
+      });
+    }
+
+    const week_modal = document.querySelector('#modal_week');
     for (var i = 0; i <= weeks.length - 1; i++) {
       const html = `
       <div class="card-panel week row">
-        <p>${weeks[i]}</p>
+        <button id="week_num" value="${weeks[i]}">${weeks[i]}</button>
       </div>
       `;
-      month_tab.innerHTML += html;
+      week_modal.innerHTML += html;
     }
     
-    //TODO
-    // Display Goals Dynamically
-    for (var i = 0; i <= months.length - 1; i++) {
-      for (var j = 0; j <= weeks.length - 1; j++) {
-        for (var k = 0; k <= types.length - 1; k++) {
-          display(user.uid, current_year.toString(), months[i], weeks[j], types[k]);
-        }
+    var select_week;  
+    //console.log(typeof select_week);
+    const week = document.querySelectorAll('#week_num');
+    for (var i = 0; i < week.length; i++) {
+      week[i].addEventListener("click", function () {
+        select_week = this.value;
+        console.log(select_week);
+        //console.log(typeof select_week);
+      });
+    }
+
+    if(typeof select_week !== 'undefined' && typeof select_month !== 'undefined' && typeof select_year !== 'undefined'){
+      for (var i = 0; i <= types.length - 1; i++) {
+        //display(user.uid, current_year.toString(), "January", "Week1", types[i]);
+        display(user.uid, select_year, select_month, select_week, types[i]);
       }
     }
+    else{
+    }
+    
+    // Display Goals Dynamically
+    // for (var i = 0; i <= months.length - 1; i++) {
+    //   for (var j = 0; j <= weeks.length - 1; j++) {
+    //     for (var k = 0; k <= types.length - 1; k++) {
+    //       display(user.uid, current_year.toString(), months[i], weeks[j], types[k]);
+    //     }
+    //   }
+    // }
 
     // Add todo list data
     const form = document.querySelector('#todo-form');
