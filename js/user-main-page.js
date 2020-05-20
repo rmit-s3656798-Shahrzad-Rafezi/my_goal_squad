@@ -3,7 +3,7 @@ var select_year = null;
 var select_month = null;
 var select_week = null;
 
-function test() {
+function search_task() {
   var user = firebase.auth().currentUser;
   if (select_week == null) {
 
@@ -445,11 +445,10 @@ const removeList = (id) => {
 
 // Checks to see if that user has logged in
 auth.onAuthStateChanged((user) => {
-
   if (user) {
-
     console.log(user.email, "has logged in");
 
+    //Display years in modal
     const year_modal = document.querySelector('#modal_year');
     for (var i = 0; i <= years.length - 1; i++) {
       const html = `
@@ -460,6 +459,7 @@ auth.onAuthStateChanged((user) => {
       year_modal.innerHTML += html;
     }
 
+    // select year from the modal
     const year = document.querySelectorAll('#year_num');
     for (var i = 0; i < year.length; i++) {
       year[i].addEventListener("click", function () {
@@ -468,6 +468,7 @@ auth.onAuthStateChanged((user) => {
       });
     }
 
+    //Display months in modal
     const month_modal = document.querySelector('#modal_month');
     for (var i = 0; i <= months.length - 1; i++) {
       const html = `
@@ -478,6 +479,7 @@ auth.onAuthStateChanged((user) => {
       month_modal.innerHTML += html;
     }
 
+    // select month from the modal
     const month = document.querySelectorAll('#month_num');
     for (var i = 0; i < month.length; i++) {
       month[i].addEventListener("click", function () {
@@ -486,6 +488,7 @@ auth.onAuthStateChanged((user) => {
       });
     }
 
+    //Display weeks in modal
     const week_modal = document.querySelector('#modal_week');
     for (var i = 0; i <= weeks.length - 1; i++) {
       const html = `
@@ -496,13 +499,14 @@ auth.onAuthStateChanged((user) => {
       week_modal.innerHTML += html;
     }
 
+    // select week from the modal
     const week = document.querySelectorAll('#week_num');
     for (var i = 0; i < week.length; i++) {
       week[i].addEventListener("click", function () {
         select_week = this.value;
         console.log(select_week);
-
-        test();
+        search_task();
+        //test();
         const modal = document.querySelector("#modal_week");
         M.Modal.getInstance(modal).close();
       });
