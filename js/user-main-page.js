@@ -1,99 +1,107 @@
-// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Global variables
-var yearx = null;
-console.log(yearx + 'testsesdfsdf')
-var monthx = null;
-var weekx = null;
-// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+var select_year = null;
+var select_month = null;
+var select_week = null;
 
 function test() {
   var user = firebase.auth().currentUser;
+  if (select_week == null) {
 
-  if (weekx == null) {
     const health_tab = document.querySelector('#test-swipe-1');
-    health_tab.innerHTML = ""
+    health_tab.innerHTML = "";
+
+    const career_tab = document.querySelector('#test-swipe-2');
+    career_tab.innerHTML = "";
+
+    const personal_tab = document.querySelector('#test-swipe-3');
+    personal_tab.innerHTML = "";
+
+    const financial_tab = document.querySelector('#test-swipe-4');
+    financial_tab.innerHTML = "";
+
+    const other_tab = document.querySelector('#test-swipe-5');
+    other_tab.innerHTML = "";
+
     console.log('test1')
-    weekx = 'Week1';
-    if (monthx == null) {
+    select_week = 'Week1';
+    if (select_month == null) {
       console.log('test2')
-      monthx = 'January';
-      if (yearx == null) {
+      select_month = 'January';
+      if (select_year == null) {
         console.log('test3')
-        // get current year funciton
-        yearx = '2020'
+        select_year = current_year.toString();
         console.log('test4')
         for (var i = 0; i <= types.length - 1; i++) {
-          //display(user.uid, current_year.toString(), "January", "Week1", types[i]);
-          display(user.uid, yearx, monthx, weekx, types[i]);
+          display(user.uid, select_year, select_month, select_week, types[i]);
         }
       } else {
         console.log('test5')
         for (var i = 0; i <= types.length - 1; i++) {
-          //display(user.uid, current_year.toString(), "January", "Week1", types[i]);
-          display(user.uid, yearx, monthx, weekx, types[i]);
+          display(user.uid, select_year, select_month, select_week, types[i]);
         }
       }
     } else {
-      if (yearx == null) {
-        console.log('test6')
-        // get current year funciton
-        yearx = '2020'
-        console.log('test7')
+      if (select_year == null) {
+        console.log('test6');
+        select_year = current_year.toString();
+        console.log('test7');
         for (var i = 0; i <= types.length - 1; i++) {
-          //display(user.uid, current_year.toString(), "January", "Week1", types[i]);
-          display(user.uid, yearx, monthx, weekx, types[i]);
+          display(user.uid, select_year, select_month, select_week, types[i]);
         }
       } else {
-        console.log('test8')
+        console.log('test8');
         for (var i = 0; i <= types.length - 1; i++) {
-
-          //display(user.uid, current_year.toString(), "January", "Week1", types[i]);
-          display(user.uid, yearx, monthx, weekx, types[i]);
+          display(user.uid, select_year, select_month, select_week, types[i]);
         }
       }
     }
   } else {
     const health_tab = document.querySelector('#test-swipe-1');
-    health_tab.innerHTML = ""
-    if (monthx == null) {
+    health_tab.innerHTML = "";
+
+    const career_tab = document.querySelector('#test-swipe-2');
+    career_tab.innerHTML = "";
+
+    const personal_tab = document.querySelector('#test-swipe-3');
+    personal_tab.innerHTML = "";
+
+    const financial_tab = document.querySelector('#test-swipe-4');
+    financial_tab.innerHTML = "";
+
+    const other_tab = document.querySelector('#test-swipe-5');
+    other_tab.innerHTML = "";
+
+    if (select_month == null) {
       console.log('test9')
-      monthx = 'January';
-      if (yearx == null) {
+      select_month = 'January';
+      if (select_year == null) {
         console.log('test10')
-        // get current year funciton
-        yearx = '2020'
+        select_year = current_year.toString();
         for (var i = 0; i <= types.length - 1; i++) {
-          //display(user.uid, current_year.toString(), "January", "Week1", types[i]);
-          display(user.uid, yearx, monthx, weekx, types[i]);
+          display(user.uid, select_year, select_month, select_week, types[i]);
         }
       } else {
         console.log('test11')
         for (var i = 0; i <= types.length - 1; i++) {
-          //display(user.uid, current_year.toString(), "January", "Week1", types[i]);
-          display(user.uid, yearx, monthx, weekx, types[i]);
+          display(user.uid, select_year, select_month, select_week, types[i]);
         }
       }
     } else {
-      if (yearx == null) {
+      if (select_year == null) {
         console.log('test12')
-        // get current year funciton
-        yearx = '2020'
+        select_year = current_year.toString();
         for (var i = 0; i <= types.length - 1; i++) {
-          //display(user.uid, current_year.toString(), "January", "Week1", types[i]);
-          display(user.uid, yearx, monthx, weekx, types[i]);
+          display(user.uid, select_year, select_month, select_week, types[i]);
         }
       } else {
         console.log('test13')
         for (var i = 0; i <= types.length - 1; i++) {
-          //display(user.uid, current_year.toString(), "January", "Week1", types[i]);
-          display(user.uid, yearx, monthx, weekx, types[i]);
+          display(user.uid, select_year, select_month, select_week, types[i]);
         }
       }
     }
   }
 }
-
-// +++++++++++++++++++++++++++++++++++++++++++++++++
 
 // This is for selection, tabs, modal element in HTML file (CSS Materialize)
 document.addEventListener('DOMContentLoaded', function () {
@@ -452,16 +460,11 @@ auth.onAuthStateChanged((user) => {
       year_modal.innerHTML += html;
     }
 
-    var select_year;
-    //console.log(typeof select_month);
     const year = document.querySelectorAll('#year_num');
     for (var i = 0; i < year.length; i++) {
       year[i].addEventListener("click", function () {
         select_year = this.value;
-        // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        yearx = this.value;
         console.log(select_year);
-        //console.log(typeof select_month);
       });
     }
 
@@ -475,16 +478,11 @@ auth.onAuthStateChanged((user) => {
       month_modal.innerHTML += html;
     }
 
-    var select_month;
-    //console.log(typeof select_month);
     const month = document.querySelectorAll('#month_num');
     for (var i = 0; i < month.length; i++) {
       month[i].addEventListener("click", function () {
         select_month = this.value;
-        // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        monthx = this.value;
         console.log(select_month);
-        //console.log(typeof select_month);
       });
     }
 
@@ -498,32 +496,17 @@ auth.onAuthStateChanged((user) => {
       week_modal.innerHTML += html;
     }
 
-    var select_week;
-    //console.log(typeof select_week);
     const week = document.querySelectorAll('#week_num');
     for (var i = 0; i < week.length; i++) {
       week[i].addEventListener("click", function () {
         select_week = this.value;
-        // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        weekx = this.value;
         console.log(select_week);
-        // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++      
-        test()
+
+        test();
         const modal = document.querySelector("#modal_week");
         M.Modal.getInstance(modal).close();
-        // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        //console.log(typeof select_week);
       });
     }
-
-    // if (typeof select_week == null && typeof select_month == null && typeof select_year == null) {
-    //   for (var i = 0; i <= types.length - 1; i++) {
-    //     //display(user.uid, current_year.toString(), "January", "Week1", types[i]);
-    //     display(user.uid, select_year, select_month, select_week, types[i]);
-    //   }
-    // }
-    // else {
-    // }
 
     // Display Goals Dynamically
     // for (var i = 0; i <= months.length - 1; i++) {
@@ -550,70 +533,120 @@ auth.onAuthStateChanged((user) => {
       form.todo.value = '';
     });
 
-    //Update range from Health tab
+    // Update range from Health tab
     const health_tab = document.querySelector('#test-swipe-1');
     health_tab.addEventListener('click', e => {
       if (e.target.tagName === 'A') {
         const id = e.target.getAttribute('data-id');
-        for (var i = 0; i <= months.length - 1; i++) {
-          for (var j = 0; j <= weeks.length - 1; j++) {
-            update_range(user.uid, current_year.toString(), months[i], weeks[j], "Health", id);
-          }
-        }
+        console.log("UPDATE RANGE: "+ select_year+ select_month+ select_week+ id);
+        update_range(user.uid, select_year, select_month, select_week, "Health", id);
       }
     });
+
+    //Update range from Health tab
+    // const health_tab = document.querySelector('#test-swipe-1');
+    // health_tab.addEventListener('click', e => {
+    //   if (e.target.tagName === 'A') {
+    //     const id = e.target.getAttribute('data-id');
+    //     for (var i = 0; i <= months.length - 1; i++) {
+    //       for (var j = 0; j <= weeks.length - 1; j++) {
+    //         update_range(user.uid, current_year.toString(), months[i], weeks[j], "Health", id);
+    //       }
+    //     }
+    //   }
+    // });
 
     //Update range from Career tab
     const career_tab = document.querySelector('#test-swipe-2');
     career_tab.addEventListener('click', e => {
       if (e.target.tagName === 'A') {
         const id = e.target.getAttribute('data-id');
-        for (var i = 0; i <= months.length - 1; i++) {
-          for (var j = 0; j <= weeks.length - 1; j++) {
-            update_range(user.uid, current_year.toString(), months[i], weeks[j], "Career", id);
-          }
-        }
+        console.log("UPDATE RANGE: "+ select_year+ select_month+ select_week+ id);
+        update_range(user.uid, select_year, select_month, select_week, "Career", id);
       }
     });
+
+    //Update range from Career tab
+    // const career_tab = document.querySelector('#test-swipe-2');
+    // career_tab.addEventListener('click', e => {
+    //   if (e.target.tagName === 'A') {
+    //     const id = e.target.getAttribute('data-id');
+    //     for (var i = 0; i <= months.length - 1; i++) {
+    //       for (var j = 0; j <= weeks.length - 1; j++) {
+    //         update_range(user.uid, current_year.toString(), months[i], weeks[j], "Career", id);
+    //       }
+    //     }
+    //   }
+    // });
 
     //Update range from Personal tab
     const personal_tab = document.querySelector('#test-swipe-3');
     personal_tab.addEventListener('click', e => {
       if (e.target.tagName === 'A') {
         const id = e.target.getAttribute('data-id');
-        for (var i = 0; i <= months.length - 1; i++) {
-          for (var j = 0; j <= weeks.length - 1; j++) {
-            update_range(user.uid, current_year.toString(), months[i], weeks[j], "Personal", id);
-          }
-        }
+        console.log("UPDATE RANGE: "+ select_year+ select_month+ select_week+ id);
+        update_range(user.uid, select_year, select_month, select_week, "Personal", id);
       }
     });
+
+    //Update range from Personal tab
+    // const personal_tab = document.querySelector('#test-swipe-3');
+    // personal_tab.addEventListener('click', e => {
+    //   if (e.target.tagName === 'A') {
+    //     const id = e.target.getAttribute('data-id');
+    //     for (var i = 0; i <= months.length - 1; i++) {
+    //       for (var j = 0; j <= weeks.length - 1; j++) {
+    //         update_range(user.uid, current_year.toString(), months[i], weeks[j], "Personal", id);
+    //       }
+    //     }
+    //   }
+    // });
 
     //Update range from Financial tab
     const financial_tab = document.querySelector('#test-swipe-4');
     financial_tab.addEventListener('click', e => {
       if (e.target.tagName === 'A') {
         const id = e.target.getAttribute('data-id');
-        for (var i = 0; i <= months.length - 1; i++) {
-          for (var j = 0; j <= weeks.length - 1; j++) {
-            update_range(user.uid, current_year.toString(), months[i], weeks[j], "Financial", id);
-          }
-        }
+        console.log("UPDATE RANGE: "+ select_year+ select_month+ select_week+ id);
+        update_range(user.uid, select_year, select_month, select_week, "Financial", id);
       }
     });
+
+    // //Update range from Financial tab
+    // const financial_tab = document.querySelector('#test-swipe-4');
+    // financial_tab.addEventListener('click', e => {
+    //   if (e.target.tagName === 'A') {
+    //     const id = e.target.getAttribute('data-id');
+    //     for (var i = 0; i <= months.length - 1; i++) {
+    //       for (var j = 0; j <= weeks.length - 1; j++) {
+    //         update_range(user.uid, current_year.toString(), months[i], weeks[j], "Financial", id);
+    //       }
+    //     }
+    //   }
+    // });
 
     //Update range from Other tab
     const other_tab = document.querySelector('#test-swipe-5');
     other_tab.addEventListener('click', e => {
       if (e.target.tagName === 'A') {
         const id = e.target.getAttribute('data-id');
-        for (var i = 0; i <= months.length - 1; i++) {
-          for (var j = 0; j <= weeks.length - 1; j++) {
-            update_range(user.uid, current_year.toString(), months[i], weeks[j], "Other", id);
-          }
-        }
+        console.log("UPDATE RANGE: "+ select_year+ select_month+ select_week+ id);
+        update_range(user.uid, select_year, select_month, select_week, "Other", id);
       }
     });
+
+    //Update range from Other tab
+    // const other_tab = document.querySelector('#test-swipe-5');
+    // other_tab.addEventListener('click', e => {
+    //   if (e.target.tagName === 'A') {
+    //     const id = e.target.getAttribute('data-id');
+    //     for (var i = 0; i <= months.length - 1; i++) {
+    //       for (var j = 0; j <= weeks.length - 1; j++) {
+    //         update_range(user.uid, current_year.toString(), months[i], weeks[j], "Other", id);
+    //       }
+    //     }
+    //   }
+    // });
 
     //Delete the list from Health tab
     const healthContainer = document.querySelector('#test-swipe-1');
