@@ -538,7 +538,7 @@ auth.onAuthStateChanged((user) => {
     health_tab.addEventListener('click', e => {
       if (e.target.tagName === 'A') {
         const id = e.target.getAttribute('data-id');
-        console.log("UPDATE RANGE: "+ select_year+ select_month+ select_week+ id);
+        console.log("UPDATE RANGE: " + select_year + select_month + select_week + id);
         update_range(user.uid, select_year, select_month, select_week, "Health", id);
       }
     });
@@ -561,7 +561,7 @@ auth.onAuthStateChanged((user) => {
     career_tab.addEventListener('click', e => {
       if (e.target.tagName === 'A') {
         const id = e.target.getAttribute('data-id');
-        console.log("UPDATE RANGE: "+ select_year+ select_month+ select_week+ id);
+        console.log("UPDATE RANGE: " + select_year + select_month + select_week + id);
         update_range(user.uid, select_year, select_month, select_week, "Career", id);
       }
     });
@@ -584,7 +584,7 @@ auth.onAuthStateChanged((user) => {
     personal_tab.addEventListener('click', e => {
       if (e.target.tagName === 'A') {
         const id = e.target.getAttribute('data-id');
-        console.log("UPDATE RANGE: "+ select_year+ select_month+ select_week+ id);
+        console.log("UPDATE RANGE: " + select_year + select_month + select_week + id);
         update_range(user.uid, select_year, select_month, select_week, "Personal", id);
       }
     });
@@ -607,7 +607,7 @@ auth.onAuthStateChanged((user) => {
     financial_tab.addEventListener('click', e => {
       if (e.target.tagName === 'A') {
         const id = e.target.getAttribute('data-id');
-        console.log("UPDATE RANGE: "+ select_year+ select_month+ select_week+ id);
+        console.log("UPDATE RANGE: " + select_year + select_month + select_week + id);
         update_range(user.uid, select_year, select_month, select_week, "Financial", id);
       }
     });
@@ -630,7 +630,7 @@ auth.onAuthStateChanged((user) => {
     other_tab.addEventListener('click', e => {
       if (e.target.tagName === 'A') {
         const id = e.target.getAttribute('data-id');
-        console.log("UPDATE RANGE: "+ select_year+ select_month+ select_week+ id);
+        console.log("UPDATE RANGE: " + select_year + select_month + select_week + id);
         update_range(user.uid, select_year, select_month, select_week, "Other", id);
       }
     });
@@ -654,14 +654,24 @@ auth.onAuthStateChanged((user) => {
       if (e.target.tagName === 'I') {
         const id = e.target.getAttribute('data-id');
         console.log(id);
-        // Delete goals dynamically
-        for (var i = 0; i <= months.length - 1; i++) {
-          for (var j = 0; j <= weeks.length - 1; j++) {
-            delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], "Health", id);
-          }
-        }
+        delete_todo_list(user.uid, select_year, select_month, select_week, "Health", id);
       }
     });
+
+    // //Delete the list from Health tab
+    // const healthContainer = document.querySelector('#test-swipe-1');
+    // healthContainer.addEventListener('click', e => {
+    //   if (e.target.tagName === 'I') {
+    //     const id = e.target.getAttribute('data-id');
+    //     console.log(id);
+    //     // Delete goals dynamically
+    //     for (var i = 0; i <= months.length - 1; i++) {
+    //       for (var j = 0; j <= weeks.length - 1; j++) {
+    //         delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], "Health", id);
+    //       }
+    //     }
+    //   }
+    // });
 
     //Delete the list from Career tab
     const careerContainer = document.querySelector('#test-swipe-2');
@@ -669,13 +679,23 @@ auth.onAuthStateChanged((user) => {
       if (e.target.tagName === 'I') {
         const id = e.target.getAttribute('data-id');
         // Delete goals dynamically
-        for (var i = 0; i <= months.length - 1; i++) {
-          for (var j = 0; j <= weeks.length - 1; j++) {
-            delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], "Career", id);
-          }
-        }
+        delete_todo_list(user.uid, select_year, select_month, select_week, "Career", id);
       }
     });
+
+    //Delete the list from Career tab
+    // const careerContainer = document.querySelector('#test-swipe-2');
+    // careerContainer.addEventListener('click', e => {
+    //   if (e.target.tagName === 'I') {
+    //     const id = e.target.getAttribute('data-id');
+    //     // Delete goals dynamically
+    //     for (var i = 0; i <= months.length - 1; i++) {
+    //       for (var j = 0; j <= weeks.length - 1; j++) {
+    //         delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], "Career", id);
+    //       }
+    //     }
+    //   }
+    // });
 
     //Delete the list from Personal tab
     const personalContainer = document.querySelector('#test-swipe-3');
@@ -683,13 +703,23 @@ auth.onAuthStateChanged((user) => {
       if (e.target.tagName === 'I') {
         const id = e.target.getAttribute('data-id');
         // Delete goals dynamically
-        for (var i = 0; i <= months.length - 1; i++) {
-          for (var j = 0; j <= weeks.length - 1; j++) {
-            delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], "Personal", id);
-          }
-        }
+        delete_todo_list(user.uid, select_year, select_month, select_week, "Personal", id);
       }
     });
+
+    // //Delete the list from Personal tab
+    // const personalContainer = document.querySelector('#test-swipe-3');
+    // personalContainer.addEventListener('click', e => {
+    //   if (e.target.tagName === 'I') {
+    //     const id = e.target.getAttribute('data-id');
+    //     // Delete goals dynamically
+    //     for (var i = 0; i <= months.length - 1; i++) {
+    //       for (var j = 0; j <= weeks.length - 1; j++) {
+    //         delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], "Personal", id);
+    //       }
+    //     }
+    //   }
+    // });
 
     //Delete the list from Financial tab
     const financialContainer = document.querySelector('#test-swipe-4');
@@ -697,13 +727,23 @@ auth.onAuthStateChanged((user) => {
       if (e.target.tagName === 'I') {
         const id = e.target.getAttribute('data-id');
         // Delete goals dynamically
-        for (var i = 0; i <= months.length - 1; i++) {
-          for (var j = 0; j <= weeks.length - 1; j++) {
-            delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], "Financial", id);
-          }
-        }
+        delete_todo_list(user.uid, select_year, select_month, select_week, "Financial", id);
       }
     });
+
+    // //Delete the list from Financial tab
+    // const financialContainer = document.querySelector('#test-swipe-4');
+    // financialContainer.addEventListener('click', e => {
+    //   if (e.target.tagName === 'I') {
+    //     const id = e.target.getAttribute('data-id');
+    //     // Delete goals dynamically
+    //     for (var i = 0; i <= months.length - 1; i++) {
+    //       for (var j = 0; j <= weeks.length - 1; j++) {
+    //         delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], "Financial", id);
+    //       }
+    //     }
+    //   }
+    // });
 
     //Delete the list from Other tab
     const otherContainer = document.querySelector('#test-swipe-5');
@@ -711,13 +751,24 @@ auth.onAuthStateChanged((user) => {
       if (e.target.tagName === 'I') {
         const id = e.target.getAttribute('data-id');
         // Delete goals dynamically
-        for (var i = 0; i <= months.length - 1; i++) {
-          for (var j = 0; j <= weeks.length - 1; j++) {
-            delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], "Other", id);
-          }
-        }
+        delete_todo_list(user.uid, select_year, select_month, select_week, "Other", id);
+
       }
     });
+
+    // //Delete the list from Other tab
+    // const otherContainer = document.querySelector('#test-swipe-5');
+    // otherContainer.addEventListener('click', e => {
+    //   if (e.target.tagName === 'I') {
+    //     const id = e.target.getAttribute('data-id');
+    //     // Delete goals dynamically
+    //     for (var i = 0; i <= months.length - 1; i++) {
+    //       for (var j = 0; j <= weeks.length - 1; j++) {
+    //         delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], "Other", id);
+    //       }
+    //     }
+    //   }
+    // });
 
   } else {
     console.log("user has logged out");
