@@ -437,6 +437,12 @@ const renderOther = (data, id) => {
   other_tab.innerHTML += html;
 };
 
+const submit_range = document.querySelector('#submit_range');
+submit_range.addEventListener("click", function () {
+  const modal = document.querySelector("#modal1");
+  M.Modal.getInstance(modal).close();
+});
+
 // Remove list from DOM
 const removeList = (id) => {
   const todo = document.querySelector(`.todo[data-id=${id}]`);
