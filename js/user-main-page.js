@@ -365,15 +365,15 @@ db.enablePersistence().catch(function (err) {
 const health_tab = document.querySelector('#test-swipe-1');
 const renderHealth = (data, id) => {
   const html = `
-  <div class="card-panel todo row" data-id="${id}">
-      <div class="todo-details">
-        <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
-        <p class="update_range" data-id="${id}">${data.range}</p>        
-      </div>
-      <div class="todo-delete">
-        <i class="material-icons" data-id="${id}">delete_outline</i>
-      </div>
-  </div>
+    <div id="change_colour" class="card-panel todo row" data-id="${id}">
+        <div class="todo-details">
+          <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
+          <p class="update_range" data-id="${id}">${data.range}</p>        
+        </div>
+        <div class="todo-delete">
+          <i class="material-icons" data-id="${id}">delete_outline</i>
+        </div>
+    </div>
   `;
   health_tab.innerHTML += html;
 };
@@ -452,17 +452,42 @@ modal.addEventListener('submit', (e) => {
   e.preventDefault();
   var user = auth.currentUser;
 
-  // console.log('==========TEST===========')
-  // console.log('DocID: ' + test_range)
-  // console.log('Range:' + submit_range.range.value)
-  // console.log('UserID: ' + user.uid)
-  // console.log('Select Year: ' + select_year)
-  // console.log('Select Month: ' + select_month)
-  // console.log('Select Week: ' + select_week)
-  // console.log('Select Type: ' + select_type)
-  // console.log('========================')
+  update_range(user.uid, select_year, select_month, select_week, select_type, get_id, submit_range.range.value);
 
-  update_range(user.uid, select_year, select_month, select_week, select_type, get_id, submit_range.range.value)
+  var change_colours = ["showRed", "showOrange", "showYellow", "showGreen"];
+
+  if (submit_range.range.value < 25) {
+
+    //Show red
+    for (var i = 0; i <= change_colours.length; i++) {
+      $('#change_colour').removeClass(change_colours[i]);
+      $('#change_colour').addClass("showRed");
+    }
+  }
+
+  if (submit_range.range.value > 25) {
+    //show orange
+    for (var i = 0; i <= change_colours.length; i++) {
+      $('#change_colour').removeClass(change_colours[i]);
+      $('#change_colour').addClass("showOrange");
+    }
+  }
+
+  if (submit_range.range.value > 50) {
+    for (var i = 0; i <= change_colours.length; i++) {
+      $('#change_colour').removeClass(change_colours[i]);
+      $('#change_colour').addClass("showYellow");
+    }
+  }
+
+  if (submit_range.range.value > 70) {
+    //show green
+    for (var i = 0; i <= change_colours.length; i++) {
+      $('#change_colour').removeClass(change_colours[i]);
+      $('#change_colour').addClass("showGreen");
+    }
+  }
+
   M.Modal.getInstance(modal).close();
 });
 

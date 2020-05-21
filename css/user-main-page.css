@@ -60,4 +60,16 @@ h5 {
   right: 0px;
 }
 
-/* slider styles */
+/* Range Colour */
+.showRed{
+  background-color: firebrick;
+}
+.showOrange{
+  background: orange;
+}
+.showYellow{
+  background: yellow;
+}
+.showGreen{
+  background: green;
+}
