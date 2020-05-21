@@ -305,7 +305,7 @@ type_id.addEventListener('change', function () {
 const form = document.querySelector('#todo-form');
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  db.collection('users').doc(chosen_user.data-value)
+  db.collection('users').doc(chosen_user.value)
     .collection('Goals').doc('Year')
     .collection(chosen_year).doc('Month')
     .collection(chosen_month).doc('Week')
