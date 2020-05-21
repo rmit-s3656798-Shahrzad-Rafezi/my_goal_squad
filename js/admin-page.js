@@ -345,12 +345,10 @@ function goalconfirm() {
 
 // [START get_multiple_all]
 
-
+var userId1 = [];
 db.collection("users").get().then(function (querySnapshot) {
-  var userId1 = [];
   let x = 0;
   querySnapshot.forEach(doc => {
-
     var user_id = document.getElementById('select_id_user');
     user_Fragment = document.createDocumentFragment();
     let chosen_user = '';
@@ -362,12 +360,11 @@ db.collection("users").get().then(function (querySnapshot) {
       user_Fragment.appendChild(option);
     }
     user_id.appendChild(user_Fragment);
-
     // Grabs the user value
     user_id.addEventListener('change', function () {
       chosen_user = this.value;
     });
-
-     console.log(doc.id, " => ", doc.data().displayName);
+    console.log(userId1);
+    console.log(doc.id, " => ", doc.data().displayName);
   });
 });
