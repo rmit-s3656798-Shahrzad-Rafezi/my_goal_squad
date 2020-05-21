@@ -214,10 +214,10 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   const tabsContainer1 = document.querySelector("#tabs-swipe-demo1");
-  M.Tabs.init(tabsContainer1, options1);  
+  M.Tabs.init(tabsContainer1, options1);
 
   const tabsContainer2 = document.querySelector("#tabs-swipe-demo2");
-  M.Tabs.init(tabsContainer2, options2);  
+  M.Tabs.init(tabsContainer2, options2);
 
   var modal = document.querySelectorAll('.modal');
   M.Modal.init(modal);
@@ -268,6 +268,7 @@ month_id.addEventListener('change', function () {
   chosen_month = this.value;
 });
 
+
 // Display Weeks
 var week_id = document.getElementById('select_id_week');
 week_fragment = document.createDocumentFragment();
@@ -303,18 +304,18 @@ for (var i = 0; i <= types.length - 1; i++) {
 }
 type_id.appendChild(type_fragment);
 
+
 // Grabs the Type value
 type_id.addEventListener('change', function () {
   chosen_type = this.value;
 });
 
-//Get userid
-var userId = document.getElementById("userId");
+
 // Add todo list data
 const form = document.querySelector('#todo-form');
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  db.collection('users').doc(userId.value)
+  db.collection('users').doc(chosen_user)
     .collection('Goals').doc('Year')
     .collection(chosen_year).doc('Month')
     .collection(chosen_month).doc('Week')
@@ -327,29 +328,46 @@ form.addEventListener('submit', (e) => {
 });
 
 //Confirm messsage
-var Confirmyear =  document.getElementById("select_id_year");
+var Confirmyear = document.getElementById("select_id_year");
 var Confirmmonth = document.getElementById("select_id_month");
 var Confirmweek = document.getElementById("select_id_week");
 var Confirmtype = document.getElementById("select_id_type");
 var Confirmtodo = document.getElementById("todo");
 
 function goalconfirm() {
-   document.getElementById("goal-confirm").innerHTML=
-   Confirmyear.value + " " +
-   Confirmmonth.value + " " +
-   Confirmweek.value + " " +
-   Confirmtype.value;
-   document.getElementById("goal-confirm-text").innerHTML=Confirmtodo.value;
-} 
+  document.getElementById("goal-confirm").innerHTML =
+    Confirmyear.value + " " +
+    Confirmmonth.value + " " +
+    Confirmweek.value + " " +
+    Confirmtype.value;
+  document.getElementById("goal-confirm-text").innerHTML = Confirmtodo.value;
+}
 
 // [START get_multiple_all]
+
+
 db.collection("users").get().then(function (querySnapshot) {
-  querySnapshot.forEach(function (doc) {
-    console.log(doc.id, " => ", doc.data());
-      //////////////////////////////////////////////////
-    const selectuser = document.querySelector('#select_id_user');
-      const html = `<option id="${doc.id}">${doc.id}</option>`;
-      //////////////////////////////////////////////////
-      selectuser.innerHTML += html;
+  var userId1 = [];
+  let x = 0;
+  querySnapshot.forEach(doc => {
+
+    var user_id = document.getElementById('select_id_user');
+    user_Fragment = document.createDocumentFragment();
+    let chosen_user = '';
+    userId1[x] = doc.id;
+    for (var i = 0; i <= userId1.length - 1; i++) {
+      var option = document.createElement('option');
+      option.value = userId1[i];
+      option.appendChild(document.createTextNode(doc.data().displayName));
+      user_Fragment.appendChild(option);
+    }
+    user_id.appendChild(user_Fragment);
+
+    // Grabs the user value
+    user_id.addEventListener('change', function () {
+      chosen_user = this.value;
+    });
+
+     console.log(doc.id, " => ", doc.data().displayName);
   });
 });
