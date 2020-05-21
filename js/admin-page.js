@@ -307,6 +307,7 @@ type_id.appendChild(type_fragment);
 type_id.addEventListener('change', function () {
   chosen_type = this.value;
 });
+
 //Get userid
 var userId = document.getElementById("userId");
 // Add todo list data
@@ -340,3 +341,15 @@ function goalconfirm() {
    Confirmtype.value;
    document.getElementById("goal-confirm-text").innerHTML=Confirmtodo.value;
 } 
+
+// [START get_multiple_all]
+db.collection("users").get().then(function (querySnapshot) {
+  querySnapshot.forEach(function (doc) {
+    console.log(doc.id, " => ", doc.data());
+      //////////////////////////////////////////////////
+    const selectuser = document.querySelector('#select_id_user');
+      const html = `<option id="${doc.id}">${doc.id}</option>`;
+      //////////////////////////////////////////////////
+      selectuser.innerHTML += html;
+  });
+});
