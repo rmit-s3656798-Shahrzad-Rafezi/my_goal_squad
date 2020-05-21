@@ -2,6 +2,10 @@
 var select_year = null;
 var select_month = null;
 var select_week = null;
+// +++++++++++++++++++++++++++++
+var select_type = null;
+var test_range = null;
+// +++++++++++++++++++++++++++++
 
 function search_task() {
   var user = firebase.auth().currentUser;
@@ -224,7 +228,7 @@ function display(userID, year, month, week, type) {
             //console.log('HELLO' + change)
           }
           //////////////////////////////////////////////////
-          else if(change.type === 'modified'){
+          else if (change.type === 'modified') {
             renderRange(change.doc.data(), change.doc.id);
           }
           //////////////////////////////////////////////////
@@ -322,34 +326,47 @@ function delete_todo_list(userID, year, month, week, type, docID) {
     .collection(type).doc(docID).delete();
 }
 
-// Update Range
-function update_range(userID, year, month, week, type, docID) {
-  const range_form = document.querySelector('#range-form');
-  range_form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    db.collection('users').doc(userID)
-      .collection('Goals').doc('Year')
-      .collection(year).doc('Month')
-      .collection(month).doc('Week')
-      .collection(week).doc('Type')
-      .collection(type).doc(docID).update({
-        range: range_form.range.value
-      });
-    //TODO: Need to think of a way to keep the colors when range changes
-    // if (range_form.range.value < 35) {
-    //   $(".todo").css("background", "red");
-    // }
-    // else if (range_form.range.value > 25) {
-    //   $(".todo").css("background", "orange");
-    // }
-    // else if (range_form.range.value > 50) {
-    //   $(".todo").css("background", "yellow");
-    // }
-    // else if (range_form.range.value > 70) {
-    //   $(".todo").css("background", "Green");
-    // }
-  });
+// +++++++++++++++++++++++++++++
+function update_range(userID, year, month, week, type, docID, range) {
+  db.collection('users').doc(userID)
+    .collection('Goals').doc('Year')
+    .collection(year).doc('Month')
+    .collection(month).doc('Week')
+    .collection(week).doc('Type')
+    .collection(type).doc(docID).update({
+      range: range
+    });
 }
+// +++++++++++++++++++++++++++++
+
+// // Update Range
+// function update_range(userID, year, month, week, type, docID) {
+//   const range_form = document.querySelector('#range-form');
+//   range_form.addEventListener('submit', (e) => {
+//     e.preventDefault();
+//     db.collection('users').doc(userID)
+//       .collection('Goals').doc('Year')
+//       .collection(year).doc('Month')
+//       .collection(month).doc('Week')
+//       .collection(week).doc('Type')
+//       .collection(type).doc(docID).update({
+//         range: range_form.range.value
+//       });
+//     //TODO: Need to think of a way to keep the colors when range changes
+//     // if (range_form.range.value < 35) {
+//     //   $(".todo").css("background", "red");
+//     // }
+//     // else if (range_form.range.value > 25) {
+//     //   $(".todo").css("background", "orange");
+//     // }
+//     // else if (range_form.range.value > 50) {
+//     //   $(".todo").css("background", "yellow");
+//     // }
+//     // else if (range_form.range.value > 70) {
+//     //   $(".todo").css("background", "Green");
+//     // }
+//   });
+// }
 
 // Enable offline data
 db.enablePersistence().catch(function (err) {
@@ -447,11 +464,33 @@ const renderRange = (data, id) => {
 };
 //////////////////////////////////////////////////
 
-const submit_range = document.querySelector('#submit_range');
-submit_range.addEventListener("click", function () {
-  const modal = document.querySelector("#modal1");
+// const submit_range = document.querySelector('#submit_range');
+// submit_range.addEventListener("click", function () {
+//   const modal = document.querySelector("#modal1");
+//   M.Modal.getInstance(modal).close();
+// });
+
+// +++++++++++++++++++++++++++++
+const submit_range = document.querySelector('#range-form');
+// submit_range.addEventListener("click", function () {
+const modal = document.querySelector("#modal1");
+modal.addEventListener('submit', (e) => {
+  e.preventDefault();
+  var user = auth.currentUser;
+
+  console.log('==========TEST===========')
+  console.log('DocID: ' + test_range)
+  console.log('Range:' + submit_range.range.value)
+  console.log('UserID: ' + user.uid)
+  console.log('Select Year: ' + select_year)
+  console.log('Select Month: ' + select_month)
+  console.log('Select Week: ' + select_week)
+  console.log('Select Type: ' + select_type)
+  console.log('========================')
+  update_range(user.uid, select_year, select_month, select_week, select_type, test_range, submit_range.range.value)
   M.Modal.getInstance(modal).close();
-});
+})
+// +++++++++++++++++++++++++++++
 
 // Remove list from DOM
 const removeList = (id) => {
@@ -558,8 +597,14 @@ auth.onAuthStateChanged((user) => {
     health_tab.addEventListener('click', e => {
       if (e.target.tagName === 'A') {
         const id = e.target.getAttribute('data-id');
-        console.log("UPDATE RANGE: " + select_year + " " + select_month + " " + select_week + " " + id);
-        update_range(user.uid, select_year, select_month, select_week, "Health", id);
+
+        // console.log("UPDATE RANGE: " + select_year + " " + select_month + " " + select_week + " " + id);
+        // update_range(user.uid, select_year, select_month, select_week, "Health", id);
+
+        // +++++++++++++++++++++++++++++
+        test_range = id;
+        select_type = "Health"
+        // +++++++++++++++++++++++++++++
       }
     });
 
