@@ -2,10 +2,27 @@
 var select_year = null;
 var select_month = null;
 var select_week = null;
-// +++++++++++++++++++++++++++++
 var select_type = null;
-var test_range = null;
-// +++++++++++++++++++++++++++++
+var get_id = null;
+
+// This is for selection, tabs, modal element in HTML file (CSS Materialize)
+document.addEventListener('DOMContentLoaded', function () {
+  var select = document.querySelectorAll('select');
+  M.FormSelect.init(select, {});
+
+  const options = {
+    duration: 300,
+    onShow: null,
+    swipeable: true,
+    responsiveThreshold: Infinity
+  };
+
+  const tabsContainer = document.querySelector("#tabs-swipe-demo");
+  M.Tabs.init(tabsContainer, options);
+
+  var modal = document.querySelectorAll('.modal');
+  M.Modal.init(modal);
+});
 
 function search_task() {
   var user = firebase.auth().currentUser;
@@ -107,25 +124,6 @@ function search_task() {
   }
 }
 
-// This is for selection, tabs, modal element in HTML file (CSS Materialize)
-document.addEventListener('DOMContentLoaded', function () {
-  var select = document.querySelectorAll('select');
-  M.FormSelect.init(select, {});
-
-  const options = {
-    duration: 300,
-    onShow: null,
-    swipeable: true,
-    responsiveThreshold: Infinity
-  };
-
-  const tabsContainer = document.querySelector("#tabs-swipe-demo");
-  M.Tabs.init(tabsContainer, options);
-
-  var modal = document.querySelectorAll('.modal');
-  M.Modal.init(modal);
-});
-
 // Display Years
 var year_id = document.getElementById('select_id_year');
 year_Fragment = document.createDocumentFragment();
@@ -213,7 +211,7 @@ type_id.addEventListener('change', function () {
 
 // Get data in real-time based on types
 function display(userID, year, month, week, type) {
-  //console.log('hello' + year + month + week)
+
   if (type == "Health") {
     db.collection('users').doc(userID)
       .collection('Goals').doc('Year')
@@ -225,13 +223,11 @@ function display(userID, year, month, week, type) {
         changes.forEach(change => {
           if (change.type === 'added') {
             renderHealth(change.doc.data(), change.doc.id);
-            //console.log('HELLO' + change)
           }
-          //////////////////////////////////////////////////
+          // Update range and then render
           else if (change.type === 'modified') {
             renderRange(change.doc.data(), change.doc.id);
           }
-          //////////////////////////////////////////////////
           else if (change.type === 'removed') {
             removeList(change.doc.id);
           }
@@ -250,6 +246,10 @@ function display(userID, year, month, week, type) {
         changes.forEach(change => {
           if (change.type === 'added') {
             renderCareer(change.doc.data(), change.doc.id);
+          }
+          // Update range and then render
+          else if (change.type === 'modified') {
+            renderRange(change.doc.data(), change.doc.id);
           }
           else if (change.type === 'removed') {
             removeList(change.doc.id);
@@ -270,6 +270,10 @@ function display(userID, year, month, week, type) {
           if (change.type === 'added') {
             renderPersonal(change.doc.data(), change.doc.id);
           }
+          // Update range and then render
+          else if (change.type === 'modified') {
+            renderRange(change.doc.data(), change.doc.id);
+          }
           else if (change.type === 'removed') {
             removeList(change.doc.id);
           }
@@ -288,6 +292,10 @@ function display(userID, year, month, week, type) {
         changes.forEach(change => {
           if (change.type === 'added') {
             renderFinancial(change.doc.data(), change.doc.id);
+          }
+          // Update range and then render
+          else if (change.type === 'modified') {
+            renderRange(change.doc.data(), change.doc.id);
           }
           else if (change.type === 'removed') {
             removeList(change.doc.id);
@@ -308,6 +316,10 @@ function display(userID, year, month, week, type) {
           if (change.type === 'added') {
             renderOther(change.doc.data(), change.doc.id);
           }
+          // Update range and then render
+          else if (change.type === 'modified') {
+            renderRange(change.doc.data(), change.doc.id);
+          }
           else if (change.type === 'removed') {
             removeList(change.doc.id);
           }
@@ -326,7 +338,6 @@ function delete_todo_list(userID, year, month, week, type, docID) {
     .collection(type).doc(docID).delete();
 }
 
-// +++++++++++++++++++++++++++++
 function update_range(userID, year, month, week, type, docID, range) {
   db.collection('users').doc(userID)
     .collection('Goals').doc('Year')
@@ -337,36 +348,6 @@ function update_range(userID, year, month, week, type, docID, range) {
       range: range
     });
 }
-// +++++++++++++++++++++++++++++
-
-// // Update Range
-// function update_range(userID, year, month, week, type, docID) {
-//   const range_form = document.querySelector('#range-form');
-//   range_form.addEventListener('submit', (e) => {
-//     e.preventDefault();
-//     db.collection('users').doc(userID)
-//       .collection('Goals').doc('Year')
-//       .collection(year).doc('Month')
-//       .collection(month).doc('Week')
-//       .collection(week).doc('Type')
-//       .collection(type).doc(docID).update({
-//         range: range_form.range.value
-//       });
-//     //TODO: Need to think of a way to keep the colors when range changes
-//     // if (range_form.range.value < 35) {
-//     //   $(".todo").css("background", "red");
-//     // }
-//     // else if (range_form.range.value > 25) {
-//     //   $(".todo").css("background", "orange");
-//     // }
-//     // else if (range_form.range.value > 50) {
-//     //   $(".todo").css("background", "yellow");
-//     // }
-//     // else if (range_form.range.value > 70) {
-//     //   $(".todo").css("background", "Green");
-//     // }
-//   });
-// }
 
 // Enable offline data
 db.enablePersistence().catch(function (err) {
@@ -380,9 +361,9 @@ db.enablePersistence().catch(function (err) {
   }
 });
 
+// Render goals insides tabs based on types
 const health_tab = document.querySelector('#test-swipe-1');
 const renderHealth = (data, id) => {
-  //////////////////////////////////////////////////
   const html = `
   <div class="card-panel todo row" data-id="${id}">
       <div class="todo-details">
@@ -394,7 +375,6 @@ const renderHealth = (data, id) => {
       </div>
   </div>
   `;
-  //////////////////////////////////////////////////
   health_tab.innerHTML += html;
 };
 
@@ -404,6 +384,7 @@ const renderCareer = (data, id) => {
   <div class="card-panel todo row" data-id="${id}">
       <div class="todo-details">
         <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
+        <p class="update_range" data-id="${id}">${data.range}</p>        
       </div>
       <div class="todo-delete">
         <i class="material-icons" data-id="${id}">delete_outline</i>
@@ -419,6 +400,7 @@ const renderPersonal = (data, id) => {
   <div class="card-panel todo row" data-id="${id}">
       <div class="todo-details">
         <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
+        <p class="update_range" data-id="${id}">${data.range}</p>        
       </div>
       <div class="todo-delete">
         <i class="material-icons" data-id="${id}">delete_outline</i>
@@ -434,11 +416,12 @@ const renderFinancial = (data, id) => {
   <div class="card-panel todo row" data-id="${id}">
       <div class="todo-details">
         <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
+        <p class="update_range" data-id="${id}">${data.range}</p>        
       </div>
       <div class="todo-delete">
         <i class="material-icons" data-id="${id}">delete_outline</i>
       </div>
-  </>
+  </div>
   `;
   financial_tab.innerHTML += html;
 };
@@ -449,6 +432,7 @@ const renderOther = (data, id) => {
   <div class="card-panel todo row" data-id="${id}">
       <div class="todo-details">
         <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
+        <p class="update_range" data-id="${id}">${data.range}</p>        
       </div>
       <div class="todo-delete">
         <i class="material-icons" data-id="${id}">delete_outline</i>
@@ -458,39 +442,29 @@ const renderOther = (data, id) => {
   other_tab.innerHTML += html;
 };
 
-//////////////////////////////////////////////////
 const renderRange = (data, id) => {
   document.querySelector(`.update_range[data-id=${id}]`).innerHTML = `<p class="update_range" data-id="${id}">${data.range}</p>`;
 };
-//////////////////////////////////////////////////
 
-// const submit_range = document.querySelector('#submit_range');
-// submit_range.addEventListener("click", function () {
-//   const modal = document.querySelector("#modal1");
-//   M.Modal.getInstance(modal).close();
-// });
-
-// +++++++++++++++++++++++++++++
 const submit_range = document.querySelector('#range-form');
-// submit_range.addEventListener("click", function () {
 const modal = document.querySelector("#modal1");
 modal.addEventListener('submit', (e) => {
   e.preventDefault();
   var user = auth.currentUser;
 
-  console.log('==========TEST===========')
-  console.log('DocID: ' + test_range)
-  console.log('Range:' + submit_range.range.value)
-  console.log('UserID: ' + user.uid)
-  console.log('Select Year: ' + select_year)
-  console.log('Select Month: ' + select_month)
-  console.log('Select Week: ' + select_week)
-  console.log('Select Type: ' + select_type)
-  console.log('========================')
-  update_range(user.uid, select_year, select_month, select_week, select_type, test_range, submit_range.range.value)
+  // console.log('==========TEST===========')
+  // console.log('DocID: ' + test_range)
+  // console.log('Range:' + submit_range.range.value)
+  // console.log('UserID: ' + user.uid)
+  // console.log('Select Year: ' + select_year)
+  // console.log('Select Month: ' + select_month)
+  // console.log('Select Week: ' + select_week)
+  // console.log('Select Type: ' + select_type)
+  // console.log('========================')
+
+  update_range(user.uid, select_year, select_month, select_week, select_type, get_id, submit_range.range.value)
   M.Modal.getInstance(modal).close();
-})
-// +++++++++++++++++++++++++++++
+});
 
 // Remove list from DOM
 const removeList = (id) => {
@@ -567,15 +541,6 @@ auth.onAuthStateChanged((user) => {
       });
     }
 
-    // Display Goals Dynamically
-    // for (var i = 0; i <= months.length - 1; i++) {
-    //   for (var j = 0; j <= weeks.length - 1; j++) {
-    //     for (var k = 0; k <= types.length - 1; k++) {
-    //       display(user.uid, current_year.toString(), months[i], weeks[j], types[k]);
-    //     }
-    //   }
-    // }
-
     // Add todo list data
     const form = document.querySelector('#todo-form');
     form.addEventListener('submit', (e) => {
@@ -597,243 +562,95 @@ auth.onAuthStateChanged((user) => {
     health_tab.addEventListener('click', e => {
       if (e.target.tagName === 'A') {
         const id = e.target.getAttribute('data-id');
-
-        // console.log("UPDATE RANGE: " + select_year + " " + select_month + " " + select_week + " " + id);
-        // update_range(user.uid, select_year, select_month, select_week, "Health", id);
-
-        // +++++++++++++++++++++++++++++
-        test_range = id;
-        select_type = "Health"
-        // +++++++++++++++++++++++++++++
+        get_id = id;
+        select_type = "Health";
       }
     });
-
-    //Update range from Health tab
-    // const health_tab = document.querySelector('#test-swipe-1');
-    // health_tab.addEventListener('click', e => {
-    //   if (e.target.tagName === 'A') {
-    //     const id = e.target.getAttribute('data-id');
-    //     for (var i = 0; i <= months.length - 1; i++) {
-    //       for (var j = 0; j <= weeks.length - 1; j++) {
-    //         update_range(user.uid, current_year.toString(), months[i], weeks[j], "Health", id);
-    //       }
-    //     }
-    //   }
-    // });
 
     //Update range from Career tab
     const career_tab = document.querySelector('#test-swipe-2');
     career_tab.addEventListener('click', e => {
       if (e.target.tagName === 'A') {
         const id = e.target.getAttribute('data-id');
-        console.log("UPDATE RANGE: " + select_year + select_month + select_week + id);
-        update_range(user.uid, select_year, select_month, select_week, "Career", id);
+        get_id = id;
+        select_type = "Career";
       }
     });
-
-    //Update range from Career tab
-    // const career_tab = document.querySelector('#test-swipe-2');
-    // career_tab.addEventListener('click', e => {
-    //   if (e.target.tagName === 'A') {
-    //     const id = e.target.getAttribute('data-id');
-    //     for (var i = 0; i <= months.length - 1; i++) {
-    //       for (var j = 0; j <= weeks.length - 1; j++) {
-    //         update_range(user.uid, current_year.toString(), months[i], weeks[j], "Career", id);
-    //       }
-    //     }
-    //   }
-    // });
 
     //Update range from Personal tab
     const personal_tab = document.querySelector('#test-swipe-3');
     personal_tab.addEventListener('click', e => {
       if (e.target.tagName === 'A') {
         const id = e.target.getAttribute('data-id');
-        console.log("UPDATE RANGE: " + select_year + select_month + select_week + id);
-        update_range(user.uid, select_year, select_month, select_week, "Personal", id);
+        get_id = id;
+        select_type = "Personal";
       }
     });
-
-    //Update range from Personal tab
-    // const personal_tab = document.querySelector('#test-swipe-3');
-    // personal_tab.addEventListener('click', e => {
-    //   if (e.target.tagName === 'A') {
-    //     const id = e.target.getAttribute('data-id');
-    //     for (var i = 0; i <= months.length - 1; i++) {
-    //       for (var j = 0; j <= weeks.length - 1; j++) {
-    //         update_range(user.uid, current_year.toString(), months[i], weeks[j], "Personal", id);
-    //       }
-    //     }
-    //   }
-    // });
 
     //Update range from Financial tab
     const financial_tab = document.querySelector('#test-swipe-4');
     financial_tab.addEventListener('click', e => {
       if (e.target.tagName === 'A') {
         const id = e.target.getAttribute('data-id');
-        console.log("UPDATE RANGE: " + select_year + select_month + select_week + id);
-        update_range(user.uid, select_year, select_month, select_week, "Financial", id);
+        get_id = id;
+        select_type = "Financial";
       }
     });
-
-    // //Update range from Financial tab
-    // const financial_tab = document.querySelector('#test-swipe-4');
-    // financial_tab.addEventListener('click', e => {
-    //   if (e.target.tagName === 'A') {
-    //     const id = e.target.getAttribute('data-id');
-    //     for (var i = 0; i <= months.length - 1; i++) {
-    //       for (var j = 0; j <= weeks.length - 1; j++) {
-    //         update_range(user.uid, current_year.toString(), months[i], weeks[j], "Financial", id);
-    //       }
-    //     }
-    //   }
-    // });
 
     //Update range from Other tab
     const other_tab = document.querySelector('#test-swipe-5');
     other_tab.addEventListener('click', e => {
       if (e.target.tagName === 'A') {
         const id = e.target.getAttribute('data-id');
-        console.log("UPDATE RANGE: " + select_year + select_month + select_week + id);
-        update_range(user.uid, select_year, select_month, select_week, "Other", id);
+        get_id = id;
+        select_type = "Other";
       }
     });
-
-    //Update range from Other tab
-    // const other_tab = document.querySelector('#test-swipe-5');
-    // other_tab.addEventListener('click', e => {
-    //   if (e.target.tagName === 'A') {
-    //     const id = e.target.getAttribute('data-id');
-    //     for (var i = 0; i <= months.length - 1; i++) {
-    //       for (var j = 0; j <= weeks.length - 1; j++) {
-    //         update_range(user.uid, current_year.toString(), months[i], weeks[j], "Other", id);
-    //       }
-    //     }
-    //   }
-    // });
 
     //Delete the list from Health tab
     const healthContainer = document.querySelector('#test-swipe-1');
     healthContainer.addEventListener('click', e => {
       if (e.target.tagName === 'I') {
         const id = e.target.getAttribute('data-id');
-        console.log(id);
         delete_todo_list(user.uid, select_year, select_month, select_week, "Health", id);
       }
     });
-
-    // //Delete the list from Health tab
-    // const healthContainer = document.querySelector('#test-swipe-1');
-    // healthContainer.addEventListener('click', e => {
-    //   if (e.target.tagName === 'I') {
-    //     const id = e.target.getAttribute('data-id');
-    //     console.log(id);
-    //     // Delete goals dynamically
-    //     for (var i = 0; i <= months.length - 1; i++) {
-    //       for (var j = 0; j <= weeks.length - 1; j++) {
-    //         delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], "Health", id);
-    //       }
-    //     }
-    //   }
-    // });
 
     //Delete the list from Career tab
     const careerContainer = document.querySelector('#test-swipe-2');
     careerContainer.addEventListener('click', e => {
       if (e.target.tagName === 'I') {
         const id = e.target.getAttribute('data-id');
-        // Delete goals dynamically
         delete_todo_list(user.uid, select_year, select_month, select_week, "Career", id);
       }
     });
-
-    //Delete the list from Career tab
-    // const careerContainer = document.querySelector('#test-swipe-2');
-    // careerContainer.addEventListener('click', e => {
-    //   if (e.target.tagName === 'I') {
-    //     const id = e.target.getAttribute('data-id');
-    //     // Delete goals dynamically
-    //     for (var i = 0; i <= months.length - 1; i++) {
-    //       for (var j = 0; j <= weeks.length - 1; j++) {
-    //         delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], "Career", id);
-    //       }
-    //     }
-    //   }
-    // });
 
     //Delete the list from Personal tab
     const personalContainer = document.querySelector('#test-swipe-3');
     personalContainer.addEventListener('click', e => {
       if (e.target.tagName === 'I') {
         const id = e.target.getAttribute('data-id');
-        // Delete goals dynamically
         delete_todo_list(user.uid, select_year, select_month, select_week, "Personal", id);
       }
     });
-
-    // //Delete the list from Personal tab
-    // const personalContainer = document.querySelector('#test-swipe-3');
-    // personalContainer.addEventListener('click', e => {
-    //   if (e.target.tagName === 'I') {
-    //     const id = e.target.getAttribute('data-id');
-    //     // Delete goals dynamically
-    //     for (var i = 0; i <= months.length - 1; i++) {
-    //       for (var j = 0; j <= weeks.length - 1; j++) {
-    //         delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], "Personal", id);
-    //       }
-    //     }
-    //   }
-    // });
 
     //Delete the list from Financial tab
     const financialContainer = document.querySelector('#test-swipe-4');
     financialContainer.addEventListener('click', e => {
       if (e.target.tagName === 'I') {
         const id = e.target.getAttribute('data-id');
-        // Delete goals dynamically
         delete_todo_list(user.uid, select_year, select_month, select_week, "Financial", id);
       }
     });
-
-    // //Delete the list from Financial tab
-    // const financialContainer = document.querySelector('#test-swipe-4');
-    // financialContainer.addEventListener('click', e => {
-    //   if (e.target.tagName === 'I') {
-    //     const id = e.target.getAttribute('data-id');
-    //     // Delete goals dynamically
-    //     for (var i = 0; i <= months.length - 1; i++) {
-    //       for (var j = 0; j <= weeks.length - 1; j++) {
-    //         delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], "Financial", id);
-    //       }
-    //     }
-    //   }
-    // });
 
     //Delete the list from Other tab
     const otherContainer = document.querySelector('#test-swipe-5');
     otherContainer.addEventListener('click', e => {
       if (e.target.tagName === 'I') {
         const id = e.target.getAttribute('data-id');
-        // Delete goals dynamically
         delete_todo_list(user.uid, select_year, select_month, select_week, "Other", id);
-
       }
     });
-
-    // //Delete the list from Other tab
-    // const otherContainer = document.querySelector('#test-swipe-5');
-    // otherContainer.addEventListener('click', e => {
-    //   if (e.target.tagName === 'I') {
-    //     const id = e.target.getAttribute('data-id');
-    //     // Delete goals dynamically
-    //     for (var i = 0; i <= months.length - 1; i++) {
-    //       for (var j = 0; j <= weeks.length - 1; j++) {
-    //         delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], "Other", id);
-    //       }
-    //     }
-    //   }
-    // });
 
   } else {
     console.log("user has logged out");
