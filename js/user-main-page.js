@@ -209,9 +209,7 @@ type_id.addEventListener('change', function () {
 
 // Get data in real-time based on types
 function display(userID, year, month, week, type) {
-  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  console.log('hello' + year + month + week)
-  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  //console.log('hello' + year + month + week)
   if (type == "Health") {
     db.collection('users').doc(userID)
       .collection('Goals').doc('Year')
@@ -223,10 +221,13 @@ function display(userID, year, month, week, type) {
         changes.forEach(change => {
           if (change.type === 'added') {
             renderHealth(change.doc.data(), change.doc.id);
-            // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            console.log('HELLO' + change)
-            // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            //console.log('HELLO' + change)
           }
+          //////////////////////////////////////////////////
+          else if(change.type === 'modified'){
+            renderRange(change.doc.data(), change.doc.id);
+          }
+          //////////////////////////////////////////////////
           else if (change.type === 'removed') {
             removeList(change.doc.id);
           }
@@ -335,18 +336,18 @@ function update_range(userID, year, month, week, type, docID) {
         range: range_form.range.value
       });
     //TODO: Need to think of a way to keep the colors when range changes
-    if (range_form.range.value < 35) {
-      $(".todo").css("background", "red");
-    }
-    else if (range_form.range.value > 25) {
-      $(".todo").css("background", "orange");
-    }
-    else if (range_form.range.value > 50) {
-      $(".todo").css("background", "yellow");
-    }
-    else if (range_form.range.value > 70) {
-      $(".todo").css("background", "Green");
-    }
+    // if (range_form.range.value < 35) {
+    //   $(".todo").css("background", "red");
+    // }
+    // else if (range_form.range.value > 25) {
+    //   $(".todo").css("background", "orange");
+    // }
+    // else if (range_form.range.value > 50) {
+    //   $(".todo").css("background", "yellow");
+    // }
+    // else if (range_form.range.value > 70) {
+    //   $(".todo").css("background", "Green");
+    // }
   });
 }
 
@@ -364,16 +365,19 @@ db.enablePersistence().catch(function (err) {
 
 const health_tab = document.querySelector('#test-swipe-1');
 const renderHealth = (data, id) => {
+  //////////////////////////////////////////////////
   const html = `
   <div class="card-panel todo row" data-id="${id}">
       <div class="todo-details">
-        <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>        
+        <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
+        <p class="update_range" data-id="${id}">${data.range}</p>        
       </div>
       <div class="todo-delete">
         <i class="material-icons" data-id="${id}">delete_outline</i>
       </div>
   </div>
   `;
+  //////////////////////////////////////////////////
   health_tab.innerHTML += html;
 };
 
@@ -436,6 +440,12 @@ const renderOther = (data, id) => {
   `;
   other_tab.innerHTML += html;
 };
+
+//////////////////////////////////////////////////
+const renderRange = (data, id) => {
+  document.querySelector(`.update_range[data-id=${id}]`).innerHTML = `<p class="update_range" data-id="${id}">${data.range}</p>`;
+};
+//////////////////////////////////////////////////
 
 const submit_range = document.querySelector('#submit_range');
 submit_range.addEventListener("click", function () {
@@ -548,7 +558,7 @@ auth.onAuthStateChanged((user) => {
     health_tab.addEventListener('click', e => {
       if (e.target.tagName === 'A') {
         const id = e.target.getAttribute('data-id');
-        console.log("UPDATE RANGE: " + select_year + select_month + select_week + id);
+        console.log("UPDATE RANGE: " + select_year + " " + select_month + " " + select_week + " " + id);
         update_range(user.uid, select_year, select_month, select_week, "Health", id);
       }
     });
