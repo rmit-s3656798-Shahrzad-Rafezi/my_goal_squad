@@ -199,25 +199,15 @@ document.addEventListener('DOMContentLoaded', function () {
   var select = document.querySelectorAll('select');
   M.FormSelect.init(select, {});
 
-  const options1 = {
-    duration: 300,
-    onShow: null,
-    swipeable: false,
-    responsiveThreshold: Infinity
-  };
-
-  const options2 = {
+  const options = {
     duration: 300,
     onShow: null,
     swipeable: true,
     responsiveThreshold: Infinity
   };
 
-  const tabsContainer1 = document.querySelector("#tabs-swipe-demo1");
-  M.Tabs.init(tabsContainer1, options1);
-
-  const tabsContainer2 = document.querySelector("#tabs-swipe-demo2");
-  M.Tabs.init(tabsContainer2, options2);
+  const tabsContainer = document.querySelector("#tabs-swipe-demo");
+  M.Tabs.init(tabsContainer, options);
 
   var modal = document.querySelectorAll('.modal');
   M.Modal.init(modal);
@@ -315,7 +305,7 @@ type_id.addEventListener('change', function () {
 const form = document.querySelector('#todo-form');
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  db.collection('users').doc(chosen_user)
+  db.collection('users').doc(chosen_user.data-value)
     .collection('Goals').doc('Year')
     .collection(chosen_year).doc('Month')
     .collection(chosen_month).doc('Week')
@@ -336,6 +326,7 @@ var Confirmtodo = document.getElementById("todo");
 
 function goalconfirm() {
   document.getElementById("goal-confirm").innerHTML =
+    chosen_user.value + " " +
     Confirmyear.value + " " +
     Confirmmonth.value + " " +
     Confirmweek.value + " " +
@@ -343,28 +334,16 @@ function goalconfirm() {
   document.getElementById("goal-confirm-text").innerHTML = Confirmtodo.value;
 }
 
-// [START get_multiple_all]
+// get userlist
+db.collection("users").get().then(snapshot => {
+  snapshot.forEach(doc => {
+    const user_tab = document.querySelector('#select_id_user');
+    const html = `
+    <option value="${doc.id}">${doc.data().displayName}</option>
+  `;
+    user_tab.innerHTML += html;
 
-var userId1 = [];
-db.collection("users").get().then(function (querySnapshot) {
-  let x = 0;
-  querySnapshot.forEach(doc => {
-    var user_id = document.getElementById('select_id_user');
-    user_Fragment = document.createDocumentFragment();
-    let chosen_user = '';
-    userId1[x] = doc.id;
-    for (var i = 0; i <= userId1.length - 1; i++) {
-      var option = document.createElement('option');
-      option.value = userId1[i];
-      option.appendChild(document.createTextNode(doc.data().displayName));
-      user_Fragment.appendChild(option);
-    }
-    user_id.appendChild(user_Fragment);
-    // Grabs the user value
-    user_id.addEventListener('change', function () {
-      chosen_user = this.value;
-    });
-    console.log(userId1);
-    console.log(doc.id, " => ", doc.data().displayName);
   });
 });
+
+ var chosen_user = document.getElementById("userlist");
