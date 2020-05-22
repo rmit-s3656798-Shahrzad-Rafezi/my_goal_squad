@@ -683,15 +683,15 @@ auth.onAuthStateChanged((user) => {
   }
 });
 
-//Logout Button
-const logout = document.querySelector("#logout-btn");
+// //Logout Button
+// const logout = document.querySelector("#logout-btn");
 
-logout.addEventListener("click", (e) => {
-  e.preventDefault();
-  auth.signOut().then(() => {
-    window.location.href = "../index.html";
-  });
-});
+// logout.addEventListener("click", (e) => {
+//   e.preventDefault();
+//   auth.signOut().then(() => {
+//     window.location.href = "../index.html";
+//   });
+// });
 
 //Confirm messsage
 var Confirmyear = document.getElementById("select_id_year");
