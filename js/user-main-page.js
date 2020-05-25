@@ -381,7 +381,7 @@ const renderHealth = (data, id) => {
 const career_tab = document.querySelector('#test-swipe-2');
 const renderCareer = (data, id) => {
   const html = `
-  <div class="card-panel todo row" data-id="${id}">
+  <div id="change_colour" class="card-panel todo row" data-id="${id}">
       <div class="todo-details">
         <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
         <p class="update_range" data-id="${id}">${data.range}</p>        
@@ -397,7 +397,7 @@ const renderCareer = (data, id) => {
 const personal_tab = document.querySelector('#test-swipe-3');
 const renderPersonal = (data, id) => {
   const html = `
-  <div class="card-panel todo row" data-id="${id}">
+  <div id="change_colour" class="card-panel todo row" data-id="${id}">
       <div class="todo-details">
         <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
         <p class="update_range" data-id="${id}">${data.range}</p>        
@@ -413,7 +413,7 @@ const renderPersonal = (data, id) => {
 const financial_tab = document.querySelector('#test-swipe-4');
 const renderFinancial = (data, id) => {
   const html = `
-  <div class="card-panel todo row" data-id="${id}">
+  <div id="change_colour" class="card-panel todo row" data-id="${id}">
       <div class="todo-details">
         <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
         <p class="update_range" data-id="${id}">${data.range}</p>        
@@ -429,7 +429,7 @@ const renderFinancial = (data, id) => {
 const other_tab = document.querySelector('#test-swipe-5');
 const renderOther = (data, id) => {
   const html = `
-  <div class="card-panel todo row" data-id="${id}">
+  <div id="change_colour" class="card-panel todo row" data-id="${id}">
       <div class="todo-details">
         <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
         <p class="update_range" data-id="${id}">${data.range}</p>        
