@@ -457,34 +457,26 @@ modal.addEventListener('submit', (e) => {
   var change_colours = ["showRed", "showOrange", "showYellow", "showGreen"];
 
   if (submit_range.range.value < 25) {
-
     //Show red
     for (var i = 0; i <= change_colours.length; i++) {
-      $('#change_colour').removeClass(change_colours[i]);
-      $('#change_colour').addClass("showRed");
+      $('#change_colour[data-id=' + get_id + ']').removeClass(change_colours[i]);
+      $('#change_colour[data-id=' + get_id + ']').addClass('showRed');
     }
   }
 
   if (submit_range.range.value > 25) {
     //show orange
     for (var i = 0; i <= change_colours.length; i++) {
-      $('#change_colour').removeClass(change_colours[i]);
-      $('#change_colour').addClass("showOrange");
+      $('#change_colour[data-id=' + get_id + ']').removeClass(change_colours[i]);
+      $('#change_colour[data-id=' + get_id + ']').addClass('showOrange');
     }
   }
 
-  if (submit_range.range.value > 50) {
-    for (var i = 0; i <= change_colours.length; i++) {
-      $('#change_colour').removeClass(change_colours[i]);
-      $('#change_colour').addClass("showYellow");
-    }
-  }
-
-  if (submit_range.range.value > 70) {
+  if (submit_range.range.value > 95) {
     //show green
     for (var i = 0; i <= change_colours.length; i++) {
-      $('#change_colour').removeClass(change_colours[i]);
-      $('#change_colour').addClass("showGreen");
+      $('#change_colour[data-id=' + get_id + ']').removeClass(change_colours[i]);
+      $('#change_colour[data-id=' + get_id + ']').addClass('showGreen');
     }
   }
 
