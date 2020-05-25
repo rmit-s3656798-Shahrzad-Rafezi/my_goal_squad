@@ -376,6 +376,8 @@ const renderHealth = (data, id) => {
     </div>
   `;
   health_tab.innerHTML += html;
+  //Show red, orange and green based on the range
+  changeColour(data.range, id);
 };
 
 const career_tab = document.querySelector('#test-swipe-2');
@@ -392,6 +394,8 @@ const renderCareer = (data, id) => {
   </div>
   `;
   career_tab.innerHTML += html;
+  //Show red, orange and green based on the range
+  changeColour(data.range, id);
 };
 
 const personal_tab = document.querySelector('#test-swipe-3');
@@ -408,6 +412,8 @@ const renderPersonal = (data, id) => {
   </div>
   `;
   personal_tab.innerHTML += html;
+  //Show red, orange and green based on the range
+  changeColour(data.range, id);
 };
 
 const financial_tab = document.querySelector('#test-swipe-4');
@@ -424,6 +430,8 @@ const renderFinancial = (data, id) => {
   </div>
   `;
   financial_tab.innerHTML += html;
+  //Show red, orange and green based on the range
+  changeColour(data.range, id);
 };
 
 const other_tab = document.querySelector('#test-swipe-5');
@@ -440,6 +448,8 @@ const renderOther = (data, id) => {
   </div>
   `;
   other_tab.innerHTML += html;
+  //Show red, orange and green based on the range
+  changeColour(data.range, id);
 };
 
 const renderRange = (data, id) => {
@@ -449,42 +459,49 @@ const renderRange = (data, id) => {
 const submit_range = document.querySelector('#range-form');
 const modal = document.querySelector("#modal1");
 modal.addEventListener('submit', (e) => {
-  e.preventDefault();
-  var user = auth.currentUser;
 
+  e.preventDefault();
+
+  var user = auth.currentUser;
   update_range(user.uid, select_year, select_month, select_week, select_type, get_id, submit_range.range.value);
 
-  var change_colours = ["showRed", "showOrange", "showYellow", "showGreen"];
-
-  if (submit_range.range.value < 25) {
-    //Show red
-    for (var i = 0; i <= change_colours.length; i++) {
-      $('#change_colour[data-id=' + get_id + ']').removeClass(change_colours[i]);
-      $('#change_colour[data-id=' + get_id + ']').addClass('showRed');
-      $('a[data-id=' + get_id + ']').addClass('whiteText');
-    }
-  }
-
-  if (submit_range.range.value > 25) {
-    //show orange
-    for (var i = 0; i <= change_colours.length; i++) {
-      $('#change_colour[data-id=' + get_id + ']').removeClass(change_colours[i]);
-      $('#change_colour[data-id=' + get_id + ']').addClass('showOrange');
-      $('a[data-id=' + get_id + ']').addClass('whiteText');
-    }
-  }
-
-  if (submit_range.range.value > 95) {
-    //show green
-    for (var i = 0; i <= change_colours.length; i++) {
-      $('#change_colour[data-id=' + get_id + ']').removeClass(change_colours[i]);
-      $('#change_colour[data-id=' + get_id + ']').addClass('showGreen');
-      $('a[data-id=' + get_id + ']').addClass('whiteText');
-    }
-  }
+  //Show red, orange and green based on the submitted range
+  changeColour(submit_range.range.value, get_id);
 
   M.Modal.getInstance(modal).close();
 });
+
+function changeColour(range_value, id_value){
+  var change_colours = ["showRed", "showOrange", "showYellow", "showGreen"];
+
+  if (range_value < 25) {
+    //Show red
+    for (var i = 0; i <= change_colours.length; i++) {
+      $('#change_colour[data-id=' + id_value + ']').removeClass(change_colours[i]);
+      $('#change_colour[data-id=' + id_value + ']').addClass('showRed');
+      $('a[data-id=' + id_value + ']').addClass('whiteText');
+    }
+  }
+
+  if (range_value > 25) {
+    //show orange
+    for (var i = 0; i <= change_colours.length; i++) {
+      $('#change_colour[data-id=' + id_value + ']').removeClass(change_colours[i]);
+      $('#change_colour[data-id=' + id_value + ']').addClass('showOrange');
+      $('a[data-id=' + id_value + ']').addClass('whiteText');
+    }
+  }
+
+  if (range_value > 95) {
+    //show green
+    for (var i = 0; i <= change_colours.length; i++) {
+      $('#change_colour[data-id=' + id_value + ']').removeClass(change_colours[i]);
+      $('#change_colour[data-id=' + id_value + ']').addClass('showGreen');
+      $('a[data-id=' + id_value + ']').addClass('whiteText');
+    }
+  }
+
+}
 
 // Remove list from DOM
 const removeList = (id) => {
