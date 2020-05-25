@@ -461,6 +461,7 @@ modal.addEventListener('submit', (e) => {
     for (var i = 0; i <= change_colours.length; i++) {
       $('#change_colour[data-id=' + get_id + ']').removeClass(change_colours[i]);
       $('#change_colour[data-id=' + get_id + ']').addClass('showRed');
+      $('a[data-id=' + get_id + ']').addClass('whiteText');
     }
   }
 
@@ -469,6 +470,7 @@ modal.addEventListener('submit', (e) => {
     for (var i = 0; i <= change_colours.length; i++) {
       $('#change_colour[data-id=' + get_id + ']').removeClass(change_colours[i]);
       $('#change_colour[data-id=' + get_id + ']').addClass('showOrange');
+      $('a[data-id=' + get_id + ']').addClass('whiteText');
     }
   }
 
@@ -477,6 +479,7 @@ modal.addEventListener('submit', (e) => {
     for (var i = 0; i <= change_colours.length; i++) {
       $('#change_colour[data-id=' + get_id + ']').removeClass(change_colours[i]);
       $('#change_colour[data-id=' + get_id + ']').addClass('showGreen');
+      $('a[data-id=' + get_id + ']').addClass('whiteText');
     }
   }
 

@@ -63,14 +63,17 @@ h5 {
 
 /* Range Colour */
 .showRed{
-  background-color: firebrick;
+  background-color: #ef9a9a;
+  color: white;
 }
 .showOrange{
-  background: orange;
-}
-.showYellow{
-  background: yellow;
+  background-color: #ffb74d;
+  color: white;
 }
 .showGreen{
-  background: green;
+  background-color: #4db6ac;
+  color: white;
+}
+a.whiteText{
+  color: white;
 }
