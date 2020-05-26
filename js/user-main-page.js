@@ -453,7 +453,7 @@ const renderOther = (data, id) => {
 };
 
 const renderRange = (data, id) => {
-  document.querySelector(`.update_range[data-id=${id}]`).innerHTML = `<p class="update_range" data-id="${id}">${data.range}</p>`;
+  document.querySelector(`.update_range[data-id="${id}"]`).innerHTML = `<p class="update_range" data-id="${id}">${data.range}</p>`;
 };
 
 const submit_range = document.querySelector('#range-form');
@@ -477,27 +477,27 @@ function changeColour(range_value, id_value){
   if (range_value < 25) {
     //Show red
     for (var i = 0; i <= change_colours.length; i++) {
-      $('#change_colour[data-id=' + id_value + ']').removeClass(change_colours[i]);
-      $('#change_colour[data-id=' + id_value + ']').addClass('showRed');
-      $('a[data-id=' + id_value + ']').addClass('whiteText');
+      $('#change_colour[data-id="' + id_value + '"]').removeClass(change_colours[i]);
+      $('#change_colour[data-id="' + id_value + '"]').addClass('showRed');
+      $('a[data-id="' + id_value + '"]').addClass('whiteText');
     }
   }
 
   if (range_value > 25) {
     //show orange
     for (var i = 0; i <= change_colours.length; i++) {
-      $('#change_colour[data-id=' + id_value + ']').removeClass(change_colours[i]);
-      $('#change_colour[data-id=' + id_value + ']').addClass('showOrange');
-      $('a[data-id=' + id_value + ']').addClass('whiteText');
+      $('#change_colour[data-id="' + id_value + '"]').removeClass(change_colours[i]);
+      $('#change_colour[data-id="' + id_value + '"]').addClass('showOrange');
+      $('a[data-id="' + id_value + '"]').addClass('whiteText');
     }
   }
 
   if (range_value > 95) {
     //show green
     for (var i = 0; i <= change_colours.length; i++) {
-      $('#change_colour[data-id=' + id_value + ']').removeClass(change_colours[i]);
-      $('#change_colour[data-id=' + id_value + ']').addClass('showGreen');
-      $('a[data-id=' + id_value + ']').addClass('whiteText');
+      $('#change_colour[data-id="' + id_value + '"]').removeClass(change_colours[i]);
+      $('#change_colour[data-id="' + id_value + '"]').addClass('showGreen');
+      $('a[data-id="' + id_value + '"]').addClass('whiteText');
     }
   }
 
@@ -505,7 +505,7 @@ function changeColour(range_value, id_value){
 
 // Remove list from DOM
 const removeList = (id) => {
-  const todo = document.querySelector(`.todo[data-id=${id}]`);
+  const todo = document.querySelector(`.todo[data-id="${id}"]`);
   todo.remove();
 };
 
