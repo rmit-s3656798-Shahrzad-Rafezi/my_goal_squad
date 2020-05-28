@@ -471,7 +471,7 @@ modal.addEventListener('submit', (e) => {
   M.Modal.getInstance(modal).close();
 });
 
-function changeColour(range_value, id_value){
+function changeColour(range_value, id_value) {
   var change_colours = ["showRed", "showOrange", "showYellow", "showGreen"];
 
   if (range_value < 25) {
@@ -514,6 +514,8 @@ auth.onAuthStateChanged((user) => {
   if (user) {
     console.log(user.email, "has logged in");
 
+    search_task()
+
     //Display years in modal
     const year_modal = document.querySelector('#modal_year');
     for (var i = 0; i <= years.length - 1; i++) {
@@ -531,6 +533,10 @@ auth.onAuthStateChanged((user) => {
       year[i].addEventListener("click", function () {
         select_year = this.value;
         console.log(select_year);
+        search_task();
+        //test();
+        const modal = document.querySelector("#modal_year");
+        M.Modal.getInstance(modal).close();
       });
     }
 
@@ -551,6 +557,10 @@ auth.onAuthStateChanged((user) => {
       month[i].addEventListener("click", function () {
         select_month = this.value;
         console.log(select_month);
+        search_task();
+        //test();
+        const modal = document.querySelector("#modal_month");
+        M.Modal.getInstance(modal).close();
       });
     }
 
@@ -719,4 +729,5 @@ function goalconfirm() {
     Confirmweek.value + " " +
     Confirmtype.value;
   document.getElementById("goal-confirm-text").innerHTML = Confirmtodo.value;
-} 
+}
+
