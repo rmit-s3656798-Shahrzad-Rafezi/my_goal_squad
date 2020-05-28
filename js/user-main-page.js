@@ -227,6 +227,7 @@ function display(userID, year, month, week, type) {
           // Update range and then render
           else if (change.type === 'modified') {
             renderRange(change.doc.data(), change.doc.id);
+            render_new_goal(change.doc.data(), change.doc.id);
           }
           else if (change.type === 'removed') {
             removeList(change.doc.id);
@@ -250,6 +251,7 @@ function display(userID, year, month, week, type) {
           // Update range and then render
           else if (change.type === 'modified') {
             renderRange(change.doc.data(), change.doc.id);
+            render_new_goal(change.doc.data(), change.doc.id);
           }
           else if (change.type === 'removed') {
             removeList(change.doc.id);
@@ -273,6 +275,7 @@ function display(userID, year, month, week, type) {
           // Update range and then render
           else if (change.type === 'modified') {
             renderRange(change.doc.data(), change.doc.id);
+            render_new_goal(change.doc.data(), change.doc.id);
           }
           else if (change.type === 'removed') {
             removeList(change.doc.id);
@@ -296,6 +299,7 @@ function display(userID, year, month, week, type) {
           // Update range and then render
           else if (change.type === 'modified') {
             renderRange(change.doc.data(), change.doc.id);
+            render_new_goal(change.doc.data(), change.doc.id);
           }
           else if (change.type === 'removed') {
             removeList(change.doc.id);
@@ -319,6 +323,7 @@ function display(userID, year, month, week, type) {
           // Update range and then render
           else if (change.type === 'modified') {
             renderRange(change.doc.data(), change.doc.id);
+            render_new_goal(change.doc.data(), change.doc.id);
           }
           else if (change.type === 'removed') {
             removeList(change.doc.id);
@@ -456,9 +461,39 @@ const renderRange = (data, id) => {
   document.querySelector(`.update_range[data-id="${id}"]`).innerHTML = `<p class="update_range" data-id="${id}">${data.range}</p>`;
 };
 
+const render_new_goal = (data, id) => {
+  document.querySelector(`a[data-id="${id}"]`).innerHTML = `<a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>`;
+  $('a[data-id="' + id + '"]').addClass('whiteText');
+};
+
+// This is for closing the modal after submitted
+modal = document.querySelector("#modal1");
+
+const update_goal_form = document.querySelector('#update-goal-form');
+
+function update_goal(userID, year, month, week, type, docID, todo) {
+  db.collection('users').doc(userID)
+    .collection('Goals').doc('Year')
+    .collection(year).doc('Month')
+    .collection(month).doc('Week')
+    .collection(week).doc('Type')
+    .collection(type).doc(docID).update({
+      todo: todo
+    });
+    update_goal_form.update_goal.value = '';
+}
+
+update_goal_form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  var user = auth.currentUser;
+  update_goal(user.uid, select_year, select_month, select_week, select_type, get_id, update_goal_form.update_goal.value);
+
+  M.Modal.getInstance(modal).close();
+});
+
 const submit_range = document.querySelector('#range-form');
-const modal = document.querySelector("#modal1");
-modal.addEventListener('submit', (e) => {
+submit_range.addEventListener('submit', (e) => {
 
   e.preventDefault();
 
