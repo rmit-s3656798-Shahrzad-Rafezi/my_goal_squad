@@ -6,6 +6,7 @@ auth.onAuthStateChanged((user) => {
 
     if (user.photoURL == null) {
       userPicture = "/img/empty-profile.png";
+      renderUserData(userPicture, user.displayName, user.email)
     } else {
 
       let path = 'users/' + user.uid + "/profilePicture.png"
