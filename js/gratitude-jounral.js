@@ -17,7 +17,9 @@ auth.onAuthStateChanged((user) => {
                 }
                 else if (change.type === 'removed') {
                     // removed
-                    removeJournal(change.doc.id);
+                    ////Sherry/////////
+                    removeEntry(change.doc.id);
+                    //////////////////
                 };
             })
         })
@@ -28,10 +30,12 @@ auth.onAuthStateChanged((user) => {
     }
 });
 
-const removeJournal = (id) => {
+/////////Sherry/////////
+const removeEntry = (id) => {
     const journal = document.querySelector(`.entry[id="${id}"]`);
     journal.remove();
 };
+//////////////////
 
 // Floating action button
 document.addEventListener('DOMContentLoaded', function () {
