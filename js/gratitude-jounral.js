@@ -17,8 +17,9 @@ auth.onAuthStateChanged((user) => {
                 }
                 else if (change.type === 'removed') {
                     // removed
-                    let removedEntry = document.querySelector("#" + change.doc.id);
-                    removedEntry.remove();
+                    ////Sherry/////////
+                    removeEntry(change.doc.id);
+                    //////////////////
                 };
             })
         })
@@ -29,7 +30,14 @@ auth.onAuthStateChanged((user) => {
     }
 });
 
-// Floationg action button
+/////////Sherry/////////
+const removeEntry = (id) => {
+    const journal = document.querySelector(`.entry[id="${id}"]`);
+    journal.remove();
+};
+//////////////////
+
+// Floating action button
 document.addEventListener('DOMContentLoaded', function () {
     var elems = document.querySelectorAll('.modal');
     var instances = M.Modal.init(elems);

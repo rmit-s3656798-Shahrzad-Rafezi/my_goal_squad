@@ -1,13 +1,20 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+    <!-- Import scripts START -->
+    <!-- Conflicting with existing code -->
+    <!-- Import scripts END -->
+
     <link rel="stylesheet" type="text/css" href="/css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="/css/user-main-page.css">
+    <link rel="stylesheet" type="text/css" href="/css/user-main-page.css" />
     <title>My Goal Squad</title>
 </head>
 
@@ -49,14 +56,124 @@
     </div>
 
     <div class="container">
+        <div class="content">
+            <!-- Add todo list form -->
+            <div id="modal-addgoal" class="modal">
+                <div class="modal-content">
+                    <h6>ADD NEW GOAL</h6>
+                    <form id="todo-form">
+                        <input id="todo" type="text" name="todo" placeholder="Add goals that you want to achieve" required/>
+                        <select id="select_id_year">
+                            <option value="" disabled selected>Select Year</option>
+                        </select>
+                        <select id="select_id_month">
+                            <option value="" disabled selected>Select Month</option>
+                        </select>
+                        <select id="select_id_week">
+                            <option value="" disabled selected>Select Week</option>
+                        </select>
+                        <select id="select_id_type">
+                            <option value="" disabled selected>Select Type</option>
+                        </select>
+                        <a onclick="goalconfirm()"class="waves-effect waves-light btn modal-trigger" href="#goalconfirm">Add</a>
+                        <div id="goalconfirm" class="modal">
+                            <h5>Confirm</h5>
+                            <div class="modal-content">
+                            <p id="goal-confirm"></p>
+                            <p id="goal-confirm-text"></p>   
+                            <button class="modal-close waves-effect waves-orange btn">Add list</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
-        <button class="waves-effect waves-orange btn test-btn">TEST
-        </button>
+            <div class="fixed-action-btn">
+                <button data-target='modal-addgoal' class="waves-effect btn-floating btn-large modal-trigger grey darken-3 ">
+                    <i class="large material-icons">add</i>
+                </button>
+            </div>
 
-        <!-- TASK SECTION GOES HERE -->
+            <!-- This is for adding range/updating goals for each task -->
+            <div id="modal1" class="modal">
+                <div class="modal-content">
+                    <h2>Progress</h2>
+                    <form id="range-form">
+                        <p class="range-field">
+                            <input type="range" name="range" id="test5" min="0" max="100" required/>
+                        </p>
+                        <button id="submit_range" class="btn teal lighten-2">Submit</button>
+                    </form>
+                    <h3>Update Goal</h3>
+                    <form id="update-goal-form">
+                        <input id="update_goal" type="text" name="update_goal" placeholder="Update your goal here" required/>
+                        <button id="submit_update" class="btn teal lighten-2">Update</button>
+                    </form>
+                </div>
+            </div>
 
+            <!-- Modal Trigger -->
+            <a class="waves-effect waves-light btn modal-trigger" href="#modal_week">Week</a>
+
+            <!-- Modal Structure -->
+            <div id="modal_week" class="modal">
+                <div class="modal-content">
+                <h4>Week</h4>
+                </div>
+            </div>
+
+            <!-- Modal Trigger -->
+            <a class="waves-effect waves-light btn modal-trigger" href="#modal_month">Month</a>
+
+            <!-- Modal Structure -->
+            <div id="modal_month" class="modal">
+                <div class="modal-content">
+                <h4>Month</h4>
+                </div>
+            </div>
+
+            <!-- Modal Trigger -->
+            <a class="waves-effect waves-light btn modal-trigger" href="#modal_year">Year</a>
+
+            <!-- Modal Structure -->
+            <div id="modal_year" class="modal">
+                <div class="modal-content">
+                <h4>Year</h4>
+                </div>
+            </div>
+
+                <!-- Tabs -->
+                <ul id="tabs-swipe-demo" class="tabs teal lighten-2" style="margin-top: 15px;">
+                    <li class="tab col s3">
+                        <a href="#test-swipe-1" class="grey-text text-lighten-5">Health</a>
+                    </li>
+                    <li class="tab col s3">
+                        <a href="#test-swipe-2" class="grey-text text-lighten-5">Career</a>
+                    </li>
+                    <li class="tab col s3">
+                        <a href="#test-swipe-3" class="grey-text text-lighten-5">Personal</a>
+                    </li>
+                    <li class="tab col s3">
+                        <a href="#test-swipe-4" class="grey-text text-lighten-5">Financial</a>
+                    </li>
+                    <li class="tab col s3">
+                        <a href="#test-swipe-5" class="grey-text text-lighten-5">Other</a>
+                    </li>
+                </ul>
+                <!-- Contents inside tabs -->
+                <div id="test-swipe-1" class="col s12" style="overflow: auto;"></div>
+                <div id="test-swipe-2" class="col s12" style="overflow: auto;"></div>
+                <div id="test-swipe-3" class="col s12" style="overflow: auto;"></div>
+                <div id="test-swipe-4" class="col s12" style="overflow: auto;"></div>
+                <div id="test-swipe-5" class="col s12" style="overflow: auto;"></div>
+
+        </div>
+<!-- 
+        <button id="logout-btn" class="waves-effect btn red">
+            Logout
+            <i class="material-icons right">input</i>
+        </button> -->
     </div>
-
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
@@ -65,16 +182,17 @@
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-storage.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-functions.js"></script>
 
-    <!-- TODO: Add SDKs for Firebase products that you want to use
- https://firebase.google.com/docs/web/setup#available-libraries -->
-    <!-- <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script> -->
 
     <script src="/js/firebase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- jQuery scripts go at the top -->
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- <script src="https://code.jquery.com/jquery-3.5.0.min.js"
+        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script> -->
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <script src="/js/navbar.js"></script>
     <script src="/js/user-main-page.js"></script>
 </body>
-
-
 
 </html>

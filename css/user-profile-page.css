@@ -44,7 +44,7 @@ i,
 }
 
 #picture-container i {
-  font-size: 800% !important;
+  font-size: 400% !important;
   color: rgba(212, 212, 212, 0.959);
   transition: 0.3s ease-in-out;
 }
