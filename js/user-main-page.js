@@ -503,9 +503,22 @@ submit_range.addEventListener('submit', (e) => {
   //Show red, orange and green based on the submitted range
   changeColour(submit_range.range.value, get_id);
 
+  // popup modal when range has submitted
   if(submit_range.range.value == 100){
     modal_congrats = document.querySelector("#modal_congrats");
     M.Modal.getInstance(modal_congrats).open();
+  }
+
+  // popup modal when range has submitted
+  if(submit_range.range.value >= 25 && submit_range.range.value <= 95 ){
+    modal_awesome = document.querySelector("#modal_awesome");
+    M.Modal.getInstance(modal_awesome).open();
+  }
+
+  // popup modal when range has submitted
+  if(submit_range.range.value < 25){
+    modal_keep_going = document.querySelector("#modal_keep_going");
+    M.Modal.getInstance(modal_keep_going).open();
   }
 
   M.Modal.getInstance(modal).close();
@@ -514,7 +527,7 @@ submit_range.addEventListener('submit', (e) => {
 function changeColour(range_value, id_value) {
   var change_colours = ["showRed", "showOrange", "showYellow", "showGreen"];
 
-  if (range_value < 25) {
+  if (range_value <= 25) {
     //Show red
     for (var i = 0; i <= change_colours.length; i++) {
       $('#change_colour[data-id="' + id_value + '"]').removeClass(change_colours[i]);
@@ -523,7 +536,7 @@ function changeColour(range_value, id_value) {
     }
   }
 
-  if (range_value > 25) {
+  if (range_value >= 25) {
     //show orange
     for (var i = 0; i <= change_colours.length; i++) {
       $('#change_colour[data-id="' + id_value + '"]').removeClass(change_colours[i]);
@@ -532,7 +545,7 @@ function changeColour(range_value, id_value) {
     }
   }
 
-  if (range_value > 95) {
+  if (range_value >= 95) {
     //show green
     for (var i = 0; i <= change_colours.length; i++) {
       $('#change_colour[data-id="' + id_value + '"]').removeClass(change_colours[i]);

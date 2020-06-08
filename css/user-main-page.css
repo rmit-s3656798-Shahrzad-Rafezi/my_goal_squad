@@ -16,6 +16,15 @@ h5 {
     margin-bottom: 5%;
   }
 }
+.done{
+  color: #4db6ac;
+}
+.mood{
+  color: #ffb74d;
+}
+.show_chart{
+  color: #ef9a9a;
+}
 
 /* week, month, year modal styles */
 .card-panel.week{
