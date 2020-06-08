@@ -503,6 +503,11 @@ submit_range.addEventListener('submit', (e) => {
   //Show red, orange and green based on the submitted range
   changeColour(submit_range.range.value, get_id);
 
+  if(submit_range.range.value == 100){
+    modal_congrats = document.querySelector("#modal_congrats");
+    M.Modal.getInstance(modal_congrats).open();
+  }
+
   M.Modal.getInstance(modal).close();
 });
 
