@@ -555,8 +555,8 @@ auth.onAuthStateChanged((user) => {
     const year_modal = document.querySelector('#modal_year');
     for (var i = 0; i <= years.length - 1; i++) {
       const html = `
-      <div class="card-panel month row">
-        <button id="year_num" value="${years[i]}">${years[i]}</button>
+      <div class="card-panel year row">
+        <button id="year_num" value="${years[i]}" class="btn-flat" style="margin-left: 50px;">${years[i]}</button>
       </div>
       `;
       year_modal.innerHTML += html;
@@ -580,7 +580,7 @@ auth.onAuthStateChanged((user) => {
     for (var i = 0; i <= months.length - 1; i++) {
       const html = `
       <div class="card-panel month row">
-        <button id="month_num" value="${months[i]}">${months[i]}</button>
+        <button id="month_num" value="${months[i]}" class="btn-flat" style="margin-left: 40px;">${months[i]}</button>
       </div>
       `;
       month_modal.innerHTML += html;
@@ -604,7 +604,7 @@ auth.onAuthStateChanged((user) => {
     for (var i = 0; i <= weeks.length - 1; i++) {
       const html = `
       <div class="card-panel week row">
-        <button id="week_num" value="${weeks[i]}">${weeks[i]}</button>
+        <button id="week_num" value="${weeks[i]}" class="btn-flat" style="margin-left: 35px;">${weeks[i]}</button>
       </div>
       `;
       week_modal.innerHTML += html;
