@@ -16,68 +16,13 @@
 
     <div class="container">
         <h2>Admin Page</h2>
-
-        <!-- <button id="test-btn" class="waves-effect btn green ">Test
-        </button> -->
-
-        <div id="modal-signup" class="modal">
-            <div class="modal-content">
-                <form id="signup-form">
-                    <h5>Register New User</h5>
-                    <div class="input-field">
-                        <input type="text" id="user-name" required />
-                        <label for="user-name">Name</label>
-                    </div>
-                    <div class="input-field">
-                        <input type="email" id="signup-email" required />
-                        <label for="signup-email">Email Address</label>
-                    </div>
-                    <div class="input-field">
-                        <input type="password" id="signup-password" required />
-                        <label for="signup-password">Passwords</label>
-                    </div>
-                    <div class="input-field">
-                        <input placeholder="<+ country code><phone number>" type="tel" id="signup-number" required />
-                        <label for="signup-number">Enter Your Number</label>
-                    </div>
-                    <div id="error-message"></div>
-                    <button class="waves-effect waves-orange btn signup-button">Register
-                    </button>
-                </form>
-            </div>
-        </div>
-
-        <div id="modal-qotd" class="modal">
-            <div class="modal-content">
-                <h5>Upload Quotes</h5>
-                <div class="progress">
-                    <div id="pgb" class="determinate"></div>
-                </div>
-                <form id="file-upload-form">
-                    <div id="file-upload" class="file-field">
-                        <div class="btn">
-                            <!-- CLIENT SIDE VALIDATION ONLY -->
-                            <span>Picture</span>
-                            <input id="upload-file-btn" type="file" , accept="image/*">
-                        </div>
-                        <div class="file-path-wrapper">
-                            <input class="file-path validate" type="text">
-                        </div>
-                    </div>
-                    <button class="waves-effect waves-orange btn submit-quote-button">Submit
-                    </button>
-                </form>
-            </div>
-        </div>
-
-
+        <input list="select_id_user" name="userlist" id="userlist" placeholder="find ID of user" onchange="selectuser()">
+        <datalist id="select_id_user">
+        </datalist>
         <div id="modal-addgoal" class="modal">
             <div class="modal-content">
                 <h6>ADD NEW GOAL</h6>
                 <form id="todo-form">
-                    <input list="select_id_user" name="userlist" id="userlist">
-                    <datalist id="select_id_user">
-                    </datalist>
                     <h6 id="username"></h6>
                     <input id="todo" type="text" name="todo" placeholder="Add goals that you want to achieve" />
                     <select id="select_id_year">
@@ -105,32 +50,64 @@
                 </form>
             </div>
         </div>
-        
-        <form id="make-admin">
-            <h6>Make User an admin</h6>
-            <div class="input-field">
-                <input type="email" id="admin-email" required />
-                <label for="admin-email">Enter Email to make Admin</label>
-            </div>
-            <button id="admin-btn" class="waves-effect btn orange">Make admin</button>
-        </form>
 
-        <button id="usergoal-btn" data-target='modal-addgoal'
-            class="waves-effect btn modal-trigger Blue darken-3 button">New goal
-        </button>
+        <div class="fixed-action-btn">
+            <button data-target='modal-addgoal'
+                class="waves-effect btn-floating btn-large modal-trigger grey darken-3 ">
+                <i class="large material-icons">add</i>
+            </button>
+        </div>
 
-        <button id="register-btn" data-target='modal-signup'
-            class="waves-effect btn modal-trigger grey darken-3 button">New
-            User
-        </button>
 
-        <button id="qotd-btn" data-target="modal-qotd"
-            class="waves-effect btn modal-trigger orange darken-3 button">Quote Of The Day</button>
+        <!-- Slider Functionality -->
+        <!-- Tabs -->
+        <ul id="tabs-swipe-demo" class="tabs">
+            <li class="tab col s3">
+                <a href="#test-swipe-1">Health</a>
+            </li>
+            <li class="tab col s3">
+                <a class="active" href="#test-swipe-2">Career</a>
+            </li>
+            <li class="tab col s3">
+                <a href="#test-swipe-3">Personal</a>
+            </li>
+            <li class="tab col s3">
+                <a href="#test-swipe-4">Financial</a>
+            </li>
+            <li class="tab col s3">
+                <a href="#test-swipe-5">Other</a>
+            </li>
+        </ul>
 
+        <!-- Contents inside tabs -->
+        <div id="test-swipe-1" class="col s12">
+        </div>
+
+        <div id="test-swipe-2" class="col s12">
+        </div>
+
+        <div id="test-swipe-3" class="col s12">
+        </div>
+
+        <div id="test-swipe-4" class="col s12">
+        </div>
+
+        <div id="test-swipe-5" class="col s12">
+        </div>
+
+        <!-- Display todo list -->
+        <!-- <div class="todo-lists"></div> -->
+        <!-- Contents inside tabs -->
+        <div id="test-swipe-1" class="col s12" style="overflow: auto;"></div>
+        <div id="test-swipe-2" class="col s12" style="overflow: auto;"></div>
+        <div id="test-swipe-3" class="col s12" style="overflow: auto;"></div>
+        <div id="test-swipe-4" class="col s12" style="overflow: auto;"></div>
+        <div id="test-swipe-5" class="col s12" style="overflow: auto;"></div>
         <button id="logout-btn" class="waves-effect btn red button">Logout
             <i class="material-icons right">input</i>
         </button>
     </div>
+
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
@@ -144,7 +121,7 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
 
     <script src="/js/firebase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="/js/admin-page.js"></script>
+    <script src="/js/admin-clientdetail.js"></script>
 </body>
 
 </html>
