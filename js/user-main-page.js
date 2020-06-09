@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function search_task() {
+  // When user opens the app, it will bring the default goals (Week1, January, current year)
   var user = firebase.auth().currentUser;
   if (select_week == null) {
 
@@ -43,39 +44,48 @@ function search_task() {
     const other_tab = document.querySelector('#test-swipe-5');
     other_tab.innerHTML = "";
 
-    console.log('test1')
+    //console.log('test1');
     select_week = 'Week1';
+
     if (select_month == null) {
-      console.log('test2')
+      //console.log('test2');
       select_month = 'January';
+
       if (select_year == null) {
-        console.log('test3')
+        //console.log('test3');
         select_year = current_year.toString();
-        console.log('test4')
+
+        //console.log('test4');
         for (var i = 0; i <= types.length - 1; i++) {
           display(user.uid, select_year, select_month, select_week, types[i]);
         }
+  //////////////////////////////////////////////////////////////
+    // When user chooses different year   
       } else {
-        console.log('test5')
+        //console.log('test5');
         for (var i = 0; i <= types.length - 1; i++) {
           display(user.uid, select_year, select_month, select_week, types[i]);
         }
       }
+    ////////////////////////////////////
+    // When user chooses different month
     } else {
       if (select_year == null) {
-        console.log('test6');
+        //console.log('test6');
         select_year = current_year.toString();
-        console.log('test7');
+        //console.log('test7');
         for (var i = 0; i <= types.length - 1; i++) {
           display(user.uid, select_year, select_month, select_week, types[i]);
         }
       } else {
-        console.log('test8');
+        //console.log('test8');
         for (var i = 0; i <= types.length - 1; i++) {
           display(user.uid, select_year, select_month, select_week, types[i]);
         }
       }
     }
+    ///////////////////////////////////
+    // When user chooses different week
   } else {
     const health_tab = document.querySelector('#test-swipe-1');
     health_tab.innerHTML = "";
@@ -93,35 +103,39 @@ function search_task() {
     other_tab.innerHTML = "";
 
     if (select_month == null) {
-      console.log('test9')
+      //console.log('test9');
       select_month = 'January';
+
       if (select_year == null) {
-        console.log('test10')
+        //console.log('test10');
         select_year = current_year.toString();
+
         for (var i = 0; i <= types.length - 1; i++) {
           display(user.uid, select_year, select_month, select_week, types[i]);
         }
       } else {
-        console.log('test11')
+        //console.log('test11');
         for (var i = 0; i <= types.length - 1; i++) {
           display(user.uid, select_year, select_month, select_week, types[i]);
         }
       }
     } else {
       if (select_year == null) {
-        console.log('test12')
+        //console.log('test12');
         select_year = current_year.toString();
+
         for (var i = 0; i <= types.length - 1; i++) {
           display(user.uid, select_year, select_month, select_week, types[i]);
         }
       } else {
-        console.log('test13')
+        //console.log('test13');
         for (var i = 0; i <= types.length - 1; i++) {
           display(user.uid, select_year, select_month, select_week, types[i]);
         }
       }
     }
   }
+  ////////////////////////////////////////
 }
 
 // Display Years
@@ -470,7 +484,6 @@ const render_new_goal = (data, id) => {
 modal = document.querySelector("#modal1");
 
 const update_goal_form = document.querySelector('#update-goal-form');
-
 function update_goal(userID, year, month, week, type, docID, todo) {
   db.collection('users').doc(userID)
     .collection('Goals').doc('Year')
@@ -569,7 +582,7 @@ auth.onAuthStateChanged((user) => {
 
     search_task()
 
-    //Display years in modal
+    //  Display years in modal
     const year_modal = document.querySelector('#modal_year');
     for (var i = 0; i <= years.length - 1; i++) {
       const html = `
@@ -580,20 +593,19 @@ auth.onAuthStateChanged((user) => {
       year_modal.innerHTML += html;
     }
 
-    // select year from the modal
+    // Select year from the modal
     const year = document.querySelectorAll('#year_num');
     for (var i = 0; i < year.length; i++) {
       year[i].addEventListener("click", function () {
         select_year = this.value;
-        console.log(select_year);
+        //console.log(select_year);
         search_task();
-        //test();
         const modal = document.querySelector("#modal_year");
         M.Modal.getInstance(modal).close();
       });
     }
 
-    //Display months in modal
+    // Display months in modal
     const month_modal = document.querySelector('#modal_month');
     for (var i = 0; i <= months.length - 1; i++) {
       const html = `
@@ -604,14 +616,13 @@ auth.onAuthStateChanged((user) => {
       month_modal.innerHTML += html;
     }
 
-    // select month from the modal
+    // Select month from the modal
     const month = document.querySelectorAll('#month_num');
     for (var i = 0; i < month.length; i++) {
       month[i].addEventListener("click", function () {
         select_month = this.value;
-        console.log(select_month);
+        //console.log(select_month);
         search_task();
-        //test();
         const modal = document.querySelector("#modal_month");
         M.Modal.getInstance(modal).close();
       });
@@ -628,14 +639,13 @@ auth.onAuthStateChanged((user) => {
       week_modal.innerHTML += html;
     }
 
-    // select week from the modal
+    // Select week from the modal
     const week = document.querySelectorAll('#week_num');
     for (var i = 0; i < week.length; i++) {
       week[i].addEventListener("click", function () {
         select_week = this.value;
-        console.log(select_week);
+        //console.log(select_week);
         search_task();
-        //test();
         const modal = document.querySelector("#modal_week");
         M.Modal.getInstance(modal).close();
       });
@@ -677,7 +687,7 @@ auth.onAuthStateChanged((user) => {
       }
     });
 
-    //Update range from Personal tab
+    // Update range from Personal tab
     const personal_tab = document.querySelector('#test-swipe-3');
     personal_tab.addEventListener('click', e => {
       if (e.target.tagName === 'A') {
@@ -687,7 +697,7 @@ auth.onAuthStateChanged((user) => {
       }
     });
 
-    //Update range from Financial tab
+    // Update range from Financial tab
     const financial_tab = document.querySelector('#test-swipe-4');
     financial_tab.addEventListener('click', e => {
       if (e.target.tagName === 'A') {
@@ -697,7 +707,7 @@ auth.onAuthStateChanged((user) => {
       }
     });
 
-    //Update range from Other tab
+    // Update range from Other tab
     const other_tab = document.querySelector('#test-swipe-5');
     other_tab.addEventListener('click', e => {
       if (e.target.tagName === 'A') {
@@ -707,7 +717,7 @@ auth.onAuthStateChanged((user) => {
       }
     });
 
-    //Delete the list from Health tab
+    // Delete the list from Health tab
     const healthContainer = document.querySelector('#test-swipe-1');
     healthContainer.addEventListener('click', e => {
       if (e.target.tagName === 'I') {
@@ -716,7 +726,7 @@ auth.onAuthStateChanged((user) => {
       }
     });
 
-    //Delete the list from Career tab
+    // Delete the list from Career tab
     const careerContainer = document.querySelector('#test-swipe-2');
     careerContainer.addEventListener('click', e => {
       if (e.target.tagName === 'I') {
@@ -725,7 +735,7 @@ auth.onAuthStateChanged((user) => {
       }
     });
 
-    //Delete the list from Personal tab
+    // Delete the list from Personal tab
     const personalContainer = document.querySelector('#test-swipe-3');
     personalContainer.addEventListener('click', e => {
       if (e.target.tagName === 'I') {
@@ -734,7 +744,7 @@ auth.onAuthStateChanged((user) => {
       }
     });
 
-    //Delete the list from Financial tab
+    // Delete the list from Financial tab
     const financialContainer = document.querySelector('#test-swipe-4');
     financialContainer.addEventListener('click', e => {
       if (e.target.tagName === 'I') {
@@ -743,7 +753,7 @@ auth.onAuthStateChanged((user) => {
       }
     });
 
-    //Delete the list from Other tab
+    // Delete the list from Other tab
     const otherContainer = document.querySelector('#test-swipe-5');
     otherContainer.addEventListener('click', e => {
       if (e.target.tagName === 'I') {
@@ -758,17 +768,7 @@ auth.onAuthStateChanged((user) => {
   }
 });
 
-// //Logout Button
-// const logout = document.querySelector("#logout-btn");
-
-// logout.addEventListener("click", (e) => {
-//   e.preventDefault();
-//   auth.signOut().then(() => {
-//     window.location.href = "../index.html";
-//   });
-// });
-
-//Confirm messsage
+// Confirm message
 var Confirmyear = document.getElementById("select_id_year");
 var Confirmmonth = document.getElementById("select_id_month");
 var Confirmweek = document.getElementById("select_id_week");
