@@ -25,6 +25,10 @@ h5 {
 .show_chart{
   color: #ef9a9a;
 }
+#current_week, #current_month, #current_year{
+  padding-right: 5px;
+  display: inline-block;
+}
 
 /* week, month, year modal styles */
 .card-panel.week{

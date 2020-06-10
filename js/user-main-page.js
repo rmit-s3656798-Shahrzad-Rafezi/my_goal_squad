@@ -24,6 +24,10 @@ document.addEventListener('DOMContentLoaded', function () {
   M.Modal.init(modal);
 });
 
+const current_week = document.querySelector("#current_week");
+const current_month = document.querySelector("#current_month");
+const current_this_year = document.querySelector("#current_year");
+
 function search_task() {
   // When user opens the app, it will bring the default goals (Week1, January, current year)
   var user = firebase.auth().currentUser;
@@ -46,14 +50,17 @@ function search_task() {
 
     //console.log('test1');
     select_week = 'Week1';
+    current_week.innerHTML = select_week;
 
     if (select_month == null) {
       //console.log('test2');
       select_month = 'January';
+      current_month.innerHTML = select_month;
 
       if (select_year == null) {
         //console.log('test3');
         select_year = current_year.toString();
+        current_this_year.innerHTML = select_year;
 
         //console.log('test4');
         for (var i = 0; i <= types.length - 1; i++) {
@@ -598,7 +605,7 @@ auth.onAuthStateChanged((user) => {
     for (var i = 0; i < year.length; i++) {
       year[i].addEventListener("click", function () {
         select_year = this.value;
-        //console.log(select_year);
+        current_this_year.innerHTML = select_year;
         search_task();
         const modal = document.querySelector("#modal_year");
         M.Modal.getInstance(modal).close();
@@ -621,7 +628,7 @@ auth.onAuthStateChanged((user) => {
     for (var i = 0; i < month.length; i++) {
       month[i].addEventListener("click", function () {
         select_month = this.value;
-        //console.log(select_month);
+        current_month.innerHTML = select_month;
         search_task();
         const modal = document.querySelector("#modal_month");
         M.Modal.getInstance(modal).close();
@@ -644,7 +651,7 @@ auth.onAuthStateChanged((user) => {
     for (var i = 0; i < week.length; i++) {
       week[i].addEventListener("click", function () {
         select_week = this.value;
-        //console.log(select_week);
+        current_week.innerHTML = select_week;
         search_task();
         const modal = document.querySelector("#modal_week");
         M.Modal.getInstance(modal).close();
