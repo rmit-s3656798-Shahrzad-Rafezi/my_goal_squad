@@ -69,42 +69,6 @@
                 </form>
             </div>
         </div>
-
-
-        <div id="modal-addgoal" class="modal">
-            <div class="modal-content">
-                <h6>ADD NEW GOAL</h6>
-                <form id="todo-form">
-                    <input list="select_id_user" name="userlist" id="userlist">
-                    <datalist id="select_id_user">
-                    </datalist>
-                    <h6 id="username"></h6>
-                    <input id="todo" type="text" name="todo" placeholder="Add goals that you want to achieve" />
-                    <select id="select_id_year">
-                        <option value="" disabled selected>Select Year</option>
-                    </select>
-                    <select id="select_id_month">
-                        <option value="" disabled selected>Select Month</option>
-                    </select>
-                    <select id="select_id_week">
-                        <option value="" disabled selected>Select Week</option>
-                    </select>
-                    <select id="select_id_type">
-                        <option value="" disabled selected>Select Type</option>
-                    </select>
-                    <a onclick="goalconfirm()" class="waves-effect waves-light btn modal-trigger"
-                        href="#goalconfirm">Add</a>
-                    <div id="goalconfirm" class="modal">
-                        <h4>Confirm</h4>
-                        <div class="modal-content">
-                            <p id="goal-confirm"></p>
-                            <p id="goal-confirm-text"></p>
-                            <button class="modal-close waves-effect waves-orange btn">Add list</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
         
         <form id="make-admin">
             <h6>Make User an admin</h6>
@@ -115,9 +79,7 @@
             <button id="admin-btn" class="waves-effect btn orange">Make admin</button>
         </form>
 
-        <button id="usergoal-btn" data-target='modal-addgoal'
-            class="waves-effect btn modal-trigger Blue darken-3 button">New goal
-        </button>
+        <a id="task-nav" href="/pages/admin-clientdetail.html">User detail</a>
 
         <button id="register-btn" data-target='modal-signup'
             class="waves-effect btn modal-trigger grey darken-3 button">New
