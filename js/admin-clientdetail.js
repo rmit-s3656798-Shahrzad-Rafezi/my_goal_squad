@@ -2,20 +2,11 @@
 auth.onAuthStateChanged((user) => {
   if (user) {
     console.log(user.email, "has logged in");
-    for (var i = 0; i <= months.length - 1; i++) {
-      for (var j = 0; j <= weeks.length - 1; j++) {
-        for (var k = 0; k <= types.length - 1; k++) {
-          display(current_year.toString(), months[i], weeks[j], types[k]);
-        }
-      }
-    }
   } else {
     console.log("user has logged out");
   }
 });
 
-// Register form
-const signupForm = document.querySelector("#signup-form");
 
 
 // Logout Button
@@ -28,19 +19,12 @@ logout.addEventListener("click", (e) => {
   });
 });
 
-// Make Admin
-const adminForm = document.querySelector("#make-admin");
 
 // Modal Triggers
 document.addEventListener('DOMContentLoaded', function () {
   var elems = document.querySelectorAll('.modal');
   var instances = M.Modal.init(elems);
 });
-
-// Upload Quote to Firebase Storage
-const progressBar = document.getElementById('pgb')
-const file_form = document.querySelector('#file-upload-form');
-const file_upload = document.getElementById('upload-file-btn');
 
 
 
@@ -49,43 +33,13 @@ function generateRandomInteger(min, max) {
   return Math.floor(min + Math.random() * (max + 1 - min))
 }
 
-// Delete Random Quote when limit is reached
-function deleteRandomQuote(limit) {
-  let x = 0;
-  var storageRef = firebase.storage().ref("quotes");
-  storageRef.listAll().then((result) => {
-    result.items.forEach((item) => {
-      x += 1;
-    });
-    if (x >= limit) {
-
-      var file = result.items[generateRandomInteger(0, 2)];
-
-      file.getMetadata().then((data) => {
-        // Create a reference to the file to delete
-        var earliestFile = storageRef.child(data.name);
-
-        // Delete the file
-        earliestFile.delete().then(function () {
-          // File deleted successfully
-          console.log("File Deleted Successfully")
-          return true;
-        }).catch(function (error) {
-          // Uh-oh, an error occurred!
-          console.log(error)
-        });
-      })
-    };
-  });
-
-}
 
 // This is for selection, tabs, modal element in HTML file (CSS Materialize)
 document.addEventListener('DOMContentLoaded', function () {
   var select = document.querySelectorAll('select');
   M.FormSelect.init(select, {});
 
-  
+
   const options = {
     duration: 300,
     onShow: null,
@@ -164,6 +118,7 @@ week_id.appendChild(week_fragment);
 // Grabs the Week value
 week_id.addEventListener('change', function () {
   chosen_week = this.value;
+  console.log(chosen_week);
 });
 
 // Display Types
@@ -235,7 +190,7 @@ db.collection("users").get().then(snapshot => {
 var chosen_user = document.getElementById("userlist");
 
 // Get data in real-time
-function display(year, month, week, type) {
+function display(clientid, year, month, week, type) {
 
   const removeList = (id) => {
     const todo = document.querySelector(`.todo[data-id="${id}"]`);
@@ -243,7 +198,7 @@ function display(year, month, week, type) {
   };
 
   if (type == "Health") {
-    db.collection('users').doc("2ISIor1btaNuRthT3Z8jdYIcLKl2")
+    db.collection('users').doc(clientid)
       .collection('Goals').doc('Year')
       .collection(year).doc('Month')
       .collection(month).doc('Week')
@@ -252,7 +207,6 @@ function display(year, month, week, type) {
         let changes = snapshot.docChanges();
         changes.forEach(change => {
           if (change.type === 'added') {
-            console.log(change.doc.data())
             renderHealth(change.doc.data(), change.doc.id);
           }
           else if (change.type === 'removed') {
@@ -263,7 +217,7 @@ function display(year, month, week, type) {
   }
 
   if (type == "Career") {
-    db.collection('users').doc("2ISIor1btaNuRthT3Z8jdYIcLKl2")
+    db.collection('users').doc(clientid)
       .collection('Goals').doc('Year')
       .collection(year).doc('Month')
       .collection(month).doc('Week')
@@ -282,7 +236,7 @@ function display(year, month, week, type) {
   }
 
   if (type == "Personal") {
-    db.collection('users').doc("2ISIor1btaNuRthT3Z8jdYIcLKl2")
+    db.collection('users').doc(clientid)
       .collection('Goals').doc('Year')
       .collection(year).doc('Month')
       .collection(month).doc('Week')
@@ -301,7 +255,7 @@ function display(year, month, week, type) {
   }
 
   if (type == "Financial") {
-    db.collection('users').doc("2ISIor1btaNuRthT3Z8jdYIcLKl2")
+    db.collection('users').doc(clientid)
       .collection('Goals').doc('Year')
       .collection(year).doc('Month')
       .collection(month).doc('Week')
@@ -320,7 +274,7 @@ function display(year, month, week, type) {
   }
 
   if (type == "Other") {
-    db.collection('users').doc("2ISIor1btaNuRthT3Z8jdYIcLKl2")
+    db.collection('users').doc(clientid)
       .collection('Goals').doc('Year')
       .collection(year).doc('Month')
       .collection(month).doc('Week')
@@ -421,7 +375,7 @@ healthContainer.addEventListener('click', e => {
     for (var i = 0; i <= months.length - 1; i++) {
       for (var j = 0; j <= weeks.length - 1; j++) {
         for (var k = 0; k <= types.length - 1; k++) {
-          delete_todo_list("2ISIor1btaNuRthT3Z8jdYIcLKl2", current_year.toString(), months[i], weeks[j], types[k], id);
+          delete_todo_list(chosen_client, current_year.toString(), months[i], weeks[j], types[k], id);
         }
       }
     }
@@ -436,7 +390,7 @@ careerContainer.addEventListener('click', e => {
     for (var i = 0; i <= months.length - 1; i++) {
       for (var j = 0; j <= weeks.length - 1; j++) {
         for (var k = 0; k <= types.length - 1; k++) {
-          delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], types[k], id);
+          delete_todo_list(chosen_client, current_year.toString(), months[i], weeks[j], types[k], id);
         }
       }
     }
@@ -451,7 +405,7 @@ personalContainer.addEventListener('click', e => {
     for (var i = 0; i <= months.length - 1; i++) {
       for (var j = 0; j <= weeks.length - 1; j++) {
         for (var k = 0; k <= types.length - 1; k++) {
-          delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], types[k], id);
+          delete_todo_list(chosen_client, current_year.toString(), months[i], weeks[j], types[k], id);
         }
       }
     }
@@ -466,7 +420,7 @@ financialContainer.addEventListener('click', e => {
     for (var i = 0; i <= months.length - 1; i++) {
       for (var j = 0; j <= weeks.length - 1; j++) {
         for (var k = 0; k <= types.length - 1; k++) {
-          delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], types[k], id);
+          delete_todo_list(chosen_client, current_year.toString(), months[i], weeks[j], types[k], id);
         }
       }
     }
@@ -481,15 +435,15 @@ otherContainer.addEventListener('click', e => {
     for (var i = 0; i <= months.length - 1; i++) {
       for (var j = 0; j <= weeks.length - 1; j++) {
         for (var k = 0; k <= types.length - 1; k++) {
-          delete_todo_list(user.uid, current_year.toString(), months[i], weeks[j], types[k], id);
+          delete_todo_list(chosen_client, current_year.toString(), months[i], weeks[j], types[k], id);
         }
       }
     }
   }
 });
 
-function delete_todo_list(userID, year, month, week, type, docID) {
-  db.collection('users').doc(userID)
+function delete_todo_list(chosen_client, year, month, week, type, docID) {
+  db.collection('users').doc(chosen_client)
     .collection('Goals').doc('Year')
     .collection(year).doc('Month')
     .collection(month).doc('Week')
@@ -497,7 +451,22 @@ function delete_todo_list(userID, year, month, week, type, docID) {
     .collection(type).doc(docID).delete();
 }
 
-function selectuser(){
-  var clientid = document.getElementById("userlist"). value;
-  console.log(clientid);
-}
+  var clientid = document.getElementById("userlist");
+
+  let chosen_client = '';
+  
+  // Grabs the client value
+  clientid.addEventListener('change', function () {
+    chosen_client = this.value;
+    console.log(chosen_client);
+    for (var i = 0; i <= months.length - 1; i++) {
+      for (var j = 0; j <= weeks.length - 1; j++) {
+        for (var k = 0; k <= types.length - 1; k++) {
+          display(chosen_client, current_year.toString(), months[i], weeks[j], types[k]);
+        }
+      }
+    }
+  });
+
+ 
+
