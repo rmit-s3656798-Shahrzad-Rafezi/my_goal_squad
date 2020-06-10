@@ -1,9 +1,9 @@
 {
     "name": "My Goal Squad",
-    "short_name": "MGS",
+    "short_name": "My Goal Squad",
     "start_url": "/index.html",
     "display": "standalone",
-    "background_color": "#4db6ac",
+    "background_color": "rgb(255, 255,255)",
     "theme_color": "#4db6ac",
     "orientation": "portrait-primary",
     "icons": [
