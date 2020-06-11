@@ -54,4 +54,19 @@ h5 {
   bottom: 0px;
   right: 0px;
 }
-
+/* Range Colour */
+.showRed{
+  background-color: #ef9a9a;
+  color: white;
+}
+.showOrange{
+  background-color: #ffb74d;
+  color: white;
+}
+.showGreen{
+  background-color: #4db6ac;
+  color: white;
+}
+a.whiteText{
+  color: white;
+}
