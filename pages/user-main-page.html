@@ -92,14 +92,14 @@
             <!-- This is for adding range/updating goals for each task -->
             <div id="modal1" class="modal">
                 <div class="modal-content">
-                    <h2>Progress</h2>
+                    <h5>Progress</h5>
                     <form id="range-form">
                         <p class="range-field">
                             <input type="range" name="range" id="test5" min="0" max="100" required/>
                         </p>
                         <button id="submit_range" class="btn teal lighten-2">Submit</button>
                     </form>
-                    <h3>Update Goal</h3>
+                    <h5>Update Goal</h5>
                     <form id="update-goal-form">
                         <input id="update_goal" type="text" name="update_goal" placeholder="Update your goal here" required/>
                         <button id="submit_update" class="btn teal lighten-2">Update</button>
@@ -131,7 +131,7 @@
             <!------------------------------------->
 
             <!-- Modal Trigger -->
-            <a class="waves-effect waves-light btn modal-trigger" href="#modal_week">Week</a>
+            <a id='modal_week_button' class="waves-effect waves-light btn modal-trigger" href="#modal_week">Week</a>
 
             <!-- Modal Structure -->
             <div id="modal_week" class="modal">
@@ -141,7 +141,7 @@
             </div>
 
             <!-- Modal Trigger -->
-            <a class="waves-effect waves-light btn modal-trigger" href="#modal_month">Month</a>
+            <a id='modal_month_button' class="waves-effect waves-light btn modal-trigger" href="#modal_month">Month</a>
 
             <!-- Modal Structure -->
             <div id="modal_month" class="modal">
@@ -151,7 +151,7 @@
             </div>
 
             <!-- Modal Trigger -->
-            <a class="waves-effect waves-light btn modal-trigger" href="#modal_year">Year</a>
+            <a id='modal_year_button' class="waves-effect waves-light btn modal-trigger" href="#modal_year">Year</a>
 
             <!-- Modal Structure -->
             <div id="modal_year" class="modal">
@@ -167,21 +167,21 @@
             </div>
 
                 <!-- Tabs -->
-                <ul id="tabs-swipe-demo" class="tabs teal lighten-2" style="margin-top: 15px;">
+                <ul id="tabs-swipe-demo" class="tabs transparent" style="margin-top: 15px;">
                     <li class="tab col s3">
-                        <a href="#test-swipe-1" class="grey-text text-lighten-5">Health</a>
+                        <a href="#test-swipe-1" class="grey-text">Health</a>
                     </li>
                     <li class="tab col s3">
-                        <a href="#test-swipe-2" class="grey-text text-lighten-5">Career</a>
+                        <a href="#test-swipe-2" class="grey-text">Career</a>
                     </li>
                     <li class="tab col s3">
-                        <a href="#test-swipe-3" class="grey-text text-lighten-5">Personal</a>
+                        <a href="#test-swipe-3" class="grey-text">Personal</a>
                     </li>
                     <li class="tab col s3">
-                        <a href="#test-swipe-4" class="grey-text text-lighten-5">Financial</a>
+                        <a href="#test-swipe-4" class="grey-text">Financial</a>
                     </li>
                     <li class="tab col s3">
-                        <a href="#test-swipe-5" class="grey-text text-lighten-5">Other</a>
+                        <a href="#test-swipe-5" class="grey-text">Other</a>
                     </li>
                 </ul>
                 

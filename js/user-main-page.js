@@ -394,7 +394,7 @@ const renderHealth = (data, id) => {
     <div id="change_colour" class="card-panel todo row" data-id="${id}">
         <div class="todo-details">
           <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
-          <p class="update_range" data-id="${id}">${data.range}</p>        
+          <p class="update_range" data-id="${id}">${data.range}%</p>        
         </div>
         <div class="todo-delete">
           <i class="material-icons" data-id="${id}">delete_outline</i>
@@ -412,7 +412,7 @@ const renderCareer = (data, id) => {
   <div id="change_colour" class="card-panel todo row" data-id="${id}">
       <div class="todo-details">
         <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
-        <p class="update_range" data-id="${id}">${data.range}</p>        
+        <p class="update_range" data-id="${id}">${data.range}%</p>        
       </div>
       <div class="todo-delete">
         <i class="material-icons" data-id="${id}">delete_outline</i>
@@ -430,7 +430,7 @@ const renderPersonal = (data, id) => {
   <div id="change_colour" class="card-panel todo row" data-id="${id}">
       <div class="todo-details">
         <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
-        <p class="update_range" data-id="${id}">${data.range}</p>        
+        <p class="update_range" data-id="${id}">${data.range}%</p>        
       </div>
       <div class="todo-delete">
         <i class="material-icons" data-id="${id}">delete_outline</i>
@@ -448,7 +448,7 @@ const renderFinancial = (data, id) => {
   <div id="change_colour" class="card-panel todo row" data-id="${id}">
       <div class="todo-details">
         <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
-        <p class="update_range" data-id="${id}">${data.range}</p>        
+        <p class="update_range" data-id="${id}">${data.range}%</p>        
       </div>
       <div class="todo-delete">
         <i class="material-icons" data-id="${id}">delete_outline</i>
@@ -466,7 +466,7 @@ const renderOther = (data, id) => {
   <div id="change_colour" class="card-panel todo row" data-id="${id}">
       <div class="todo-details">
         <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
-        <p class="update_range" data-id="${id}">${data.range}</p>        
+        <p class="update_range" data-id="${id}">${data.range}%</p>        
       </div>
       <div class="todo-delete">
         <i class="material-icons" data-id="${id}">delete_outline</i>
