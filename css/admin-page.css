@@ -35,6 +35,7 @@ h5 {
   color: rgb(240, 52, 52);
   margin-bottom: 2%;
 }
+
 .card-panel.todo{
   border-radius: 8px;
   padding: 10px;
@@ -69,4 +70,41 @@ h5 {
 }
 a.whiteText{
   color: white;
+}
+.card-panel.week{
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0px 1px 3px rgba(90,90,90,0.1);
+  display: grid;
+  grid-template-areas: "image details delete";
+  position: relative;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+.card-panel.month{
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0px 1px 3px rgba(90,90,90,0.1);
+  display: grid;
+  grid-template-areas: "image details delete";
+  position: relative;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+.card-panel.year{
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0px 1px 3px rgba(90,90,90,0.1);
+  display: grid;
+  grid-template-areas: "image details delete";
+  position: relative;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+#current_week, #current_month, #current_year{
+  padding-right: 5px;
+  display: inline-block;
+}
+.fixed-action-btn{
+  right: 75%;/*desired value*/
 }

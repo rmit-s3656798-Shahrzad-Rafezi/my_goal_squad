@@ -1,3 +1,9 @@
+var select_year = null;
+var select_month = null;
+var select_week = null;
+var select_type = null;
+var get_id = null;
+
 // listen for auth changes
 auth.onAuthStateChanged((user) => {
   if (user) {
@@ -427,11 +433,7 @@ function update_goal(clientid, year, month, week, type, docID, todo) {
 
 update_goal_form.addEventListener('submit', (e) => {
   e.preventDefault();
-  for (var i = 0; i <= months.length - 1; i++) {
-    for (var j = 0; j <= weeks.length - 1; j++) {
-      update_goal(chosen_client, current_year.toString(), months[i], weeks[j], select_type, get_id, update_goal_form.update_goal.value);
-    }
-  }
+  update_goal(chosen_client, select_year, select_month, select_week, select_type, get_id, update_goal_form.update_goal.value);
   M.Modal.getInstance(modal).close();
 });
 
@@ -449,11 +451,7 @@ function update_range(clientid, year, month, week, type, docID, range) {
 const submit_range = document.querySelector('#range-form');
 submit_range.addEventListener('submit', (e) => {
   e.preventDefault();
-  for (var i = 0; i <= months.length - 1; i++) {
-    for (var j = 0; j <= weeks.length - 1; j++) {
-      update_range(chosen_client, current_year.toString(), months[i], weeks[j], select_type, get_id, submit_range.range.value);
-    }
-  }
+  update_range(chosen_client, select_year, select_month, select_week, select_type, get_id, submit_range.range.value);
   //Show red, orange and green based on the submitted range
   changeColour(submit_range.range.value, get_id);
 
@@ -491,9 +489,6 @@ function changeColour(range_value, id_value) {
   }
 
 }
-
-var select_type = null;
-var get_id = null;
 
 // Update range from Health tab
 health_tab.addEventListener('click', e => {
@@ -544,14 +539,7 @@ const healthContainer = document.querySelector('#test-swipe-1');
 healthContainer.addEventListener('click', e => {
   if (e.target.tagName === 'I') {
     const id = e.target.getAttribute('data-id');
-    // Delete goals dynamically
-    for (var i = 0; i <= months.length - 1; i++) {
-      for (var j = 0; j <= weeks.length - 1; j++) {
-        for (var k = 0; k <= types.length - 1; k++) {
-          delete_todo_list(chosen_client, current_year.toString(), months[i], weeks[j], types[k], id);
-        }
-      }
-    }
+    delete_todo_list(chosen_client, select_year, select_month, select_week, "Health", id);
   }
 });
 
@@ -559,14 +547,7 @@ const careerContainer = document.querySelector('#test-swipe-2');
 careerContainer.addEventListener('click', e => {
   if (e.target.tagName === 'I') {
     const id = e.target.getAttribute('data-id');
-    // Delete goals dynamically
-    for (var i = 0; i <= months.length - 1; i++) {
-      for (var j = 0; j <= weeks.length - 1; j++) {
-        for (var k = 0; k <= types.length - 1; k++) {
-          delete_todo_list(chosen_client, current_year.toString(), months[i], weeks[j], types[k], id);
-        }
-      }
-    }
+    delete_todo_list(chosen_client, select_year, select_month, select_week, "Career", id);
   }
 });
 
@@ -574,14 +555,7 @@ const personalContainer = document.querySelector('#test-swipe-3');
 personalContainer.addEventListener('click', e => {
   if (e.target.tagName === 'I') {
     const id = e.target.getAttribute('data-id');
-    // Delete goals dynamically
-    for (var i = 0; i <= months.length - 1; i++) {
-      for (var j = 0; j <= weeks.length - 1; j++) {
-        for (var k = 0; k <= types.length - 1; k++) {
-          delete_todo_list(chosen_client, current_year.toString(), months[i], weeks[j], types[k], id);
-        }
-      }
-    }
+    delete_todo_list(chosen_client, select_year, select_month, select_week, "Personal", id);
   }
 });
 
@@ -589,14 +563,7 @@ const financialContainer = document.querySelector('#test-swipe-4');
 financialContainer.addEventListener('click', e => {
   if (e.target.tagName === 'I') {
     const id = e.target.getAttribute('data-id');
-    // Delete goals dynamically
-    for (var i = 0; i <= months.length - 1; i++) {
-      for (var j = 0; j <= weeks.length - 1; j++) {
-        for (var k = 0; k <= types.length - 1; k++) {
-          delete_todo_list(chosen_client, current_year.toString(), months[i], weeks[j], types[k], id);
-        }
-      }
-    }
+    delete_todo_list(chosen_client, select_year, select_month, select_week, "Financial", id);
   }
 });
 
@@ -604,14 +571,7 @@ const otherContainer = document.querySelector('#test-swipe-5');
 otherContainer.addEventListener('click', e => {
   if (e.target.tagName === 'I') {
     const id = e.target.getAttribute('data-id');
-    // Delete goals dynamically
-    for (var i = 0; i <= months.length - 1; i++) {
-      for (var j = 0; j <= weeks.length - 1; j++) {
-        for (var k = 0; k <= types.length - 1; k++) {
-          delete_todo_list(chosen_client, current_year.toString(), months[i], weeks[j], types[k], id);
-        }
-      }
-    }
+    delete_todo_list(chosen_client, select_year, select_month, select_week, "Other", id);
   }
 });
 
@@ -632,11 +592,185 @@ let chosen_client = '';
 clientid.addEventListener('change', function () {
   chosen_client = this.value;
   console.log(chosen_client);
-  for (var i = 0; i <= months.length - 1; i++) {
-    for (var j = 0; j <= weeks.length - 1; j++) {
-      for (var k = 0; k <= types.length - 1; k++) {
-        display(chosen_client, current_year.toString(), months[i], weeks[j], types[k]);
+  search_task();
+  // for (var i = 0; i <= months.length - 1; i++) {
+  //   for (var j = 0; j <= weeks.length - 1; j++) {
+  //     for (var k = 0; k <= types.length - 1; k++) {
+  //       display(chosen_client, current_year.toString(), months[i], weeks[j], types[k]);
+  //     }
+  //   }
+  // }
+});
+
+const current_week = document.querySelector("#current_week");
+const current_month = document.querySelector("#current_month");
+const current_this_year = document.querySelector("#current_year");
+
+// Display years in modal
+const year_modal = document.querySelector('#modal_year');
+for (var i = 0; i <= years.length - 1; i++) {
+  const html = `
+  <div class="card-panel year row">
+    <button id="year_num" value="${years[i]}" class="btn-flat" style="margin-left: 50px;">${years[i]}</button>
+  </div>
+  `;
+  year_modal.innerHTML += html;
+}
+
+// Select year from the modal
+const year = document.querySelectorAll('#year_num');
+for (var i = 0; i < year.length; i++) {
+  year[i].addEventListener("click", function () {
+    select_year = this.value;
+    current_this_year.innerHTML = select_year;
+    search_task();
+    const modal = document.querySelector("#modal_year");
+    M.Modal.getInstance(modal).close();
+  });
+}
+
+// Display months in modal
+const month_modal = document.querySelector('#modal_month');
+for (var i = 0; i <= months.length - 1; i++) {
+  const html = `
+  <div class="card-panel month row">
+    <button id="month_num" value="${months[i]}" class="btn-flat" style="margin-left: 40px;">${months[i]}</button>
+  </div>
+  `;
+  month_modal.innerHTML += html;
+}
+
+// Select month from the modal
+const month = document.querySelectorAll('#month_num');
+for (var i = 0; i < month.length; i++) {
+  month[i].addEventListener("click", function () {
+    select_month = this.value;
+    current_month.innerHTML = select_month;
+    search_task();
+    const modal = document.querySelector("#modal_month");
+    M.Modal.getInstance(modal).close();
+  });
+}
+
+// Display weeks in modal
+const week_modal = document.querySelector('#modal_week');
+for (var i = 0; i <= weeks.length - 1; i++) {
+  const html = `
+  <div class="card-panel week row">
+    <button id="week_num" value="${weeks[i]}" class="btn-flat" style="margin-left: 35px;">${weeks[i]}</button>
+  </div>
+  `;
+  week_modal.innerHTML += html;
+}
+
+// Select week from the modal
+const week = document.querySelectorAll('#week_num');
+for (var i = 0; i < week.length; i++) {
+  week[i].addEventListener("click", function () {
+    select_week = this.value;
+    current_week.innerHTML = select_week;
+    search_task();
+    const modal = document.querySelector("#modal_week");
+    M.Modal.getInstance(modal).close();
+  });
+}
+
+function search_task() {
+
+  if (select_week == null) {
+
+    const health_tab = document.querySelector('#test-swipe-1');
+    health_tab.innerHTML = "";
+
+    const career_tab = document.querySelector('#test-swipe-2');
+    career_tab.innerHTML = "";
+
+    const personal_tab = document.querySelector('#test-swipe-3');
+    personal_tab.innerHTML = "";
+
+    const financial_tab = document.querySelector('#test-swipe-4');
+    financial_tab.innerHTML = "";
+
+    const other_tab = document.querySelector('#test-swipe-5');
+    other_tab.innerHTML = "";
+
+    select_week = 'Week1';
+    current_week.innerHTML = select_week;
+
+    if (select_month == null) {
+      select_month = 'January';
+      current_month.innerHTML = select_month;
+
+      if (select_year == null) {
+        select_year = current_year.toString();
+        current_this_year.innerHTML = select_year;
+
+        for (var i = 0; i <= types.length - 1; i++) {
+          if(chosen_client != ''){
+            display(chosen_client, select_year, select_month, select_week, types[i]);
+          }
+        }
+      } else {
+        for (var i = 0; i <= types.length - 1; i++) {
+          display(chosen_client, select_year, select_month, select_week, types[i]);
+        }
+      }
+    } else {
+      if (select_year == null) {
+        select_year = current_year.toString();
+
+        for (var i = 0; i <= types.length - 1; i++) {
+          display(chosen_client, select_year, select_month, select_week, types[i]);
+        }
+      } else {
+
+        for (var i = 0; i <= types.length - 1; i++) {
+          display(chosen_client, select_year, select_month, select_week, types[i]);
+        }
+      }
+    }
+  } else {
+    const health_tab = document.querySelector('#test-swipe-1');
+    health_tab.innerHTML = "";
+
+    const career_tab = document.querySelector('#test-swipe-2');
+    career_tab.innerHTML = "";
+
+    const personal_tab = document.querySelector('#test-swipe-3');
+    personal_tab.innerHTML = "";
+
+    const financial_tab = document.querySelector('#test-swipe-4');
+    financial_tab.innerHTML = "";
+
+    const other_tab = document.querySelector('#test-swipe-5');
+    other_tab.innerHTML = "";
+
+    if (select_month == null) {
+      select_month = 'January';
+
+      if (select_year == null) {
+        select_year = current_year.toString();
+
+        for (var i = 0; i <= types.length - 1; i++) {
+          display(chosen_client, select_year, select_month, select_week, types[i]);
+        }
+      } else {
+        for (var i = 0; i <= types.length - 1; i++) {
+          display(chosen_client, select_year, select_month, select_week, types[i]);
+        }
+      }
+    } else {
+      if (select_year == null) {
+        select_year = current_year.toString();
+
+        for (var i = 0; i <= types.length - 1; i++) {
+          display(chosen_client, select_year, select_month, select_week, types[i]);
+        }
+      } else {
+        for (var i = 0; i <= types.length - 1; i++) {
+          display(chosen_client, select_year, select_month, select_week, types[i]);
+        }
       }
     }
   }
-});
+}
