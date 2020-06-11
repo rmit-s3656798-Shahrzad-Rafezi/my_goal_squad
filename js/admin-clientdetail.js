@@ -183,10 +183,15 @@ db.collection("users").get().then(snapshot => {
 var chosen_user = document.getElementById("userlist");
 
 // Get data in real-time
-function display(userID, year, month, week, type) {
+function display(clientid, year, month, week, type) {
+
+  const removeList = (id) => {
+    const todo = document.querySelector(`.todo[data-id="${id}"]`);
+    todo.remove();
+  };
 
   if (type == "Health") {
-    db.collection('users').doc(userID)
+    db.collection('users').doc(clientid)
       .collection('Goals').doc('Year')
       .collection(year).doc('Month')
       .collection(month).doc('Week')
@@ -210,7 +215,7 @@ function display(userID, year, month, week, type) {
   }
 
   if (type == "Career") {
-    db.collection('users').doc(userID)
+    db.collection('users').doc(clientid)
       .collection('Goals').doc('Year')
       .collection(year).doc('Month')
       .collection(month).doc('Week')
@@ -234,7 +239,7 @@ function display(userID, year, month, week, type) {
   }
 
   if (type == "Personal") {
-    db.collection('users').doc(userID)
+    db.collection('users').doc(clientid)
       .collection('Goals').doc('Year')
       .collection(year).doc('Month')
       .collection(month).doc('Week')
@@ -258,7 +263,7 @@ function display(userID, year, month, week, type) {
   }
 
   if (type == "Financial") {
-    db.collection('users').doc(userID)
+    db.collection('users').doc(clientid)
       .collection('Goals').doc('Year')
       .collection(year).doc('Month')
       .collection(month).doc('Week')
@@ -282,7 +287,7 @@ function display(userID, year, month, week, type) {
   }
 
   if (type == "Other") {
-    db.collection('users').doc(userID)
+    db.collection('users').doc(clientid)
       .collection('Goals').doc('Year')
       .collection(year).doc('Month')
       .collection(month).doc('Week')
@@ -393,12 +398,6 @@ const renderOther = (data, id) => {
   other_tab.innerHTML += html;
   //Show red, orange and green based on the range
   changeColour(data.range, id);
-};
-
-// Remove list from DOM
-const removeList = (id) => {
-  const todo = document.querySelector(`.todo[data-id="${id}"]`);
-  todo.remove();
 };
 
 function changeColour(range_value, id_value) {
