@@ -25,16 +25,16 @@
                 <form id="todo-form">
                     <h6 id="username"></h6>
                     <input id="todo" type="text" name="todo" placeholder="Add goals that you want to achieve" />
-                    <select id="select_id_year">
+                    <select id="select_id_year" class="browser-default">
                         <option value="" disabled selected>Select Year</option>
                     </select>
-                    <select id="select_id_month">
+                    <select id="select_id_month" class="browser-default">
                         <option value="" disabled selected>Select Month</option>
                     </select>
-                    <select id="select_id_week">
+                    <select id="select_id_week" class="browser-default">
                         <option value="" disabled selected>Select Week</option>
                     </select>
-                    <select id="select_id_type">
+                    <select id="select_id_type" class="browser-default">
                         <option value="" disabled selected>Select Type</option>
                     </select>
                     <a onclick="goalconfirm()" class="waves-effect waves-light btn modal-trigger"
@@ -57,8 +57,26 @@
                 <i class="large material-icons">add</i>
             </button>
         </div>
-        <p id="demo"></p>
 
+            <!-- This is for adding range/updating goals for each task -->
+            <div id="modal1" class="modal">
+                <div class="modal-content">
+                    <h2>Progress</h2>
+                    <form id="range-form">
+                        <p class="range-field">
+                            <input type="range" name="range" id="test5" min="0" max="100" required/>
+                        </p>
+                        <button id="submit_range" class="btn teal lighten-2">Submit</button>
+                    </form>
+                    <h3>Update Goal</h3>
+                    <form id="update-goal-form">
+                        <input id="update_goal" type="text" name="update_goal" placeholder="Update your goal here" required/>
+                        <button id="submit_update" class="btn teal lighten-2">Update</button>
+                    </form>
+                </div>
+            </div>
+
+        <p id="demo"></p>
 
         <!-- Slider Functionality -->
         <!-- Tabs -->

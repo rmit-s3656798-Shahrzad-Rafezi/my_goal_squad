@@ -400,6 +400,66 @@ const renderOther = (data, id) => {
   changeColour(data.range, id);
 };
 
+const renderRange = (data, id) => {
+  document.querySelector(`.update_range[data-id="${id}"]`).innerHTML = `<p class="update_range" data-id="${id}">${data.range}</p>`;
+};
+
+const render_new_goal = (data, id) => {
+  document.querySelector(`a[data-id="${id}"]`).innerHTML = `<a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>`;
+  $('a[data-id="' + id + '"]').addClass('whiteText');
+};
+
+// This is for closing the modal after submitted
+modal = document.querySelector("#modal1");
+
+const update_goal_form = document.querySelector('#update-goal-form');
+function update_goal(clientid, year, month, week, type, docID, todo) {
+  db.collection('users').doc(clientid)
+    .collection('Goals').doc('Year')
+    .collection(year).doc('Month')
+    .collection(month).doc('Week')
+    .collection(week).doc('Type')
+    .collection(type).doc(docID).update({
+      todo: todo
+    });
+  update_goal_form.update_goal.value = '';
+}
+
+update_goal_form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  for (var i = 0; i <= months.length - 1; i++) {
+    for (var j = 0; j <= weeks.length - 1; j++) {
+      update_goal(chosen_client, current_year.toString(), months[i], weeks[j], select_type, get_id, update_goal_form.update_goal.value);
+    }
+  }
+  M.Modal.getInstance(modal).close();
+});
+
+function update_range(clientid, year, month, week, type, docID, range) {
+  db.collection('users').doc(clientid)
+    .collection('Goals').doc('Year')
+    .collection(year).doc('Month')
+    .collection(month).doc('Week')
+    .collection(week).doc('Type')
+    .collection(type).doc(docID).update({
+      range: range
+    });
+}
+
+const submit_range = document.querySelector('#range-form');
+submit_range.addEventListener('submit', (e) => {
+  e.preventDefault();
+  for (var i = 0; i <= months.length - 1; i++) {
+    for (var j = 0; j <= weeks.length - 1; j++) {
+      update_range(chosen_client, current_year.toString(), months[i], weeks[j], select_type, get_id, submit_range.range.value);
+    }
+  }
+  //Show red, orange and green based on the submitted range
+  changeColour(submit_range.range.value, get_id);
+
+  M.Modal.getInstance(modal).close();
+});
+
 function changeColour(range_value, id_value) {
   var change_colours = ["showRed", "showOrange", "showYellow", "showGreen"];
 
@@ -431,6 +491,54 @@ function changeColour(range_value, id_value) {
   }
 
 }
+
+var select_type = null;
+var get_id = null;
+
+// Update range from Health tab
+health_tab.addEventListener('click', e => {
+  if (e.target.tagName === 'A') {
+    const id = e.target.getAttribute('data-id');
+    get_id = id;
+    select_type = "Health";
+  }
+});
+
+//Update range from Career tab
+career_tab.addEventListener('click', e => {
+  if (e.target.tagName === 'A') {
+    const id = e.target.getAttribute('data-id');
+    get_id = id;
+    select_type = "Career";
+  }
+});
+
+//Update range from Personal tab
+personal_tab.addEventListener('click', e => {
+  if (e.target.tagName === 'A') {
+    const id = e.target.getAttribute('data-id');
+    get_id = id;
+    select_type = "Personal";
+  }
+});
+
+//Update range from Financial tab
+financial_tab.addEventListener('click', e => {
+  if (e.target.tagName === 'A') {
+    const id = e.target.getAttribute('data-id');
+    get_id = id;
+    select_type = "Financial";
+  }
+});
+
+//Update range from Other tab
+other_tab.addEventListener('click', e => {
+  if (e.target.tagName === 'A') {
+    const id = e.target.getAttribute('data-id');
+    get_id = id;
+    select_type = "Other";
+  }
+});
 
 const healthContainer = document.querySelector('#test-swipe-1');
 healthContainer.addEventListener('click', e => {
