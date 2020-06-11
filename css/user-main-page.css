@@ -4,12 +4,17 @@
   height: 80%;
   padding: 2% 5%;
   text-align: center;
-  margin-top: 10%
+  margin-top: 10%;
 }
-
 h5 {
   font-size: 16px;
   margin-bottom: 7%;
+}
+
+#modal_week_button,
+#modal_month_button,
+#modal_year_button {
+  border-radius: 20px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -18,43 +23,80 @@ h5 {
     margin-bottom: 5%;
   }
 }
+.done {
+  color: #4db6ac;
+}
+.mood {
+  color: #ffb74d;
+}
+.show_chart {
+  color: #ef9a9a;
+}
+#current_week,
+#current_month,
+#current_year {
+  padding-right: 5px;
+  display: inline-block;
+}
+.fixed-action-btn{
+  right: 70%;
+}
+
+/* week, month, year modal styles */
+.card-panel.week {
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0px 1px 3px rgba(90, 90, 90, 0.1);
+  display: grid;
+  grid-template-areas: "image details delete";
+  position: relative;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+.card-panel.month {
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0px 1px 3px rgba(90, 90, 90, 0.1);
+  display: grid;
+  grid-template-areas: "image details delete";
+  position: relative;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+.card-panel.year {
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0px 1px 3px rgba(90, 90, 90, 0.1);
+  display: grid;
+  grid-template-areas: "image details delete";
+  position: relative;
+  margin-left: 50px;
+  margin-right: 50px;
+}
 
 /* todo list styles */
-.todos{
+.carousel.carousel-slider {
+  top: 0;
+  left: 0;
+  margin-top: 5%;
+}
+.todos {
   margin-top: 20px;
 }
-.card-panel.week{
+.card-panel.todo {
   border-radius: 8px;
   padding: 10px;
-  box-shadow: 0px 1px 3px rgba(90,90,90,0.1);
+  box-shadow: 0px 1px 3px rgba(90, 90, 90, 0.1);
   display: grid;
   grid-template-areas: "image details delete";
   position: relative;
   margin: 9px;
 }
-.card-panel.month{
-  border-radius: 8px;
-  padding: 10px;
-  box-shadow: 0px 1px 3px rgba(90,90,90,0.1);
-  display: grid;
-  grid-template-areas: "image details delete";
-  position: relative;
-  margin: 9px;
-}
-.card-panel.todo{
-  border-radius: 8px;
-  padding: 10px;
-  box-shadow: 0px 1px 3px rgba(90,90,90,0.1);
-  display: grid;
-  grid-template-areas: "image details delete";
-  position: relative;
-  margin: 9px;
-}
-.todo-details{
+.todo-details {
   grid-area: details;
   margin-top: 6px;
 }
-.todo-delete{
+.todo-delete {
   grid-area: delete;
   position: absolute;
   bottom: 0px;
@@ -62,18 +104,18 @@ h5 {
 }
 
 /* Range Colour */
-.showRed{
+.showRed {
   background-color: #ef9a9a;
   color: white;
 }
-.showOrange{
+.showOrange {
   background-color: #ffb74d;
   color: white;
 }
-.showGreen{
+.showGreen {
   background-color: #4db6ac;
   color: white;
 }
-a.whiteText{
+a.whiteText {
   color: white;
 }

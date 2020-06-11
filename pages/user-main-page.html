@@ -6,13 +6,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-
-    <!-- Import scripts START -->
-    <!-- Conflicting with existing code -->
-    <!-- Import scripts END -->
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/css/navbar.css">
     <link rel="stylesheet" type="text/css" href="/css/user-main-page.css" />
     <title>My Goal Squad</title>
@@ -57,22 +51,23 @@
 
     <div class="container">
         <div class="content">
+
             <!-- Add todo list form -->
             <div id="modal-addgoal" class="modal">
                 <div class="modal-content">
                     <h6>ADD NEW GOAL</h6>
                     <form id="todo-form">
                         <input id="todo" type="text" name="todo" placeholder="Add goals that you want to achieve" required/>
-                        <select id="select_id_year">
+                        <select id="select_id_year" class="browser-default">
                             <option value="" disabled selected>Select Year</option>
                         </select>
-                        <select id="select_id_month">
+                        <select id="select_id_month" class="browser-default">
                             <option value="" disabled selected>Select Month</option>
                         </select>
-                        <select id="select_id_week">
+                        <select id="select_id_week" class="browser-default">
                             <option value="" disabled selected>Select Week</option>
                         </select>
-                        <select id="select_id_type">
+                        <select id="select_id_type" class="browser-default">
                             <option value="" disabled selected>Select Type</option>
                         </select>
                         <a onclick="goalconfirm()"class="waves-effect waves-light btn modal-trigger" href="#goalconfirm">Add</a>
@@ -97,14 +92,14 @@
             <!-- This is for adding range/updating goals for each task -->
             <div id="modal1" class="modal">
                 <div class="modal-content">
-                    <h2>Progress</h2>
+                    <h5>Progress</h5>
                     <form id="range-form">
                         <p class="range-field">
                             <input type="range" name="range" id="test5" min="0" max="100" required/>
                         </p>
                         <button id="submit_range" class="btn teal lighten-2">Submit</button>
                     </form>
-                    <h3>Update Goal</h3>
+                    <h5>Update Goal</h5>
                     <form id="update-goal-form">
                         <input id="update_goal" type="text" name="update_goal" placeholder="Update your goal here" required/>
                         <button id="submit_update" class="btn teal lighten-2">Update</button>
@@ -112,8 +107,31 @@
                 </div>
             </div>
 
+            <!-- Display moods based on range -->
+            <div id="modal_congrats" class="modal">
+                <div class="modal-content">
+                <h4>Great Job!</h4>
+                <i class="large material-icons done">done</i>
+                </div>
+            </div>
+
+            <div id="modal_awesome" class="modal">
+                <div class="modal-content">
+                <h4>Nice!</h4>
+                <i class="large material-icons mood">mood</i>
+                </div>
+            </div>
+            
+            <div id="modal_keep_going" class="modal">
+                <div class="modal-content">
+                <h4>Keep It Up!</h4>
+                <i class="large material-icons show_chart">show_chart</i>
+                </div>
+            </div>
+            <!------------------------------------->
+
             <!-- Modal Trigger -->
-            <a class="waves-effect waves-light btn modal-trigger" href="#modal_week">Week</a>
+            <a id='modal_week_button' class="waves-effect waves-light btn modal-trigger" href="#modal_week">Week</a>
 
             <!-- Modal Structure -->
             <div id="modal_week" class="modal">
@@ -123,7 +141,7 @@
             </div>
 
             <!-- Modal Trigger -->
-            <a class="waves-effect waves-light btn modal-trigger" href="#modal_month">Month</a>
+            <a id='modal_month_button' class="waves-effect waves-light btn modal-trigger" href="#modal_month">Month</a>
 
             <!-- Modal Structure -->
             <div id="modal_month" class="modal">
@@ -133,7 +151,7 @@
             </div>
 
             <!-- Modal Trigger -->
-            <a class="waves-effect waves-light btn modal-trigger" href="#modal_year">Year</a>
+            <a id='modal_year_button' class="waves-effect waves-light btn modal-trigger" href="#modal_year">Year</a>
 
             <!-- Modal Structure -->
             <div id="modal_year" class="modal">
@@ -142,24 +160,31 @@
                 </div>
             </div>
 
+            <div id="current_goals">
+                <p id="current_week" class="teal-text tex-lighten-2"></p>
+                <p id="current_month" class="teal-text tex-lighten-2"></p>
+                <p id="current_year" class="teal-text tex-lighten-2"></p>
+            </div>
+
                 <!-- Tabs -->
-                <ul id="tabs-swipe-demo" class="tabs teal lighten-2" style="margin-top: 15px;">
+                <ul id="tabs-swipe-demo" class="tabs transparent" style="margin-top: 15px;">
                     <li class="tab col s3">
-                        <a href="#test-swipe-1" class="grey-text text-lighten-5">Health</a>
+                        <a href="#test-swipe-1" class="grey-text">Health</a>
                     </li>
                     <li class="tab col s3">
-                        <a href="#test-swipe-2" class="grey-text text-lighten-5">Career</a>
+                        <a href="#test-swipe-2" class="grey-text">Career</a>
                     </li>
                     <li class="tab col s3">
-                        <a href="#test-swipe-3" class="grey-text text-lighten-5">Personal</a>
+                        <a href="#test-swipe-3" class="grey-text">Personal</a>
                     </li>
                     <li class="tab col s3">
-                        <a href="#test-swipe-4" class="grey-text text-lighten-5">Financial</a>
+                        <a href="#test-swipe-4" class="grey-text">Financial</a>
                     </li>
                     <li class="tab col s3">
-                        <a href="#test-swipe-5" class="grey-text text-lighten-5">Other</a>
+                        <a href="#test-swipe-5" class="grey-text">Other</a>
                     </li>
                 </ul>
+                
                 <!-- Contents inside tabs -->
                 <div id="test-swipe-1" class="col s12" style="overflow: auto;"></div>
                 <div id="test-swipe-2" class="col s12" style="overflow: auto;"></div>
@@ -168,11 +193,6 @@
                 <div id="test-swipe-5" class="col s12" style="overflow: auto;"></div>
 
         </div>
-<!-- 
-        <button id="logout-btn" class="waves-effect btn red">
-            Logout
-            <i class="material-icons right">input</i>
-        </button> -->
     </div>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -185,12 +205,6 @@
 
     <script src="/js/firebase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-    <!-- jQuery scripts go at the top -->
-    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-    <!-- <script src="https://code.jquery.com/jquery-3.5.0.min.js"
-        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script> -->
-    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <script src="/js/navbar.js"></script>
     <script src="/js/user-main-page.js"></script>
 </body>

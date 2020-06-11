@@ -24,7 +24,12 @@ document.addEventListener('DOMContentLoaded', function () {
   M.Modal.init(modal);
 });
 
+const current_week = document.querySelector("#current_week");
+const current_month = document.querySelector("#current_month");
+const current_this_year = document.querySelector("#current_year");
+
 function search_task() {
+  // When user opens the app, it will bring the default goals (Week1, January, current year)
   var user = firebase.auth().currentUser;
   if (select_week == null) {
 
@@ -43,39 +48,51 @@ function search_task() {
     const other_tab = document.querySelector('#test-swipe-5');
     other_tab.innerHTML = "";
 
-    console.log('test1')
+    //console.log('test1');
     select_week = 'Week1';
+    current_week.innerHTML = select_week;
+
     if (select_month == null) {
-      console.log('test2')
+      //console.log('test2');
       select_month = 'January';
+      current_month.innerHTML = select_month;
+
       if (select_year == null) {
-        console.log('test3')
+        //console.log('test3');
         select_year = current_year.toString();
-        console.log('test4')
+        current_this_year.innerHTML = select_year;
+
+        //console.log('test4');
         for (var i = 0; i <= types.length - 1; i++) {
           display(user.uid, select_year, select_month, select_week, types[i]);
         }
+  //////////////////////////////////////////////////////////////
+    // When user chooses different year   
       } else {
-        console.log('test5')
+        //console.log('test5');
         for (var i = 0; i <= types.length - 1; i++) {
           display(user.uid, select_year, select_month, select_week, types[i]);
         }
       }
+    ////////////////////////////////////
+    // When user chooses different month
     } else {
       if (select_year == null) {
-        console.log('test6');
+        //console.log('test6');
         select_year = current_year.toString();
-        console.log('test7');
+        //console.log('test7');
         for (var i = 0; i <= types.length - 1; i++) {
           display(user.uid, select_year, select_month, select_week, types[i]);
         }
       } else {
-        console.log('test8');
+        //console.log('test8');
         for (var i = 0; i <= types.length - 1; i++) {
           display(user.uid, select_year, select_month, select_week, types[i]);
         }
       }
     }
+    ///////////////////////////////////
+    // When user chooses different week
   } else {
     const health_tab = document.querySelector('#test-swipe-1');
     health_tab.innerHTML = "";
@@ -93,35 +110,39 @@ function search_task() {
     other_tab.innerHTML = "";
 
     if (select_month == null) {
-      console.log('test9')
+      //console.log('test9');
       select_month = 'January';
+
       if (select_year == null) {
-        console.log('test10')
+        //console.log('test10');
         select_year = current_year.toString();
+
         for (var i = 0; i <= types.length - 1; i++) {
           display(user.uid, select_year, select_month, select_week, types[i]);
         }
       } else {
-        console.log('test11')
+        //console.log('test11');
         for (var i = 0; i <= types.length - 1; i++) {
           display(user.uid, select_year, select_month, select_week, types[i]);
         }
       }
     } else {
       if (select_year == null) {
-        console.log('test12')
+        //console.log('test12');
         select_year = current_year.toString();
+
         for (var i = 0; i <= types.length - 1; i++) {
           display(user.uid, select_year, select_month, select_week, types[i]);
         }
       } else {
-        console.log('test13')
+        //console.log('test13');
         for (var i = 0; i <= types.length - 1; i++) {
           display(user.uid, select_year, select_month, select_week, types[i]);
         }
       }
     }
   }
+  ////////////////////////////////////////
 }
 
 // Display Years
@@ -373,7 +394,7 @@ const renderHealth = (data, id) => {
     <div id="change_colour" class="card-panel todo row" data-id="${id}">
         <div class="todo-details">
           <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
-          <p class="update_range" data-id="${id}">${data.range}</p>        
+          <p class="update_range" data-id="${id}">${data.range}%</p>        
         </div>
         <div class="todo-delete">
           <i class="material-icons" data-id="${id}">delete_outline</i>
@@ -391,7 +412,7 @@ const renderCareer = (data, id) => {
   <div id="change_colour" class="card-panel todo row" data-id="${id}">
       <div class="todo-details">
         <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
-        <p class="update_range" data-id="${id}">${data.range}</p>        
+        <p class="update_range" data-id="${id}">${data.range}%</p>        
       </div>
       <div class="todo-delete">
         <i class="material-icons" data-id="${id}">delete_outline</i>
@@ -409,7 +430,7 @@ const renderPersonal = (data, id) => {
   <div id="change_colour" class="card-panel todo row" data-id="${id}">
       <div class="todo-details">
         <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
-        <p class="update_range" data-id="${id}">${data.range}</p>        
+        <p class="update_range" data-id="${id}">${data.range}%</p>        
       </div>
       <div class="todo-delete">
         <i class="material-icons" data-id="${id}">delete_outline</i>
@@ -427,7 +448,7 @@ const renderFinancial = (data, id) => {
   <div id="change_colour" class="card-panel todo row" data-id="${id}">
       <div class="todo-details">
         <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
-        <p class="update_range" data-id="${id}">${data.range}</p>        
+        <p class="update_range" data-id="${id}">${data.range}%</p>        
       </div>
       <div class="todo-delete">
         <i class="material-icons" data-id="${id}">delete_outline</i>
@@ -445,7 +466,7 @@ const renderOther = (data, id) => {
   <div id="change_colour" class="card-panel todo row" data-id="${id}">
       <div class="todo-details">
         <a data-id="${id}" data-target="modal1" class="modal-trigger">${data.todo}</a>
-        <p class="update_range" data-id="${id}">${data.range}</p>        
+        <p class="update_range" data-id="${id}">${data.range}%</p>        
       </div>
       <div class="todo-delete">
         <i class="material-icons" data-id="${id}">delete_outline</i>
@@ -470,7 +491,6 @@ const render_new_goal = (data, id) => {
 modal = document.querySelector("#modal1");
 
 const update_goal_form = document.querySelector('#update-goal-form');
-
 function update_goal(userID, year, month, week, type, docID, todo) {
   db.collection('users').doc(userID)
     .collection('Goals').doc('Year')
@@ -503,13 +523,31 @@ submit_range.addEventListener('submit', (e) => {
   //Show red, orange and green based on the submitted range
   changeColour(submit_range.range.value, get_id);
 
+  // popup modal when range has submitted
+  if(submit_range.range.value == 100){
+    modal_congrats = document.querySelector("#modal_congrats");
+    M.Modal.getInstance(modal_congrats).open();
+  }
+
+  // popup modal when range has submitted
+  if(submit_range.range.value >= 25 && submit_range.range.value <= 95 ){
+    modal_awesome = document.querySelector("#modal_awesome");
+    M.Modal.getInstance(modal_awesome).open();
+  }
+
+  // popup modal when range has submitted
+  if(submit_range.range.value < 25){
+    modal_keep_going = document.querySelector("#modal_keep_going");
+    M.Modal.getInstance(modal_keep_going).open();
+  }
+
   M.Modal.getInstance(modal).close();
 });
 
 function changeColour(range_value, id_value) {
   var change_colours = ["showRed", "showOrange", "showYellow", "showGreen"];
 
-  if (range_value < 25) {
+  if (range_value <= 25) {
     //Show red
     for (var i = 0; i <= change_colours.length; i++) {
       $('#change_colour[data-id="' + id_value + '"]').removeClass(change_colours[i]);
@@ -518,7 +556,7 @@ function changeColour(range_value, id_value) {
     }
   }
 
-  if (range_value > 25) {
+  if (range_value >= 25) {
     //show orange
     for (var i = 0; i <= change_colours.length; i++) {
       $('#change_colour[data-id="' + id_value + '"]').removeClass(change_colours[i]);
@@ -527,7 +565,7 @@ function changeColour(range_value, id_value) {
     }
   }
 
-  if (range_value > 95) {
+  if (range_value >= 95) {
     //show green
     for (var i = 0; i <= change_colours.length; i++) {
       $('#change_colour[data-id="' + id_value + '"]').removeClass(change_colours[i]);
@@ -551,49 +589,47 @@ auth.onAuthStateChanged((user) => {
 
     search_task()
 
-    //Display years in modal
+    //  Display years in modal
     const year_modal = document.querySelector('#modal_year');
     for (var i = 0; i <= years.length - 1; i++) {
       const html = `
-      <div class="card-panel month row">
-        <button id="year_num" value="${years[i]}">${years[i]}</button>
+      <div class="card-panel year row">
+        <button id="year_num" value="${years[i]}" class="btn-flat" style="margin-left: 50px;">${years[i]}</button>
       </div>
       `;
       year_modal.innerHTML += html;
     }
 
-    // select year from the modal
+    // Select year from the modal
     const year = document.querySelectorAll('#year_num');
     for (var i = 0; i < year.length; i++) {
       year[i].addEventListener("click", function () {
         select_year = this.value;
-        console.log(select_year);
+        current_this_year.innerHTML = select_year;
         search_task();
-        //test();
         const modal = document.querySelector("#modal_year");
         M.Modal.getInstance(modal).close();
       });
     }
 
-    //Display months in modal
+    // Display months in modal
     const month_modal = document.querySelector('#modal_month');
     for (var i = 0; i <= months.length - 1; i++) {
       const html = `
       <div class="card-panel month row">
-        <button id="month_num" value="${months[i]}">${months[i]}</button>
+        <button id="month_num" value="${months[i]}" class="btn-flat" style="margin-left: 40px;">${months[i]}</button>
       </div>
       `;
       month_modal.innerHTML += html;
     }
 
-    // select month from the modal
+    // Select month from the modal
     const month = document.querySelectorAll('#month_num');
     for (var i = 0; i < month.length; i++) {
       month[i].addEventListener("click", function () {
         select_month = this.value;
-        console.log(select_month);
+        current_month.innerHTML = select_month;
         search_task();
-        //test();
         const modal = document.querySelector("#modal_month");
         M.Modal.getInstance(modal).close();
       });
@@ -604,20 +640,19 @@ auth.onAuthStateChanged((user) => {
     for (var i = 0; i <= weeks.length - 1; i++) {
       const html = `
       <div class="card-panel week row">
-        <button id="week_num" value="${weeks[i]}">${weeks[i]}</button>
+        <button id="week_num" value="${weeks[i]}" class="btn-flat" style="margin-left: 35px;">${weeks[i]}</button>
       </div>
       `;
       week_modal.innerHTML += html;
     }
 
-    // select week from the modal
+    // Select week from the modal
     const week = document.querySelectorAll('#week_num');
     for (var i = 0; i < week.length; i++) {
       week[i].addEventListener("click", function () {
         select_week = this.value;
-        console.log(select_week);
+        current_week.innerHTML = select_week;
         search_task();
-        //test();
         const modal = document.querySelector("#modal_week");
         M.Modal.getInstance(modal).close();
       });
@@ -659,7 +694,7 @@ auth.onAuthStateChanged((user) => {
       }
     });
 
-    //Update range from Personal tab
+    // Update range from Personal tab
     const personal_tab = document.querySelector('#test-swipe-3');
     personal_tab.addEventListener('click', e => {
       if (e.target.tagName === 'A') {
@@ -669,7 +704,7 @@ auth.onAuthStateChanged((user) => {
       }
     });
 
-    //Update range from Financial tab
+    // Update range from Financial tab
     const financial_tab = document.querySelector('#test-swipe-4');
     financial_tab.addEventListener('click', e => {
       if (e.target.tagName === 'A') {
@@ -679,7 +714,7 @@ auth.onAuthStateChanged((user) => {
       }
     });
 
-    //Update range from Other tab
+    // Update range from Other tab
     const other_tab = document.querySelector('#test-swipe-5');
     other_tab.addEventListener('click', e => {
       if (e.target.tagName === 'A') {
@@ -689,7 +724,7 @@ auth.onAuthStateChanged((user) => {
       }
     });
 
-    //Delete the list from Health tab
+    // Delete the list from Health tab
     const healthContainer = document.querySelector('#test-swipe-1');
     healthContainer.addEventListener('click', e => {
       if (e.target.tagName === 'I') {
@@ -698,7 +733,7 @@ auth.onAuthStateChanged((user) => {
       }
     });
 
-    //Delete the list from Career tab
+    // Delete the list from Career tab
     const careerContainer = document.querySelector('#test-swipe-2');
     careerContainer.addEventListener('click', e => {
       if (e.target.tagName === 'I') {
@@ -707,7 +742,7 @@ auth.onAuthStateChanged((user) => {
       }
     });
 
-    //Delete the list from Personal tab
+    // Delete the list from Personal tab
     const personalContainer = document.querySelector('#test-swipe-3');
     personalContainer.addEventListener('click', e => {
       if (e.target.tagName === 'I') {
@@ -716,7 +751,7 @@ auth.onAuthStateChanged((user) => {
       }
     });
 
-    //Delete the list from Financial tab
+    // Delete the list from Financial tab
     const financialContainer = document.querySelector('#test-swipe-4');
     financialContainer.addEventListener('click', e => {
       if (e.target.tagName === 'I') {
@@ -725,7 +760,7 @@ auth.onAuthStateChanged((user) => {
       }
     });
 
-    //Delete the list from Other tab
+    // Delete the list from Other tab
     const otherContainer = document.querySelector('#test-swipe-5');
     otherContainer.addEventListener('click', e => {
       if (e.target.tagName === 'I') {
@@ -740,17 +775,7 @@ auth.onAuthStateChanged((user) => {
   }
 });
 
-// //Logout Button
-// const logout = document.querySelector("#logout-btn");
-
-// logout.addEventListener("click", (e) => {
-//   e.preventDefault();
-//   auth.signOut().then(() => {
-//     window.location.href = "../index.html";
-//   });
-// });
-
-//Confirm messsage
+// Confirm message
 var Confirmyear = document.getElementById("select_id_year");
 var Confirmmonth = document.getElementById("select_id_month");
 var Confirmweek = document.getElementById("select_id_week");
