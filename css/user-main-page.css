@@ -38,10 +38,9 @@ h5 {
   padding-right: 5px;
   display: inline-block;
 }
-/* .fixed-action-btn{
-
-  right: 75%;
-} */
+.fixed-action-btn{
+  right: 70%;
+}
 
 /* week, month, year modal styles */
 .card-panel.week {
