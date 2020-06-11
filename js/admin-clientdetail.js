@@ -470,6 +470,3 @@ function delete_todo_list(chosen_client, year, month, week, type, docID) {
       }
     }
   });
-
- 
-
