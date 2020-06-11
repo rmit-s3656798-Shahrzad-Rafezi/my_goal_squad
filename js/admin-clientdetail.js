@@ -3,6 +3,7 @@ var select_month = null;
 var select_week = null;
 var select_type = null;
 var get_id = null;
+let rows = [];
 
 // listen for auth changes
 auth.onAuthStateChanged((user) => {
@@ -207,6 +208,8 @@ function display(clientid, year, month, week, type) {
         changes.forEach(change => {
           if (change.type === 'added') {
             renderHealth(change.doc.data(), change.doc.id);
+            //console.log(change.doc.data().todo);
+            rows.push([change.doc.data().todo]);
           }
           // Update range and then render
           else if (change.type === 'modified') {
@@ -231,6 +234,7 @@ function display(clientid, year, month, week, type) {
         changes.forEach(change => {
           if (change.type === 'added') {
             renderCareer(change.doc.data(), change.doc.id);
+            rows.push([change.doc.data().todo]);
           }
           // Update range and then render
           else if (change.type === 'modified') {
@@ -255,6 +259,7 @@ function display(clientid, year, month, week, type) {
         changes.forEach(change => {
           if (change.type === 'added') {
             renderPersonal(change.doc.data(), change.doc.id);
+            rows.push([change.doc.data().todo]);
           }
           // Update range and then render
           else if (change.type === 'modified') {
@@ -279,6 +284,7 @@ function display(clientid, year, month, week, type) {
         changes.forEach(change => {
           if (change.type === 'added') {
             renderFinancial(change.doc.data(), change.doc.id);
+            rows.push([change.doc.data().todo]);
           }
           // Update range and then render
           else if (change.type === 'modified') {
@@ -303,6 +309,7 @@ function display(clientid, year, month, week, type) {
         changes.forEach(change => {
           if (change.type === 'added') {
             renderOther(change.doc.data(), change.doc.id);
+            rows.push([change.doc.data().todo]);
           }
           // Update range and then render
           else if (change.type === 'modified') {
@@ -706,7 +713,7 @@ function search_task() {
         current_this_year.innerHTML = select_year;
 
         for (var i = 0; i <= types.length - 1; i++) {
-          if(chosen_client != ''){
+          if (chosen_client != '') {
             display(chosen_client, select_year, select_month, select_week, types[i]);
           }
         }
@@ -774,3 +781,37 @@ function search_task() {
     }
   }
 }
+//if (chosen_client != '') {
+  // db.collection('users').doc(chosen_client)
+  //   .collection('Goals').doc('Year')
+  //   .collection(select_year).doc('Month')
+  //   .collection(select_month).doc('Week')
+  //   .collection(select_week).doc('Type')
+  //   .collection('Health').get().then((snapshot) => {
+  //     snapshot.docs.forEach(doc => {
+  //       //renderList(doc);
+  //       console.log(doc.data());
+  //       //rows.push([doc.data()]);
+  //     });
+  //   });
+//}
+let csvContent = "data:text/csv;charset=utf-8,";
+
+rows.forEach(function (rowArray) {
+  let row = rowArray.join(",");
+  console.log(row);
+  csvContent += row + "\r\n";
+});
+
+var download = document.getElementById('download_csv');
+
+var encodedUri = encodeURI(csvContent);
+
+var link = document.createElement("a");
+var t = document.createTextNode("Download CSV");
+
+link.setAttribute("href", encodedUri);
+link.setAttribute("download", "data.csv");
+
+link.appendChild(t);
+download.appendChild(link);
