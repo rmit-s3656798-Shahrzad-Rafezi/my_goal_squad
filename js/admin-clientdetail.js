@@ -3,7 +3,6 @@ var select_month = null;
 var select_week = null;
 var select_type = null;
 var get_id = null;
-let rows = [];
 
 // listen for auth changes
 auth.onAuthStateChanged((user) => {
@@ -208,8 +207,6 @@ function display(clientid, year, month, week, type) {
         changes.forEach(change => {
           if (change.type === 'added') {
             renderHealth(change.doc.data(), change.doc.id);
-            //console.log(change.doc.data().todo);
-            rows.push([change.doc.data().todo]);
           }
           // Update range and then render
           else if (change.type === 'modified') {
@@ -234,7 +231,6 @@ function display(clientid, year, month, week, type) {
         changes.forEach(change => {
           if (change.type === 'added') {
             renderCareer(change.doc.data(), change.doc.id);
-            rows.push([change.doc.data().todo]);
           }
           // Update range and then render
           else if (change.type === 'modified') {
@@ -259,7 +255,6 @@ function display(clientid, year, month, week, type) {
         changes.forEach(change => {
           if (change.type === 'added') {
             renderPersonal(change.doc.data(), change.doc.id);
-            rows.push([change.doc.data().todo]);
           }
           // Update range and then render
           else if (change.type === 'modified') {
@@ -284,7 +279,6 @@ function display(clientid, year, month, week, type) {
         changes.forEach(change => {
           if (change.type === 'added') {
             renderFinancial(change.doc.data(), change.doc.id);
-            rows.push([change.doc.data().todo]);
           }
           // Update range and then render
           else if (change.type === 'modified') {
@@ -309,7 +303,6 @@ function display(clientid, year, month, week, type) {
         changes.forEach(change => {
           if (change.type === 'added') {
             renderOther(change.doc.data(), change.doc.id);
-            rows.push([change.doc.data().todo]);
           }
           // Update range and then render
           else if (change.type === 'modified') {
@@ -781,37 +774,47 @@ function search_task() {
     }
   }
 }
-//if (chosen_client != '') {
-  // db.collection('users').doc(chosen_client)
-  //   .collection('Goals').doc('Year')
-  //   .collection(select_year).doc('Month')
-  //   .collection(select_month).doc('Week')
-  //   .collection(select_week).doc('Type')
-  //   .collection('Health').get().then((snapshot) => {
-  //     snapshot.docs.forEach(doc => {
-  //       //renderList(doc);
-  //       console.log(doc.data());
-  //       //rows.push([doc.data()]);
-  //     });
-  //   });
-//}
-let csvContent = "data:text/csv;charset=utf-8,";
 
-rows.forEach(function (rowArray) {
-  let row = rowArray.join(",");
-  console.log(row);
-  csvContent += row + "\r\n";
-});
+function downloadCSV() {
+  var object = {};
+  var jsondata = [
+    ["Health", "Career", "Personal", "Financial", "Other"]
+  ];
 
-var download = document.getElementById('download_csv');
+  db.collection('users').doc(chosen_client)
+    .collection('Goals').doc('Year')
+    .collection(select_year).doc('Month')
+    .collection(select_month).doc('Week')
+    .collection(select_week).doc('Type')
+    .collection('Health').get().then((snapshot) => {
+      snapshot.docs.forEach(doc => {
+        // data.push([doc.data().todo]);
+        object = doc.data().todo;
+        object['docid'] = doc.id; // must add this line after doc.data
+        console.log("objectbefore", object);
+        jsondata.push(object);
+        console.log("objectafter", object);
+        console.log(jsondata);
+      });
+    });
+  //console.log("Test2 ", data);
 
-var encodedUri = encodeURI(csvContent);
+  let csvContent = "data:text/csv;charset=utf-8,";
 
-var link = document.createElement("a");
-var t = document.createTextNode("Download CSV");
+  jsondata.forEach(function (rowArray) {
+    let row = rowArray.join(",");
+    csvContent += row + "\r\n";
+  });
 
-link.setAttribute("href", encodedUri);
-link.setAttribute("download", "data.csv");
+  var encodedUri = encodeURI(csvContent);
 
-link.appendChild(t);
-download.appendChild(link);
+  var hiddenElement = document.createElement('a');
+
+  hiddenElement.href = encodedUri;
+
+  hiddenElement.target = '_blank';
+
+  hiddenElement.download = 'data.csv';
+
+  hiddenElement.click();
+}
