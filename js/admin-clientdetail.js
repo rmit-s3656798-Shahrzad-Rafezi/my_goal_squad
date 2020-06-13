@@ -103,7 +103,7 @@ var week_id = document.getElementById('select_id_week');
 week_fragment = document.createDocumentFragment();
 let chosen_week = '';
 
-var weeks = ["Week1", "Week2", "Week3", "Week4"];
+var weeks = ["Week0", "Week1", "Week2", "Week3", "Week4"];
 
 for (var i = 0; i <= weeks.length - 1; i++) {
   var option = document.createElement('option');
@@ -593,13 +593,6 @@ clientid.addEventListener('change', function () {
   chosen_client = this.value;
   console.log(chosen_client);
   search_task();
-  // for (var i = 0; i <= months.length - 1; i++) {
-  //   for (var j = 0; j <= weeks.length - 1; j++) {
-  //     for (var k = 0; k <= types.length - 1; k++) {
-  //       display(chosen_client, current_year.toString(), months[i], weeks[j], types[k]);
-  //     }
-  //   }
-  // }
 });
 
 const current_week = document.querySelector("#current_week");
@@ -775,7 +768,7 @@ function search_task() {
   }
 }
 
-function downloadCSV() {
+function download_CSV_Health() {
   let csvContent = "data:text/csv;charset=utf-8,";
   let hiddenElement = null;
 
@@ -793,7 +786,99 @@ function downloadCSV() {
       hiddenElement = document.createElement('a');
       hiddenElement.href = encodedUri;
       hiddenElement.target = '_blank';
-      hiddenElement.download = 'health.csv';
+      hiddenElement.download = 'Health.csv';
       hiddenElement.click();
-    });  
+    });
+}
+
+function download_CSV_Career() {
+  let csvContent = "data:text/csv;charset=utf-8,";
+  let hiddenElement = null;
+
+  db.collection('users').doc(chosen_client)
+    .collection('Goals').doc('Year')
+    .collection(select_year).doc('Month')
+    .collection(select_month).doc('Week')
+    .collection(select_week).doc('Type')
+    .collection('Career').get().then((snapshot) => {
+      snapshot.docs.forEach(doc => {
+        var data = doc.data().todo;
+        csvContent += data + "\r\n";
+      });
+      var encodedUri = encodeURI(csvContent);
+      hiddenElement = document.createElement('a');
+      hiddenElement.href = encodedUri;
+      hiddenElement.target = '_blank';
+      hiddenElement.download = 'Career.csv';
+      hiddenElement.click();
+    });
+}
+
+function download_CSV_Personal() {
+  let csvContent = "data:text/csv;charset=utf-8,";
+  let hiddenElement = null;
+
+  db.collection('users').doc(chosen_client)
+    .collection('Goals').doc('Year')
+    .collection(select_year).doc('Month')
+    .collection(select_month).doc('Week')
+    .collection(select_week).doc('Type')
+    .collection('Personal').get().then((snapshot) => {
+      snapshot.docs.forEach(doc => {
+        var data = doc.data().todo;
+        csvContent += data + "\r\n";
+      });
+      var encodedUri = encodeURI(csvContent);
+      hiddenElement = document.createElement('a');
+      hiddenElement.href = encodedUri;
+      hiddenElement.target = '_blank';
+      hiddenElement.download = 'Personal.csv';
+      hiddenElement.click();
+    });
+}
+
+function download_CSV_Financial() {
+  let csvContent = "data:text/csv;charset=utf-8,";
+  let hiddenElement = null;
+
+  db.collection('users').doc(chosen_client)
+    .collection('Goals').doc('Year')
+    .collection(select_year).doc('Month')
+    .collection(select_month).doc('Week')
+    .collection(select_week).doc('Type')
+    .collection('Financial').get().then((snapshot) => {
+      snapshot.docs.forEach(doc => {
+        var data = doc.data().todo;
+        csvContent += data + "\r\n";
+      });
+      var encodedUri = encodeURI(csvContent);
+      hiddenElement = document.createElement('a');
+      hiddenElement.href = encodedUri;
+      hiddenElement.target = '_blank';
+      hiddenElement.download = 'Financial.csv';
+      hiddenElement.click();
+    });
+}
+
+function download_CSV_Other() {
+  let csvContent = "data:text/csv;charset=utf-8,";
+  let hiddenElement = null;
+
+  db.collection('users').doc(chosen_client)
+    .collection('Goals').doc('Year')
+    .collection(select_year).doc('Month')
+    .collection(select_month).doc('Week')
+    .collection(select_week).doc('Type')
+    .collection('Other').get().then((snapshot) => {
+      snapshot.docs.forEach(doc => {
+        var data = doc.data().todo;
+        csvContent += data + "\r\n";
+      });
+      var encodedUri = encodeURI(csvContent);
+      hiddenElement = document.createElement('a');
+      hiddenElement.href = encodedUri;
+      hiddenElement.target = '_blank';
+      hiddenElement.download = 'Other.csv';
+      hiddenElement.click();
+    });
 }

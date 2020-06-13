@@ -58,8 +58,6 @@
             </button>
         </div>      
         
-        <button onclick="downloadCSV()">Download CSV</button> 
-
             <!-- This is for adding range/updating goals for each task -->
             <div id="modal1" class="modal">
                 <div class="modal-content">
@@ -142,6 +140,22 @@
         <div id="test-swipe-3" class="col s12" style="overflow: auto;"></div>
         <div id="test-swipe-4" class="col s12" style="overflow: auto;"></div>
         <div id="test-swipe-5" class="col s12" style="overflow: auto;"></div>
+
+        <!-- Modal Trigger -->
+        <a class="waves-effect waves-light btn modal-trigger" href="#modal_csv">Download CSV</a>
+
+        <!-- Modal Structure -->
+        <div id="modal_csv" class="modal">
+            <div class="modal-content">
+                <div class="csv-buttons">
+                    <button id="health_CSV" class="waves-effect btn blue" onclick="download_CSV_Health()">Health CSV</button>
+                    <button id="career_CSV" class="waves-effect btn blue" onclick="download_CSV_Career()">Career CSV</button>
+                    <button id="personal_CSV" class="waves-effect btn blue" onclick="download_CSV_Personal()">Personal CSV</button>
+                    <button id="financial_CSV" class="waves-effect btn blue" onclick="download_CSV_Financial()">Financial CSV</button>
+                    <button id="other_CSV" class="waves-effect btn blue" onclick="download_CSV_Other()">Other CSV</button>
+                </div>
+            </div>
+        </div>
 
         <button id="logout-btn" class="waves-effect btn red button">Logout
             <i class="material-icons right">input</i>

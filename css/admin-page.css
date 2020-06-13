@@ -105,6 +105,12 @@ a.whiteText{
   padding-right: 5px;
   display: inline-block;
 }
+.csv-buttons{
+  display: grid;
+}
+#health_CSV, #career_CSV, #personal_CSV, #financial_CSV, #other_CSV{
+  margin-top: 10px;
+}
 .fixed-action-btn{
   right: 75%;/*desired value*/
 }
