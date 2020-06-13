@@ -776,10 +776,8 @@ function search_task() {
 }
 
 function downloadCSV() {
-  var object = {};
-  var jsondata = [
-    ["Health", "Career", "Personal", "Financial", "Other"]
-  ];
+  let csvContent = "data:text/csv;charset=utf-8,";
+  let hiddenElement = null;
 
   db.collection('users').doc(chosen_client)
     .collection('Goals').doc('Year')
@@ -788,33 +786,14 @@ function downloadCSV() {
     .collection(select_week).doc('Type')
     .collection('Health').get().then((snapshot) => {
       snapshot.docs.forEach(doc => {
-        // data.push([doc.data().todo]);
-        object = doc.data().todo;
-        object['docid'] = doc.id; // must add this line after doc.data
-        console.log("objectbefore", object);
-        jsondata.push(object);
-        console.log("objectafter", object);
-        console.log(jsondata);
+        var data = doc.data().todo;
+        csvContent += data + "\r\n";
       });
-    });
-  //console.log("Test2 ", data);
-
-  let csvContent = "data:text/csv;charset=utf-8,";
-
-  jsondata.forEach(function (rowArray) {
-    let row = rowArray.join(",");
-    csvContent += row + "\r\n";
-  });
-
-  var encodedUri = encodeURI(csvContent);
-
-  var hiddenElement = document.createElement('a');
-
-  hiddenElement.href = encodedUri;
-
-  hiddenElement.target = '_blank';
-
-  hiddenElement.download = 'data.csv';
-
-  hiddenElement.click();
+      var encodedUri = encodeURI(csvContent);
+      hiddenElement = document.createElement('a');
+      hiddenElement.href = encodedUri;
+      hiddenElement.target = '_blank';
+      hiddenElement.download = 'health.csv';
+      hiddenElement.click();
+    });  
 }
