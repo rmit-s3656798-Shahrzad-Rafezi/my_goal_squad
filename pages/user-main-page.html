@@ -62,7 +62,8 @@
                 <div class="modal-content">
                     <h6>ADD NEW GOAL</h6>
                     <form id="todo-form">
-                        <input id="todo" type="text" name="todo" placeholder="Add goals that you want to achieve" required/>
+                        <input id="todo" type="text" name="todo" placeholder="Add goals that you want to achieve"
+                            required />
                         <select id="select_id_year" class="browser-default">
                             <option value="" disabled selected>Select Year</option>
                         </select>
@@ -75,13 +76,14 @@
                         <select id="select_id_type" class="browser-default">
                             <option value="" disabled selected>Select Type</option>
                         </select>
-                        <a onclick="goalconfirm()"class="waves-effect waves-light btn modal-trigger" href="#goalconfirm">Add</a>
+                        <a onclick="goalconfirm()" class="waves-effect waves-light btn modal-trigger"
+                            href="#goalconfirm">Add</a>
                         <div id="goalconfirm" class="modal">
                             <h5>Confirm</h5>
                             <div class="modal-content">
-                            <p id="goal-confirm"></p>
-                            <p id="goal-confirm-text"></p>   
-                            <button class="modal-close waves-effect waves-orange btn">Add list</button>
+                                <p id="goal-confirm"></p>
+                                <p id="goal-confirm-text"></p>
+                                <button class="modal-close waves-effect waves-orange btn">Add list</button>
                             </div>
                         </div>
                     </form>
@@ -89,7 +91,8 @@
             </div>
 
             <div class="fixed-action-btn">
-                <button data-target='modal-addgoal' class="waves-effect btn-floating btn-large modal-trigger grey darken-3 ">
+                <button data-target='modal-addgoal'
+                    class="waves-effect btn-floating btn-large modal-trigger grey darken-3 ">
                     <i class="large material-icons">add</i>
                 </button>
             </div>
@@ -100,13 +103,14 @@
                     <h5>Progress</h5>
                     <form id="range-form">
                         <p class="range-field">
-                            <input type="range" name="range" id="test5" min="0" max="100" required/>
+                            <input type="range" name="range" id="test5" min="0" max="100" required />
                         </p>
                         <button id="submit_range" class="btn teal lighten-2">Submit</button>
                     </form>
                     <h5>Update Goal</h5>
                     <form id="update-goal-form">
-                        <input id="update_goal" type="text" name="update_goal" placeholder="Update your goal here" required/>
+                        <input id="update_goal" type="text" name="update_goal" placeholder="Update your goal here"
+                            required />
                         <button id="submit_update" class="btn teal lighten-2">Update</button>
                     </form>
                 </div>
@@ -115,22 +119,22 @@
             <!-- Display moods based on range -->
             <div id="modal_congrats" class="modal">
                 <div class="modal-content">
-                <h4>Great Job!</h4>
-                <i class="large material-icons done">done</i>
+                    <h4>Great Job!</h4>
+                    <i class="large material-icons done">done</i>
                 </div>
             </div>
 
             <div id="modal_awesome" class="modal">
                 <div class="modal-content">
-                <h4>Nice!</h4>
-                <i class="large material-icons mood">mood</i>
+                    <h4>Nice!</h4>
+                    <i class="large material-icons mood">mood</i>
                 </div>
             </div>
-            
+
             <div id="modal_keep_going" class="modal">
                 <div class="modal-content">
-                <h4>Keep It Up!</h4>
-                <i class="large material-icons show_chart">show_chart</i>
+                    <h4>Keep It Up!</h4>
+                    <i class="large material-icons show_chart">show_chart</i>
                 </div>
             </div>
             <!------------------------------------->
@@ -141,7 +145,7 @@
             <!-- Modal Structure -->
             <div id="modal_week" class="modal">
                 <div class="modal-content">
-                <h4>Week</h4>
+                    <h4>Week</h4>
                 </div>
             </div>
 
@@ -151,7 +155,7 @@
             <!-- Modal Structure -->
             <div id="modal_month" class="modal">
                 <div class="modal-content">
-                <h4>Month</h4>
+                    <h4>Month</h4>
                 </div>
             </div>
 
@@ -161,7 +165,7 @@
             <!-- Modal Structure -->
             <div id="modal_year" class="modal">
                 <div class="modal-content">
-                <h4>Year</h4>
+                    <h4>Year</h4>
                 </div>
             </div>
 
@@ -171,31 +175,31 @@
                 <p id="current_year" class="teal-text tex-lighten-2"></p>
             </div>
 
-                <!-- Tabs -->
-                <ul id="tabs-swipe-demo" class="tabs transparent" style="margin-top: 15px;">
-                    <li class="tab col s3">
-                        <a href="#test-swipe-1" class="grey-text">Health</a>
-                    </li>
-                    <li class="tab col s3">
-                        <a href="#test-swipe-2" class="grey-text">Career</a>
-                    </li>
-                    <li class="tab col s3">
-                        <a href="#test-swipe-3" class="grey-text">Personal</a>
-                    </li>
-                    <li class="tab col s3">
-                        <a href="#test-swipe-4" class="grey-text">Financial</a>
-                    </li>
-                    <li class="tab col s3">
-                        <a href="#test-swipe-5" class="grey-text">Other</a>
-                    </li>
-                </ul>
-                
-                <!-- Contents inside tabs -->
-                <div id="test-swipe-1" class="col s12" style="overflow: auto;"></div>
-                <div id="test-swipe-2" class="col s12" style="overflow: auto;"></div>
-                <div id="test-swipe-3" class="col s12" style="overflow: auto;"></div>
-                <div id="test-swipe-4" class="col s12" style="overflow: auto;"></div>
-                <div id="test-swipe-5" class="col s12" style="overflow: auto;"></div>
+            <!-- Tabs -->
+            <ul id="tabs-swipe-demo" class="tabs transparent" style="margin-top: 15px;">
+                <li class="tab col s3">
+                    <a href="#test-swipe-1" class="grey-text">Health</a>
+                </li>
+                <li class="tab col s3">
+                    <a href="#test-swipe-2" class="grey-text">Career</a>
+                </li>
+                <li class="tab col s3">
+                    <a href="#test-swipe-3" class="grey-text">Personal</a>
+                </li>
+                <li class="tab col s3">
+                    <a href="#test-swipe-4" class="grey-text">Financial</a>
+                </li>
+                <li class="tab col s3">
+                    <a href="#test-swipe-5" class="grey-text">Other</a>
+                </li>
+            </ul>
+
+            <!-- Contents inside tabs -->
+            <div id="test-swipe-1" class="col s12" style="overflow: auto;"></div>
+            <div id="test-swipe-2" class="col s12" style="overflow: auto;"></div>
+            <div id="test-swipe-3" class="col s12" style="overflow: auto;"></div>
+            <div id="test-swipe-4" class="col s12" style="overflow: auto;"></div>
+            <div id="test-swipe-5" class="col s12" style="overflow: auto;"></div>
 
         </div>
     </div>

@@ -38,8 +38,8 @@ h5 {
   padding-right: 5px;
   display: inline-block;
 }
-.fixed-action-btn{
-  right: 70%;
+.fixed-action-btn {
+  /* right: 70%; */
 }
 
 /* week, month, year modal styles */
@@ -79,7 +79,12 @@ h5 {
   top: 0;
   left: 0;
   margin-top: 5%;
+  height: 60vh !important;
 }
+.carousel-item {
+  padding-bottom: 18vh;
+}
+
 .todos {
   margin-top: 20px;
 }
