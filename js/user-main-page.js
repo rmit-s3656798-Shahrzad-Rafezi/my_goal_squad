@@ -195,7 +195,7 @@ var week_id = document.getElementById('select_id_week');
 week_fragment = document.createDocumentFragment();
 let chosen_week = '';
 
-var weeks = ["Week1", "Week2", "Week3", "Week4"];
+var weeks = ["Week0", "Week1", "Week2", "Week3", "Week4"];
 
 for (var i = 0; i <= weeks.length - 1; i++) {
   var option = document.createElement('option');
