@@ -149,9 +149,6 @@ form.addEventListener('submit', (e) => {
     .collection(chosen_month).doc('Week')
     .collection(chosen_week).doc('Type')
     .collection(chosen_type).add({
-      year: chosen_year,
-      month: chosen_month,
-      week: chosen_week,
       todo: form.todo.value,
       range: 0
     });

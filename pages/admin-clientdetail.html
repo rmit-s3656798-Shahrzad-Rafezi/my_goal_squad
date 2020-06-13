@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/admin-page.css">
+    <link rel="stylesheet" type="text/css" href="/css/admin-clientdetail.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/js/lightbox-plus-jquery.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/css/lightbox.min.css" rel="stylesheet" />
@@ -15,6 +15,7 @@
 <body class="grey lighten-3">
 
     <div class="container">
+
         <h2>Admin Page</h2>
         <input list="select_id_user" name="userlist" id="userlist" placeholder="find ID of user">
         <datalist id="select_id_user">
@@ -147,6 +148,7 @@
         <!-- Modal Structure -->
         <div id="modal_csv" class="modal">
             <div class="modal-content">
+                <h4>Download CSV</h4>
                 <div class="csv-buttons">
                     <button id="health_CSV" class="waves-effect btn blue" onclick="download_CSV_Health()">Health CSV</button>
                     <button id="career_CSV" class="waves-effect btn blue" onclick="download_CSV_Career()">Career CSV</button>
@@ -160,6 +162,7 @@
         <button id="logout-btn" class="waves-effect btn red button">Logout
             <i class="material-icons right">input</i>
         </button>
+        
     </div>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
