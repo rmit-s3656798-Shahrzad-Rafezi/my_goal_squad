@@ -17,9 +17,7 @@ auth.onAuthStateChanged((user) => {
                 }
                 else if (change.type === 'removed') {
                     // removed
-                    ////Sherry/////////
                     removeEntry(change.doc.id);
-                    //////////////////
                 };
             })
         })
@@ -30,12 +28,10 @@ auth.onAuthStateChanged((user) => {
     }
 });
 
-/////////Sherry/////////
 const removeEntry = (id) => {
     const journal = document.querySelector(`.entry[id="${id}"]`);
     journal.remove();
 };
-//////////////////
 
 // Floating action button
 document.addEventListener('DOMContentLoaded', function () {
@@ -147,27 +143,14 @@ entryContainer.addEventListener('click', evt => {
     }
 })
 
-
-// Button for testing functions
-// let test = document.querySelector('.test');
-
-// test.addEventListener("click", (e) => {
-//     e.preventDefault();
-//     // let dateTime = new firebase.firestore.Timestamp.now();
-//     // let rawTime = dateTime.seconds;
-
-//     // let min = rawTime / 60;
-//     // let hr = min / 60;
-//     // let day = hr / 24;
-//     // let week = day / 7;
-
-//     // console.log(week)
-//     const time = new Date();
-
-//     const test = dateString(time)
-
-//     console.log(CURRENTUSER);
-
-// })
-
-
+// Enable offline data
+db.enablePersistence().catch(function (err) {
+    if (err.code == 'failed-precondition') {
+        // probably multiple tabs open at once
+        console.log('persistance failed');
+    }
+    else if (err.code == 'unimplemented') {
+        // lack of browser support for the feature
+        console.log('persistance not available');
+    }
+});
