@@ -1,0 +1,94 @@
+.container {
+  position: relative;
+  width: auto;
+  height: 80%;
+  padding: 2% 5%;
+  text-align: center;
+}
+
+h5 {
+  font-size: 16px;
+  margin-top: 5%;
+  margin-bottom: 10%;
+}
+
+.lightbox {
+  align-content: center;
+  align-items: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: fixed !important;
+  top: 0 !important;
+}
+
+#lightboxOverlay {
+  height: 100% !important;
+  left: 0;
+  position: fixed !important;
+  top: 0;
+  width: 100% !important;
+  opacity: 1;
+}
+
+#lightbox img {
+  border: none;
+}
+
+.lb-outerContainer {
+  margin: auto;
+  background-color: transparent !important;
+}
+
+.lb-image {
+  margin: auto;
+}
+
+.lb-dataContainer {
+  transform: translateY(-50vh);
+  display: none !important;
+}
+
+.lb-nav {
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+#preloader {
+  display: block;
+  transform: translateY(25vh);
+}
+
+.carousel .carousel-item {
+  position: absolute;
+  height: 100% !important;
+  width: 50vh !important;
+}
+
+.carousel {
+  transform: translateY(-7%) !important;
+  height: 600px;
+}
+
+@media only screen and (max-width: 600px) {
+  h5 {
+    margin-top: 20%;
+    margin-bottom: 5%;
+  }
+
+  .carousel .carousel-item {
+    width: 90% !important;
+  }
+
+  .carousel {
+    transform: translateY(10%) !important;
+    height: 60vh;
+  }
+
+  .lb-outerContainer {
+    background-color: transparent !important;
+  }
+}
