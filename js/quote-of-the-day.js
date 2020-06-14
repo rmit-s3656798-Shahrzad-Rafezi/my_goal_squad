@@ -11,16 +11,15 @@ auth.onAuthStateChanged((user) => {
 function renderQuotes() {
     var storageRef = storage.ref("quotes");
 
-
     // Now we get the references of these images
     storageRef.listAll().then(function (result) {
         result.items.forEach(function (imageRef) {
             // And finally display them
 
-            console.log(imageRef.location.path)
+            //console.log(imageRef.location.path)
 
             imageRef.getDownloadURL().then((url) => {
-                console.log(url)
+                //console.log(url)
 
                 let html = `
                 <a class="carousel-item" href="${url}" rel='lightbox'>

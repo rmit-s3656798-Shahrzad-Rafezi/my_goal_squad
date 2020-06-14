@@ -124,7 +124,6 @@ const dateString = (date) => {
     return '' + (d <= 9 ? '0' + d : d) + m + ' ' +
         H + ':' +
         (M <= 9 ? '0' + M : M) + ':' +
-        // (S <= 9 ? '0' + S : S) +
         (H < 12 ? 'am' : 'pm');
 }
 

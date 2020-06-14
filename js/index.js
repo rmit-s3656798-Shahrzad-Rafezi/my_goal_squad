@@ -54,7 +54,5 @@ signinForm.addEventListener("submit", (e) => {
 
     let error_div = document.querySelector("#error-message");
     error_div.innerHTML = error_message;
-
-    // alert(error)
   });
 });

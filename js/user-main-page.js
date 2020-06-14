@@ -545,7 +545,7 @@ submit_range.addEventListener('submit', (e) => {
 });
 
 function changeColour(range_value, id_value) {
-  var change_colours = ["showRed", "showOrange", "showYellow", "showGreen"];
+  var change_colours = ["showRed", "showOrange", "showGreen"];
 
   if (range_value <= 25) {
     //Show red
@@ -585,8 +585,7 @@ const removeList = (id) => {
 // Checks to see if that user has logged in
 auth.onAuthStateChanged((user) => {
   if (user) {
-    console.log(user.email, "has logged in");
-
+    //console.log(user.email, "has logged in");
     search_task()
 
     //  Display years in modal

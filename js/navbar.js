@@ -24,7 +24,6 @@ auth.onAuthStateChanged((user) => {
             <a href="/pages/user-profile-page.html"><span class="white-text email">${userEmail}</span></a>
             `;
 
-
             let userPanel = document.querySelector(".user-view");
             userPanel.innerHTML += navLi;
         }

@@ -456,7 +456,7 @@ submit_range.addEventListener('submit', (e) => {
 });
 
 function changeColour(range_value, id_value) {
-  var change_colours = ["showRed", "showOrange", "showYellow", "showGreen"];
+  var change_colours = ["showRed", "showOrange", "showGreen"];
 
   if (range_value < 25) {
     //Show red
@@ -588,7 +588,7 @@ let chosen_client = '';
 // Grabs the client value
 clientid.addEventListener('change', function () {
   chosen_client = this.value;
-  console.log(chosen_client);
+  //console.log(chosen_client);
   search_task();
 });
 

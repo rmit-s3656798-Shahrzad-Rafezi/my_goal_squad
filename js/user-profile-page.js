@@ -10,7 +10,6 @@ auth.onAuthStateChanged((user) => {
     } else {
 
       let path = 'users/' + user.uid + "/profilePicture.png"
-      // var starsRef = storageRef.child('images/stars.jpg');
 
       var test = storage.ref(path);
 
@@ -46,19 +45,6 @@ auth.onAuthStateChanged((user) => {
     console.log("user has logged out");
   }
 });
-
-// $(document).on("click", "i", function () {
-//   switch (this.id) {
-//     case "change-name":
-
-//       break;
-//     case "change-email":
-//       M.toast({ html: 'Email Changed' })
-//       break;
-//     case "change-password":
-//       break;
-//   }
-// });
 
 // Logout Button
 // ===============================================================
@@ -149,7 +135,6 @@ updateEmailForm.addEventListener("submit", (e) => {
       M.Modal.getInstance($('#modal-email')).close();
       updateEmailForm.reset();
 
-
       // Update in Firestore
       // ++++++++++++++++++++++++++++++++++
       db.collection("users").doc(user.uid).update({
@@ -164,8 +149,6 @@ updateEmailForm.addEventListener("submit", (e) => {
       }).catch((e) => {
         console.log(e)
       });
-
-
 
     }).catch((e) => {
 
@@ -268,7 +251,7 @@ file_upload.addEventListener("change", (e) => {
       }
     }
 
-    // // State change on progress of uploading file
+    // State change on progress of uploading file
     task.on('state_changed', function progress(snapshot) {
 
       document.querySelector(".preloader").style.display = "block";
