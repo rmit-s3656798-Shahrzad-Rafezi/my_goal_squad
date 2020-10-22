@@ -1,0 +1,222 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="/css/user-main-page.css" />
+    <link rel="manifest" href="/manifest.json">
+    <!-- ios support -->
+    <link rel="apple-touch-icon" href="/img/icons/icon-96x96.png">
+    <meta name="apple-mobile-web-app-status-bar" content="#4db6ac">
+    <meta name="theme-color" content="#4db6ac">
+    <title>My Goal Squad</title>
+</head>
+
+<body class="grey lighten-3">
+
+    <!-- side navpanel -->
+    <div>
+        <ul id="slide-out" class="sidenav sidenav-fixed">
+            <li>
+                <div class="user-view">
+                    <div class="background">
+                    </div>
+                </div>
+            </li>
+            <li class="nav-list"><a id="task-nav" href="/pages/user-main-page.html">Task</a></li>
+            <li class="nav-list"><a id="journal-nav" href="/pages/gratitude-journal.html">My Gratitude Journal</a>
+            </li>
+            <li class="nav-list"><a id="quote-nav" href="/pages/quote-of-the-day.html">Quotes of the Day</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- top navbar -->
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#!" class="brand-logo">
+                    <img id='logo' src="/img/logo.svg" alt="">
+                </a>
+                <a href="#" data-target="slide-out" class="sidenav-trigger menu-btn"><i
+                        class="material-icons menu-icon">menu</i></a>
+                <ul class="left hide-on-med-and-down">
+                    <li>
+
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <div class="content">
+
+            <!-- Add todo list form -->
+            <div id="modal-addgoal" class="modal">
+                <div class="modal-content">
+                    <h6>ADD NEW GOAL</h6>
+                    <form id="todo-form">
+                        <input id="todo" type="text" name="todo" placeholder="Add goals that you want to achieve"
+                            required />
+                        <select id="select_id_year" class="browser-default">
+                            <option value="" disabled selected>Select Year</option>
+                        </select>
+                        <select id="select_id_month" class="browser-default">
+                            <option value="" disabled selected>Select Month</option>
+                        </select>
+                        <select id="select_id_week" class="browser-default">
+                            <option value="" disabled selected>Select Week</option>
+                        </select>
+                        <select id="select_id_type" class="browser-default">
+                            <option value="" disabled selected>Select Type</option>
+                        </select>
+                        <a onclick="goalconfirm()" class="waves-effect waves-light btn modal-trigger"
+                            href="#goalconfirm">Add</a>
+                        <div id="goalconfirm" class="modal">
+                            <h5>Confirm</h5>
+                            <div class="modal-content">
+                                <p id="goal-confirm"></p>
+                                <p id="goal-confirm-text"></p>
+                                <button class="modal-close waves-effect waves-orange btn">Add list</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="fixed-action-btn">
+                <button data-target='modal-addgoal'
+                    class="waves-effect btn-floating btn-large modal-trigger grey darken-3 ">
+                    <i class="large material-icons">add</i>
+                </button>
+            </div>
+
+            <!-- This is for adding range/updating goals for each task -->
+            <div id="modal1" class="modal">
+                <div class="modal-content">
+                    <h5>Progress</h5>
+                    <form id="range-form">
+                        <p class="range-field">
+                            <input type="range" name="range" id="test5" min="0" max="100" required />
+                        </p>
+                        <button id="submit_range" class="btn teal lighten-2">Submit</button>
+                    </form>
+                    <h5>Update Goal</h5>
+                    <form id="update-goal-form">
+                        <input id="update_goal" type="text" name="update_goal" placeholder="Update your goal here"
+                            required />
+                        <button id="submit_update" class="btn teal lighten-2">Update</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Display moods based on range -->
+            <div id="modal_congrats" class="modal">
+                <div class="modal-content">
+                    <h4>Great Job!</h4>
+                    <i class="large material-icons done">done</i>
+                </div>
+            </div>
+
+            <div id="modal_awesome" class="modal">
+                <div class="modal-content">
+                    <h4>Nice!</h4>
+                    <i class="large material-icons mood">mood</i>
+                </div>
+            </div>
+
+            <div id="modal_keep_going" class="modal">
+                <div class="modal-content">
+                    <h4>Keep It Up!</h4>
+                    <i class="large material-icons show_chart">show_chart</i>
+                </div>
+            </div>
+            <!------------------------------------->
+
+            <!-- Modal Trigger -->
+            <a id='modal_week_button' class="waves-effect waves-light btn modal-trigger" href="#modal_week">Week</a>
+
+            <!-- Modal Structure -->
+            <div id="modal_week" class="modal">
+                <div class="modal-content">
+                    <h4>Week</h4>
+                </div>
+            </div>
+
+            <!-- Modal Trigger -->
+            <a id='modal_month_button' class="waves-effect waves-light btn modal-trigger" href="#modal_month">Month</a>
+
+            <!-- Modal Structure -->
+            <div id="modal_month" class="modal">
+                <div class="modal-content">
+                    <h4>Month</h4>
+                </div>
+            </div>
+
+            <!-- Modal Trigger -->
+            <a id='modal_year_button' class="waves-effect waves-light btn modal-trigger" href="#modal_year">Year</a>
+
+            <!-- Modal Structure -->
+            <div id="modal_year" class="modal">
+                <div class="modal-content">
+                    <h4>Year</h4>
+                </div>
+            </div>
+
+            <div id="current_goals">
+                <p id="current_week" class="teal-text tex-lighten-2"></p>
+                <p id="current_month" class="teal-text tex-lighten-2"></p>
+                <p id="current_year" class="teal-text tex-lighten-2"></p>
+            </div>
+
+            <!-- Tabs -->
+            <ul id="tabs-swipe-demo" class="tabs transparent" style="margin-top: 15px;">
+                <li class="tab col s3">
+                    <a href="#test-swipe-1" class="grey-text">Health</a>
+                </li>
+                <li class="tab col s3">
+                    <a href="#test-swipe-2" class="grey-text">Career</a>
+                </li>
+                <li class="tab col s3">
+                    <a href="#test-swipe-3" class="grey-text">Personal</a>
+                </li>
+                <li class="tab col s3">
+                    <a href="#test-swipe-4" class="grey-text">Financial</a>
+                </li>
+                <li class="tab col s3">
+                    <a href="#test-swipe-5" class="grey-text">Other</a>
+                </li>
+            </ul>
+
+            <!-- Contents inside tabs -->
+            <div id="test-swipe-1" class="col s12" style="overflow: auto;"></div>
+            <div id="test-swipe-2" class="col s12" style="overflow: auto;"></div>
+            <div id="test-swipe-3" class="col s12" style="overflow: auto;"></div>
+            <div id="test-swipe-4" class="col s12" style="overflow: auto;"></div>
+            <div id="test-swipe-5" class="col s12" style="overflow: auto;"></div>
+
+        </div>
+    </div>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-functions.js"></script>
+
+
+    <script src="/js/firebase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/js/navbar.js"></script>
+    <script src="/js/user-main-page.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+
+</html>

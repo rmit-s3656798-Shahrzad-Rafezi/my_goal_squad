@@ -1,0 +1,190 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="/css/user-profile-page.css">
+    <link rel="manifest" href="/manifest.json">
+    <!-- ios support -->
+    <link rel="apple-touch-icon" href="/img/icons/icon-96x96.png">
+    <meta name="apple-mobile-web-app-status-bar" content="#4db6ac">
+    <meta name="theme-color" content="#4db6ac">
+    <title>My Goal Squad</title>
+</head>
+
+<body class="grey lighten-3">
+
+    <!-- side navpanel -->
+    <div>
+        <ul id="slide-out" class="sidenav sidenav-fixed">
+            <li>
+                <div id="userTab" class="user-view">
+                    <div class="background">
+                    </div>
+                </div>
+            </li>
+            <li class="nav-list"><a id="task-nav" href="/pages/user-main-page.html">Task</a></li>
+            <li class="nav-list"><a id="journal-nav" href="/pages/gratitude-journal.html">My Gratitude Journal</a>
+            </li>
+            <li class="nav-list"><a id="quote-nav" href="/pages/quote-of-the-day.html">Quotes of the Day</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- top navbar -->
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#!" class="brand-logo">
+                    <img id='logo' src="/img/logo.svg" alt="">
+                </a>
+                <a href="#" data-target="slide-out" class="sidenav-trigger menu-btn"><i
+                        class="material-icons menu-icon">menu</i></a>
+                <ul class="left hide-on-med-and-down">
+                    <li>
+
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+
+        <div id="modal-img" class="modal">
+            <div class="modal-content">
+                <h5>Upload Profile Picture</h5>
+                <div class="preloader">
+                    <div class="progress">
+                        <div id="pgb" class="determinate"></div>
+                    </div>
+                </div>
+                <form id="file-upload-form">
+                    <div id="file-upload" class="file-field">
+                        <div class="btn">
+                            <!-- CLIENT SIDE VALIDATION ONLY -->
+                            <span>Picture</span>
+                            <input id="upload-file-btn" type="file" , accept="image/*">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+                    <button class="waves-effect waves-orange btn submit-quote-button">Submit
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div id="modal-name" class="modal">
+            <div class="modal-content">
+                <div class="preloader">
+                    <div class="progress">
+                        <div class="indeterminate"></div>
+                    </div>
+                </div>
+                <form id="name-form">
+                    <h5>Update Name</h5>
+                    <div class="input-field">
+                        <input type="text" id="update-name" required />
+                        <label for="update-name">Enter New Name</label>
+                    </div>
+                    <button class="waves-effect waves-orange btn signup-button">Update Name
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div id="modal-email" class="modal">
+            <div class="modal-content">
+                <h5>Update Email</h5>
+                <div class="preloader">
+                    <div class="progress">
+                        <div class="indeterminate"></div>
+                    </div>
+                </div>
+                <form id="email-form">
+                    <div class="input-field">
+                        <input type="email" id="update-email" required />
+                        <label for="update-email">Enter New Email</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" id="email-pw" required />
+                        <label for="email-pw">Enter Password</label>
+                    </div>
+                    <button class="waves-effect waves-orange btn signup-button">Update Email
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div id="modal-pw" class="modal">
+            <div class="modal-content">
+                <div class="preloader">
+                    <div class="progress">
+                        <div class="indeterminate"></div>
+                    </div>
+                </div>
+                <form id="pw-form">
+                    <h5>Update Password</h5>
+                    <div class="input-field">
+                        <input type="password" id="current-pw" required />
+                        <label for="current-pw">Enter Current Password</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" id="update-pw" required />
+                        <label for="update-pw">Enter New Password</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" id="check-pw" required />
+                        <label for="check-pw">Confirm New Password</label>
+                    </div>
+                    <div class="error-message"></div>
+                    <button class="waves-effect waves-orange btn signup-button">Update Password
+                    </button>
+                </form>
+            </div>
+        </div>
+
+
+        <div id="userData">
+        </div>
+
+        <a id="logout-btn"><i class="material-icons">exit_to_app</i>Logout</a>
+
+        <div id="contact">
+            <div class="component"><span><i class="material-icons">call</i>Contact us</span></div>
+            <div class="component">
+                <a href="tel:+61411445606">+61 411 445 606</a>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-functions.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+ https://firebase.google.com/docs/web/setup#available-libraries -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script> -->
+
+    <script src="/js/firebase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/js/navbar.js"></script>
+    <script src="/js/user-profile-page.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+
+
+
+</html>

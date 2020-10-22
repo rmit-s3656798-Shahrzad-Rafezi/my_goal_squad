@@ -1,0 +1,90 @@
+.container {
+  position: relative;
+  width: auto;
+  height: 80%;
+  padding: 2% 5%;
+  text-align: center;
+}
+
+/* Header */
+h5 {
+  /* position: block; */
+  text-align: left;
+  font-size: 16px;
+  /* margin-top: 6%; */
+  margin-bottom: 2%;
+}
+
+.book-icon {
+  transform: translate(5%, 15%);
+}
+
+/* Journal  */
+.journal-icon {
+  transform: translate(25%, 25%);
+}
+
+/* No entries message */
+#no-entries {
+  display: block;
+}
+
+/* Entries Container */
+.entry-container {
+  margin-top: 1%;
+  margin-bottom: 50px;
+  text-align: left;
+}
+
+/* Entries */
+
+.entry {
+  position: relative;
+  margin: 15px 0;
+  padding: 10px 25px;
+  font-size: 12px;
+}
+
+p {
+  margin: 8px 0;
+}
+
+.entry-title-container {
+  display: flex;
+}
+
+.entry-title {
+  font-weight: 800;
+  margin-right: 10px;
+}
+
+.entry-time {
+  font-size: 9px;
+  font-weight: 700;
+  transform: translateY(4px);
+}
+
+.entry-text {
+  margin-top: 0%;
+}
+
+#modal-entry {
+  border-top-left-radius: 3% !important;
+  border-top-right-radius: 3% !important;
+  padding: 1% 5% !important;
+  top: auto !important;
+  transform: translateY(0) !important;
+}
+
+.entry-delete {
+  position: absolute;
+  display: inline-block;
+  top: 15%;
+  right: 3%;
+}
+
+@media only screen and (max-width: 600px) {
+  h5 {
+    margin-bottom: 5%;
+  }
+}

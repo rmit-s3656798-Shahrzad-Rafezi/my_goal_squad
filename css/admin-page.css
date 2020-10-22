@@ -1,0 +1,45 @@
+.container {
+  padding: 2% 5%;
+  /* position: absolute; */
+  /* left: 50%;
+  top: 50%; */
+  /* width: 70%; */
+  /* transform: translate(-50%, -50%); */
+  text-align: center;
+}
+
+h2,
+h5 {
+  padding-bottom: 15%;
+}
+
+.button {
+  margin: auto;
+  margin-top: 5%;
+  display: block;
+}
+
+#modal-qotd {
+  text-align: center;
+}
+
+.progress {
+  display: none;
+}
+
+#make-admin {
+  display: none;
+}
+
+#error-message {
+  color: rgb(240, 52, 52);
+  margin-bottom: 2%;
+}
+
+.fixed-action-btn{
+  right: 75%;/*desired value*/
+}
+#task-nav{
+  margin-left: 20%;
+  margin-right: 20%;
+}

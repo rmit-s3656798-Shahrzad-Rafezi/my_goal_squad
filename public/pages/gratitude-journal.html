@@ -1,0 +1,110 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="/css/gratitude-journal.css">
+    <link rel="manifest" href="/manifest.json">
+    <!-- ios support -->
+    <link rel="apple-touch-icon" href="/img/icons/icon-96x96.png">
+    <meta name="apple-mobile-web-app-status-bar" content="#4db6ac">
+    <meta name="theme-color" content="#4db6ac">
+    <title>My Goal Squad</title>
+</head>
+
+<body class="grey lighten-3">
+
+    <!-- side navbar -->
+    <div>
+        <ul id="slide-out" class="sidenav sidenav-fixed">
+            <li>
+                <div class="user-view">
+                    <div class="background">
+                    </div>
+                </div>
+            </li>
+            <li class="nav-list"><a id="task-nav" href="/pages/user-main-page.html">Task</a></li>
+            <li class="nav-list"><a id="journal-nav" href="/pages/gratitude-journal.html">My Gratitude Journal</a>
+            </li>
+            <li class="nav-list"><a id="quote-nav" href="/pages/quote-of-the-day.html">Quotes of the Day</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- top navbar -->
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#!" class="brand-logo">
+                    <img id='logo' src="/img/logo.svg" alt="">
+                </a>
+                <a href="#" data-target="slide-out" class="sidenav-trigger menu-btn"><i
+                        class="material-icons menu-icon">menu</i></a>
+                <ul class="left hide-on-med-and-down">
+                    <li>
+
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <h5>GRATITUDE JOURNAL<i class="small material-icons book-icon">book</i></h5>
+        <h6 id="no-entries"> There is no journal entries yet.<br> Write something !</h6>
+
+        <!-- Entry Container -->
+        <div class="entry-container"></div>
+
+        <!-- New Entry Form -->
+        <div id="modal-entry" class="modal bottom-sheet">
+            <div class="modal-content">
+                <form id="journal-form">
+                    <i class="small material-icons journal-icon">border_color</i>
+                    <div class="input-field">
+                        <input type="text" id="journal-entry" required />
+                        <label for="journal-entry">Say something</label>
+                        <button class="waves-effect waves-teal btn-flat
+                        teal-text journal-btn">Log
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Entry Form Trigger -->
+        <div class="fixed-action-btn">
+            <button data-target='modal-entry'
+                class="waves-effect btn-floating btn-large modal-trigger grey darken-3 entry-button">
+                <i class="large material-icons">mode_edit</i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Test button (uncomment to use)-->
+    <!-- <button class="waves-effect waves-teal btn test">TEST</button> -->
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-functions.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+ https://firebase.google.com/docs/web/setup#available-libraries -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script> -->
+
+    <script src="/js/firebase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/js/navbar.js"></script>
+    <script src="/js/gratitude-journal.js"></script>
+    <script src="/js/app.js"></script>
+
+</body>
+
+</html>

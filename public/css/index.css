@@ -1,0 +1,42 @@
+.container {
+  padding: 5%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 70%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  border-radius: 20px;
+}
+
+.progress {
+  margin-top: 20%;
+  display: none;
+}
+
+h5 {
+  margin-bottom: 5;
+}
+
+img {
+  height: auto;
+  width: 40%;
+}
+
+.signin-button {
+  margin-top: 20px;
+  /* color: teal; */
+}
+
+#error-message {
+  color: rgb(240, 52, 52);
+}
+
+@media only screen and (max-width: 600px) {
+  img {
+    margin-top: 10%;
+    height: auto;
+    width: 80% !important;
+    margin-bottom: 10%;
+  }
+}
